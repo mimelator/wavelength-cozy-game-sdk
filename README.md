@@ -46,18 +46,6 @@ cd my-beach-game
 
 ---
 
-## 🎮 **Live Examples**
-
-| Game | Description | Try It |
-|------|-------------|---------|
-| 🧁 **Cozy Bakery** | Bake magical pastries for woodland creatures | [Play Now](#) |
-| 🏰 **Lighthouse Keeper** | Guide ships safely through stormy nights | [Play Now](#) |
-| 🌸 **Garden Sanctuary** | Cultivate a peaceful meditation garden | [Play Now](#) |
-
-*Each game generates badge merchandise revenue for creators*
-
----
-
 ## 💰 **Revenue Model**
 
 ### **How You Earn Money**

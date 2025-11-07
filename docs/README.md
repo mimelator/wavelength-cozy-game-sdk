@@ -19,16 +19,7 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 - **[Contributing Guide](guides/CONTRIBUTING.md)** - How to contribute to the project
 - **[Deployment Guide](guides/DEPLOYMENT-GUIDE.md)** - Deploy games to production
 
-### AI Integration
-- **[AI Creative Workflow](guides/AI-CREATIVE-WORKFLOW.md)** - Using AI for game creation
-- **[AI Integration Guide](guides/AI-INTEGRATION-ROADMAP.md)** - Setting up AI providers
-- **[AI Context](guides/AI-CONTEXT.md)** - Understanding AI capabilities
-- **[AI-Powered Development](guides/AI-POWERED-DEVELOPMENT.md)** - Advanced AI workflows
-
 ## 🔧 Technical Documentation
-
-### Architecture
-- **[SDK Evolution](guides/SDK-EVOLUTION.md)** - Design decisions and evolution
 
 ### Testing
 - **[Testing Overview](testing/README.md)** - Testing framework and guidelines
@@ -40,14 +31,10 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 ### Game Templates
 - **[Simple Collector](../templates/simple-collector/README.md)** - Basic collection game template
 
-### AI Prompts
-- **[AI Prompts Collection](../ai-prompts/README.md)** - Curated AI prompts for game creation
-
 ## 🛠️ Tools & CLI
 
 ### Command Line Interface
 - **[wavelength-cli.sh](../wavelength-cli.sh)** - Main CLI tool for development
-- **[AI Creative Workflow](../tools/ai-creative-workflow.sh)** - AI-powered game generation
 - **[Deployment Tools](../tools/deploy-to-hub.sh)** - Production deployment utilities
 
 ### Development Kit
@@ -109,10 +96,8 @@ wavelength-cozy-game-sdk/
 ├── templates/                  # Game templates
 │   └── simple-collector/      # Basic template
 ├── tools/                     # Development tools
-│   ├── ai-creative-workflow.sh # AI integration
 │   └── deploy-to-hub.sh       # Deployment
 ├── dev-kit/                   # Development utilities
-└── ai-prompts/               # AI prompt library
 ```
 
 ### Version Information
