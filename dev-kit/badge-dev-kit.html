@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badge Dev Kit - Wavelength Games</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+    }
+    .config-section {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .config-section label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
+    .config-section input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .test-section {
+      margin-top: 30px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    button.secondary {
+      background: #6c757d;
+    }
+    button.secondary:hover {
+      background: #5a6268;
+    }
+    .log {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+    .log-entry {
+      margin-bottom: 8px;
+    }
+    .log-entry.success {
+      color: #4ec9b0;
+    }
+    .log-entry.error {
+      color: #f48771;
+    }
+    .log-entry.info {
+      color: #9cdcfe;
+    }
+    .badge-preview {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #667eea;
+      color: white;
+      border-radius: 20px;
+      margin: 10px 10px 10px 0;
+      font-size: 14px;
+    }
+    .code-block {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 4px;
+      border-left: 4px solid #667eea;
+      margin: 15px 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Badge Development Kit</h1>
+    <p>Test badge awarding locally before uploading to sandbox</p>
+
+    <div class="config-section">
+      <h2>Configuration</h2>
+      <label>API Base URL:</label>
+      <input type="text" id="apiBase" value="http://localhost:3000/api" placeholder="http://localhost:3000/api">
+      
+      <label>Game ID:</label>
+      <input type="text" id="gameId" value="test-game-1.0.0" placeholder="your-game-id">
+      
+      <label>Tenant ID:</label>
+      <input type="text" id="tenantId" value="test-tenant" placeholder="your-tenant-id">
+      
+      <label>Player ID (leave empty for anonymous):</label>
+      <input type="text" id="playerId" value="" placeholder="optional-user-id">
+      
+      <button onclick="initBadgeHelper()">Initialize Badge Helper</button>
+    </div>
+
+    <div class="test-section">
+      <h2>Test Badge Awarding</h2>
+      <p>Try awarding different types of badges:</p>
+      
+      <button onclick="testAwardBadge()">Award Simple Badge</button>
+      <button onclick="testAwardBadgeWithMetadata()">Award Badge with Metadata</button>
+      <button onclick="testAwardBadgeWithImage()">Award Badge with Custom Image</button>
+      <button onclick="testGetBadges()">Get Available Badges</button>
+      <button class="secondary" onclick="clearLog()">Clear Log</button>
+    </div>
+
+    <div class="test-section">
+      <h2>Log Output</h2>
+      <div id="log" class="log"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>Integration Code</h2>
+      <p>Copy this code into your game:</p>
+      <div class="code-block">
+        <code id="integrationCode">// Initialize badge helper (wait for it to load)
+if (window.WavelengthBadge) {
+  // Award a badge
+  window.WavelengthBadge.awardBadge({
+    badgeId: 'my-achievement-badge',
+    metadata: {
+      score: 1250,
+      level: 5
+    }
+  }).then(result => {
+    console.log('Badge awarded!', result);
+    // Show notification to player
+  }).catch(error => {
+    console.error('Failed to award badge:', error);
+  });
+}</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load badge helper -->
+  <script src="badge-helper.js"></script>
+  
+  <script>
+    let badgeHelper = null;
+
+    function log(message, type = 'info') {
+      const logEl = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `[${timestamp}] ${message}`;
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function clearLog() {
+      document.getElementById('log').innerHTML = '';
+    }
+
+    function initBadgeHelper() {
+      const apiBase = document.getElementById('apiBase').value;
+      const gameId = document.getElementById('gameId').value;
+      const tenantId = document.getElementById('tenantId').value;
+      const playerId = document.getElementById('playerId').value;
+
+      if (!gameId || !tenantId) {
+        log('Please fill in Game ID and Tenant ID', 'error');
+        return;
+      }
+
+      // Create context
+      window.wavelengthGameContext = {
+        gameId: gameId,
+        tenantId: tenantId,
+        playerId: playerId || null,
+        apiBase: apiBase
+      };
+
+      // Initialize badge helper
+      if (typeof WavelengthBadgeHelper !== 'undefined') {
+        badgeHelper = new WavelengthBadgeHelper(window.wavelengthGameContext);
+        log('Badge helper initialized successfully!', 'success');
+        log(`Game ID: ${gameId}`);
+        log(`Tenant ID: ${tenantId}`);
+        log(`Player ID: ${playerId || 'Anonymous (using session)'}`);
+        log(`API Base: ${apiBase}`);
+      } else {
+        log('Badge helper script not loaded. Make sure badge-helper.js is in the same directory.', 'error');
+      }
+
+      // Update integration code
+      updateIntegrationCode();
+    }
+
+    function updateIntegrationCode() {
+      const gameId = document.getElementById('gameId').value;
+      const code = `// Check if badge helper is available
+if (window.WavelengthBadge) {
+  // Award a badge when player achieves something
+  window.WavelengthBadge.awardBadge({
+    badgeId: 'my-achievement-badge',
+    metadata: {
+      score: 1250,
+      level: 5,
+      achievement: 'high-score'
+    }
+  }).then(result => {
+    console.log('Badge awarded!', result);
+    // Show badge notification to player
+    showBadgeNotification(result.badge);
+  }).catch(error => {
+    console.error('Failed to award badge:', error);
+  });
+}`;
+      document.getElementById('integrationCode').textContent = code;
+    }
+
+    async function testAwardBadge() {
+      if (!badgeHelper) {
+        log('Please initialize badge helper first', 'error');
+        return;
+      }
+
+      try {
+        log('Attempting to award badge: test-badge-1...', 'info');
+        const result = await badgeHelper.awardBadge({
+          badgeId: 'test-badge-1',
+          metadata: {}
+        });
+        log(`✅ Badge awarded successfully!`, 'success');
+        log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
+        log(`Status: ${result.badge.status}`);
+        if (result.badge.badgeImageUrl) {
+          log(`Badge Image: ${result.badge.badgeImageUrl}`);
+        }
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        console.error(error);
+      }
+    }
+
+    async function testAwardBadgeWithMetadata() {
+      if (!badgeHelper) {
+        log('Please initialize badge helper first', 'error');
+        return;
+      }
+
+      try {
+        log('Attempting to award badge with metadata...', 'info');
+        const result = await badgeHelper.awardBadge({
+          badgeId: 'test-badge-2',
+          metadata: {
+            score: 1250,
+            level: 5,
+            achievement: 'high-score',
+            timestamp: Date.now()
+          }
+        });
+        log(`✅ Badge awarded with metadata!`, 'success');
+        log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
+        log(`Metadata: ${JSON.stringify({ score: 1250, level: 5 })}`);
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        console.error(error);
+      }
+    }
+
+    async function testAwardBadgeWithImage() {
+      if (!badgeHelper) {
+        log('Please initialize badge helper first', 'error');
+        return;
+      }
+
+      try {
+        // Create a simple SVG badge
+        const svgBadge = `
+          <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="#667eea"/>
+            <text x="50" y="55" font-family="Arial" font-size="24" fill="white" text-anchor="middle">🏆</text>
+          </svg>
+        `;
+        const base64Badge = 'data:image/svg+xml;base64,' + btoa(svgBadge);
+
+        log('Attempting to award badge with custom image...', 'info');
+        const result = await badgeHelper.awardBadge({
+          badgeId: 'test-badge-3',
+          badgeImage: base64Badge,
+          metadata: {
+            customImage: true
+          }
+        });
+        log(`✅ Badge with custom image awarded!`, 'success');
+        log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
+        if (result.badge.badgeImageUrl) {
+          log(`Badge Image URL: ${result.badge.badgeImageUrl}`);
+        }
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        console.error(error);
+      }
+    }
+
+    async function testGetBadges() {
+      if (!badgeHelper) {
+        log('Please initialize badge helper first', 'error');
+        return;
+      }
+
+      try {
+        log('Fetching available badges...', 'info');
+        const badges = await badgeHelper.getBadges();
+        log(`✅ Retrieved ${badges.length} badge(s)`, 'success');
+        badges.forEach((badge, i) => {
+          log(`  ${i + 1}. ${badge.badgeId} - ${badge.name || 'No name'}`);
+        });
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+        console.error(error);
+      }
+    }
+
+    // Auto-initialize on page load if values are set
+    window.addEventListener('load', () => {
+      log('Badge Dev Kit loaded. Click "Initialize Badge Helper" to start.', 'info');
+    });
+  </script>
+</body>
+</html>

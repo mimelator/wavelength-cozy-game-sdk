@@ -1,0 +1,523 @@
+/* VIBE Coding Template: Simple Collector Game Styles */
+/* Easy to customize - just change the colors and fonts! */
+
+/* Color Variables - Change these to customize your game! */
+:root {
+    /* Theme Colors (change these to match your vibe) */
+    --primary-color: #4a7c59;      /* Forest green */
+    --secondary-color: #8fbc8f;    /* Light green */
+    --background-color: #f0f8ea;   /* Cream */
+    --text-color: #2d5016;         /* Dark green */
+    --accent-color: #ff6b6b;       /* Coral pink */
+
+    /* UI Colors */
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --button-bg: var(--primary-color);
+    --button-hover: var(--secondary-color);
+    --shadow: rgba(0, 0, 0, 0.1);
+
+    /* Fonts - Change to your favorite! */
+    --main-font: Georgia, serif;
+    --ui-font: Arial, sans-serif;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--main-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow: hidden;
+    user-select: none;
+}
+
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Game Header */
+.game-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.game-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Game Stats */
+.game-stats {
+    background: var(--panel-bg);
+    padding: 0.8rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid var(--secondary-color);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+.stat-label {
+    color: var(--primary-color);
+}
+
+.progress-bar {
+    width: 150px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 8px;
+}
+
+/* Game World */
+.game-world {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(to bottom, #87CEEB, var(--background-color));
+    overflow: hidden;
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(to bottom,
+        #87CEEB 0%,     /* Sky blue */
+        #98FB98 40%,    /* Pale green */
+        #90EE90 100%    /* Light green */
+    );
+}
+
+/* Player Character */
+.player {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    z-index: 10;
+    transition: all 0.2s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player.moving {
+    animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translate(-50%, -50%) translateY(0px); }
+    to { transform: translate(-50%, -50%) translateY(-8px); }
+}
+
+/* Game Items */
+.game-items {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.collectible-item {
+    position: absolute;
+    font-size: 1.5rem;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 0.3s ease;
+    z-index: 5;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.collectible-item:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.collectible-item.collected {
+    animation: collectAnimation 0.8s ease-out;
+    pointer-events: none;
+}
+
+@keyframes collectAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5) translateY(-20px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0) translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* Game Controls */
+.game-controls {
+    background: var(--panel-bg);
+    padding: 1rem;
+    text-align: center;
+    border-top: 2px solid var(--secondary-color);
+}
+
+.movement-hint {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    display: none;
+    justify-content: center;
+}
+
+.dpad {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+    background: var(--primary-color);
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--shadow);
+}
+
+.dpad-btn {
+    width: 50px;
+    height: 50px;
+    background: var(--button-bg);
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.dpad-btn:active {
+    background: var(--button-hover);
+    transform: scale(0.95);
+}
+
+.dpad-up { grid-column: 2; grid-row: 1; }
+.dpad-middle {
+    grid-column: 1 / 4;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.dpad-left { grid-column: 1; }
+.dpad-center {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.dpad-right { grid-column: 3; }
+.dpad-down { grid-column: 2; grid-row: 3; }
+
+/* Show mobile controls on touch devices */
+@media (pointer: coarse) {
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+/* Game Menu */
+.game-menu {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 20;
+}
+
+.menu-btn {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px var(--shadow);
+    font-family: var(--ui-font);
+}
+
+.menu-btn:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* Panels */
+.collection-panel,
+.settings-panel,
+.help-panel {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 80%;
+    background: var(--panel-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.panel-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.panel-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Collection Panel Specific */
+.collected-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.collected-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 10px var(--shadow);
+    border: 2px solid var(--secondary-color);
+    transition: transform 0.2s ease;
+}
+
+.collected-item:hover {
+    transform: translateY(-3px);
+}
+
+.collected-item .item-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.collected-item .item-name {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.collected-item .item-description {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Settings Panel Specific */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.setting-item label {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.setting-item input[type="range"] {
+    width: 150px;
+}
+
+.setting-item input[type="checkbox"] {
+    transform: scale(1.5);
+}
+
+/* Help Panel Specific */
+.help-section {
+    margin-bottom: 2rem;
+}
+
+.help-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.help-section p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .game-stats {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .stat-item {
+        font-size: 0.9rem;
+    }
+
+    .progress-bar {
+        width: 100px;
+    }
+
+    .game-menu {
+        top: 80px;
+        right: 10px;
+    }
+
+    .menu-btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .panel-content {
+        padding: 1rem;
+    }
+
+    .collected-items {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+/* Accessibility */
+.high-contrast {
+    --primary-color: #000;
+    --secondary-color: #333;
+    --background-color: #fff;
+    --text-color: #000;
+    --accent-color: #ff0000;
+}
+
+.large-text {
+    font-size: 1.2em;
+}
+
+.large-text .game-header h1 {
+    font-size: 2.5rem;
+}
+
+.large-text .menu-btn {
+    font-size: 1.1rem;
+    padding: 1rem 1.2rem;
+}
+
+/* Loading and Transitions */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Item Rarity Colors */
+.rarity-common { color: #8fbc8f; }
+.rarity-uncommon { color: #4682b4; }
+.rarity-rare { color: #9370db; }
+.rarity-legendary { color: #ffd700; }

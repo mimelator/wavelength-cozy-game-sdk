@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cozy Collection Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <h1 id="gameTitle">My Cozy Collection Game</h1>
+            <p id="gameDescription">A peaceful adventure where you collect beautiful items</p>
+        </header>
+
+        <!-- Game Stats -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-label">Items Collected:</span>
+                <span id="itemCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Score:</span>
+                <span id="scoreValue">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Progress:</span>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game World -->
+        <div class="game-world">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+            <!-- Player Character -->
+            <div id="player" class="player">🚶‍♀️</div>
+
+            <!-- Collection Items (dynamically generated) -->
+            <div id="gameItems" class="game-items"></div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <div class="movement-hint">
+                Use arrow keys or WASD to explore • Click items to collect them
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="mobile-controls" id="mobileControls">
+                <div class="dpad">
+                    <button class="dpad-btn dpad-up" data-direction="up">⬆️</button>
+                    <div class="dpad-middle">
+                        <button class="dpad-btn dpad-left" data-direction="left">⬅️</button>
+                        <div class="dpad-center">🎮</div>
+                        <button class="dpad-btn dpad-right" data-direction="right">➡️</button>
+                    </div>
+                    <button class="dpad-btn dpad-down" data-direction="down">⬇️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collection Panel -->
+        <div id="collectionPanel" class="collection-panel">
+            <div class="panel-header">
+                <h2>Collection Journal</h2>
+                <button id="closePanelBtn" class="close-btn">✕</button>
+            </div>
+            <div class="panel-content">
+                <div id="collectedItems" class="collected-items"></div>
+            </div>
+        </div>
+
+        <!-- Game Menu -->
+        <div class="game-menu">
+            <button id="collectionBtn" class="menu-btn">📖 Collection</button>
+            <button id="settingsBtn" class="menu-btn">⚙️ Settings</button>
+            <button id="helpBtn" class="menu-btn">❓ Help</button>
+        </div>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel hidden">
+            <div class="panel-header">
+                <h2>Settings</h2>
+                <button id="closeSettingsBtn" class="close-btn">✕</button>
+            </div>
+            <div class="panel-content">
+                <div class="setting-item">
+                    <label for="musicVolume">Music Volume:</label>
+                    <input type="range" id="musicVolume" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label for="soundVolume">Sound Effects:</label>
+                    <input type="range" id="soundVolume" min="0" max="100" value="70">
+                </div>
+                <div class="setting-item">
+                    <label for="highContrast">High Contrast:</label>
+                    <input type="checkbox" id="highContrast">
+                </div>
+                <div class="setting-item">
+                    <label for="largeText">Large Text:</label>
+                    <input type="checkbox" id="largeText">
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Panel -->
+        <div id="helpPanel" class="help-panel hidden">
+            <div class="panel-header">
+                <h2>How to Play</h2>
+                <button id="closeHelpBtn" class="close-btn">✕</button>
+            </div>
+            <div class="panel-content">
+                <div class="help-section">
+                    <h3>🎯 Goal</h3>
+                    <p>Explore the beautiful world and collect magical items!</p>
+                </div>
+                <div class="help-section">
+                    <h3>🎮 Controls</h3>
+                    <p><strong>Desktop:</strong> Use WASD or arrow keys to move</p>
+                    <p><strong>Mobile:</strong> Use the virtual D-pad or swipe gestures</p>
+                </div>
+                <div class="help-section">
+                    <h3>✨ Items</h3>
+                    <p><span style="font-size: 1.2em;">🌸</span> Common items are everywhere</p>
+                    <p><span style="font-size: 1.2em;">🍄</span> Uncommon items are harder to find</p>
+                    <p><span style="font-size: 1.2em;">💎</span> Rare items are precious treasures</p>
+                    <p><span style="font-size: 1.2em;">✨</span> Legendary items are extremely special!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/gameEngine.js"></script>
+    <script src="js/gameLogic.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

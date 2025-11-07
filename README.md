@@ -1,2 +1,238 @@
-# wavelength-cozy-game-sdk
-Create peaceful, revenue-generating cozy games with AI assistance
+# 🎮 Wavelength Cozy Game SDK
+
+**Create peaceful, revenue-generating cozy games with AI assistance**
+
+[![GitHub Stars](https://img.shields.io/github/stars/mimelator/wavelength-cozy-game-sdk?style=social)](https://github.com/mimelator/wavelength-cozy-game-sdk)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![AI Powered](https://img.shields.io/badge/AI-Powered-blue.svg)](https://github.com/mimelator/wavelength-cozy-game-sdk)
+
+> Transform your cozy game ideas into reality and earn 35% revenue from badge merchandise sales
+
+---
+
+## ✨ **What Makes This Special**
+
+🎨 **AI Creative Freedom** - Describe your cozy game idea, AI builds the complete experience  
+💰 **Built-in Revenue** - 35% creator share from automatic badge merchandise system  
+📱 **Mobile-First** - Games work perfectly on all devices out of the box  
+🚀 **Instant Deploy** - One command deploys to WavelengthHub with revenue tracking  
+
+## 🎯 **Perfect For**
+
+- **Artists & Creators** seeking new revenue streams
+- **Entrepreneurs** building passive income  
+- **Game Enthusiasts** with cozy ideas but no coding skills
+- **Developers** wanting rapid AI-assisted prototyping
+
+---
+
+## 🚀 **30-Second Quick Start**
+
+```bash
+# 1. Get the SDK
+git clone https://github.com/mimelator/wavelength-cozy-game-sdk.git
+cd wavelength-cozy-game-sdk
+
+# 2. Get AI API key (Claude recommended for best results)
+export ANTHROPIC_API_KEY="your-claude-api-key"
+
+# 3. Create your cozy game
+./wavelength-cli.sh creative "cozy lighthouse where I guide ships safely home"
+
+# 4. Test and play
+./wavelength-cli.sh test [your-game-folder]
+```
+
+**That's it!** You now have a unique, playable cozy game with built-in revenue generation.
+
+---
+
+## 🎮 **Live Examples**
+
+| Game | Description | Try It |
+|------|-------------|---------|
+| 🧁 **Cozy Bakery** | Bake magical pastries for woodland creatures | [Play Now](#) |
+| 🏰 **Lighthouse Keeper** | Guide ships safely through stormy nights | [Play Now](#) |
+| 🌸 **Garden Sanctuary** | Cultivate a peaceful meditation garden | [Play Now](#) |
+
+*Each game generates badge merchandise revenue for creators*
+
+---
+
+## 💰 **Revenue Model**
+
+### **How You Earn Money**
+1. **Create cozy game** with built-in achievement badges
+2. **Players earn badges** by playing your game  
+3. **Badges become merchandise** (t-shirts, mugs, stickers)
+4. **You earn 35%** of all merchandise sales automatically
+
+### **Example Revenue**
+- 1,000 players → ~100 badge earnings → ~20 merchandise purchases → **$60-200/month passive income**
+- Popular games can generate **$500-2000+ monthly** through organic badge merchandise sales
+
+---
+
+## 🤖 **AI-Powered Development**
+
+### **Creative Workflow** (Recommended)
+```bash
+# Let AI create freely, then integrate SDK
+./wavelength-cli.sh creative "describe your cozy game idea"
+```
+✅ **Unique games** - AI creates complete, original experiences  
+✅ **Smart integration** - Badge system added automatically  
+✅ **Quality assured** - Encoding, mobile, deployment handled  
+
+### **Claude Sonnet vs OpenAI**
+```bash
+# Claude (recommended) - Superior creative results
+export ANTHROPIC_API_KEY="your-key"
+
+# OpenAI (alternative) - Reliable generation  
+export OPENAI_API_KEY="your-key"
+```
+
+### **Traditional Templates** (Also Available)
+```bash
+# Template-based for structured development
+./wavelength-cli.sh new beach-game simple-collector
+```
+
+---
+
+## 🛠️ **What You Get**
+
+### **Complete Toolkit**
+- 🎨 **AI Creative Workflow** - Generate unique games from descriptions
+- 📱 **Mobile-Optimized Templates** - Responsive design built-in
+- 🏆 **Badge Revenue System** - Automatic merchandise generation
+- 🧪 **Local Testing Server** - Preview games instantly  
+- 🚀 **One-Click Deployment** - Deploy to WavelengthHub
+- 📊 **Revenue Analytics** - Track your earnings
+
+### **Supported Game Types**
+- **Collection Games** - Beach treasures, forest mushrooms, space fragments
+- **Creation Games** - Cozy bakeries, art studios, magic workshops  
+- **Simulation Games** - Lighthouse operation, garden tending, stargazing
+- **Peaceful Experiences** - Meditation spaces, reading nooks, rain sounds
+
+---
+
+## 📖 **Documentation**
+
+| Guide | Purpose |
+|-------|---------|
+| [🚀 Quick Start](QUICK-START.md) | Get your first game running in 5 minutes |
+| [🎨 Creative Workflow](AI-CREATIVE-WORKFLOW.md) | Master AI-assisted game creation |
+| [💰 Revenue Guide](REVENUE-GUIDE.md) | Optimize games for maximum earnings |
+| [📱 Deployment](DEPLOYMENT-GUIDE.md) | Publish to WavelengthHub |
+| [🎯 Examples](docs/examples/) | Sample games and tutorials |
+
+---
+
+## 🌟 **Why Wavelength?**
+
+### **vs Traditional Game Development**
+✅ **No Programming** - AI handles all technical implementation  
+✅ **Instant Results** - Complete games in minutes, not months  
+✅ **Built-in Monetization** - Revenue system included from day one  
+
+### **vs Other No-Code Platforms**
+✅ **True AI Creativity** - Not limited to templates or drag-and-drop  
+✅ **Revenue-First Design** - Built around making money, not just games  
+✅ **Quality Assurance** - Professional deployment and testing included  
+
+### **vs DIY Approaches**
+✅ **Professional Infrastructure** - Hosting, payments, analytics handled  
+✅ **Proven Revenue Model** - Badge system optimized for merchandise sales  
+✅ **Community Platform** - Built-in discovery through WavelengthHub  
+
+---
+
+## 🎯 **CLI Commands Reference**
+
+### **Core Commands**
+```bash
+./wavelength-cli.sh creative "game idea"     # AI creates unique game
+./wavelength-cli.sh new game-name            # Template-based creation  
+./wavelength-cli.sh test [game-folder]       # Local testing server
+./wavelength-cli.sh deploy                   # Deploy to WavelengthHub
+```
+
+### **AI Integration**
+```bash
+./wavelength-cli.sh ai-setup provider key   # Configure AI provider
+./wavelength-cli.sh ai-create "description" # Template + AI approach
+./wavelength-cli.sh ai-refine "changes"     # Improve existing games
+```
+
+### **Utilities**
+```bash
+./wavelength-cli.sh validate                # Check game requirements
+./wavelength-cli.sh package                 # Create distribution package  
+./wavelength-cli.sh themes                  # List available themes
+./wavelength-cli.sh examples                # Show configuration examples
+```
+
+---
+
+## 🤝 **Community & Support**
+
+### **Get Help**
+- 📖 [Complete Documentation](docs/)
+- 💬 [GitHub Discussions](https://github.com/mimelator/wavelength-cozy-game-sdk/discussions)  
+- 🐛 [Report Issues](https://github.com/mimelator/wavelength-cozy-game-sdk/issues)
+- 💡 [Feature Requests](https://github.com/mimelator/wavelength-cozy-game-sdk/issues/new?template=feature_request.md)
+
+### **Connect with Creators**
+- 🎮 [WavelengthHub Community](https://hub.wavelength.com/community)
+- 💰 [Revenue Success Stories](https://hub.wavelength.com/success-stories)  
+- 🎨 [Creator Showcase](https://hub.wavelength.com/showcase)
+
+---
+
+## 🚀 **What's Next**
+
+### **Roadmap**
+- 🎨 **Visual Editor** - Web-based game creation interface
+- 🤖 **More AI Providers** - Google Gemini, local models
+- 🎵 **Audio Integration** - AI-generated cozy soundtracks  
+- 🌍 **Multiplayer** - Shared cozy experiences
+- 📈 **Advanced Analytics** - Revenue optimization insights
+
+### **Contributing**
+We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
+- 🐛 Bug reports and fixes
+- ✨ Feature development  
+- 📖 Documentation improvements
+- 🎮 Example games and templates
+
+---
+
+## 📄 **License**
+
+MIT License - Create freely, earn revenue, share knowledge.
+
+See [LICENSE](LICENSE) for full terms.
+
+---
+
+## 🌟 **Start Creating**
+
+Ready to turn your cozy game ideas into revenue-generating experiences?
+
+```bash
+git clone https://github.com/mimelator/wavelength-cozy-game-sdk.git
+cd wavelength-cozy-game-sdk
+./wavelength-cli.sh creative "your cozy game idea here"
+```
+
+**Your journey to passive income through cozy game creation starts now!** 🎮✨
+
+---
+
+<p align="center">
+  <strong>Built with ❤️ for the cozy gaming community</strong><br>
+  <em>Create • Play • Earn • Repeat</em>
+</p>

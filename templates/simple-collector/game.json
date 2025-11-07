@@ -1,0 +1,205 @@
+{
+  "title": "My Cozy Collection Game",
+  "description": "A peaceful adventure where you collect beautiful items and explore a magical world",
+  "version": "1.0.0",
+  "template": "simple-collector",
+
+  "theme": {
+    "name": "forest",
+    "primaryColor": "#4a7c59",
+    "secondaryColor": "#8fbc8f",
+    "backgroundColor": "#f0f8ea",
+    "textColor": "#2d5016",
+    "accentColor": "#ff6b6b",
+    "font": "Georgia, serif"
+  },
+
+  "gameplay": {
+    "worldSize": "medium",
+    "difficulty": "relaxed",
+    "movementSpeed": "normal",
+    "collectionGoal": 50,
+
+    "itemsToCollect": [
+      {
+        "id": "common_flower",
+        "name": "Wild Flower",
+        "emoji": "🌸",
+        "description": "A delicate bloom found in sunny meadows",
+        "rarity": "common",
+        "points": 5,
+        "spawnRate": 0.4,
+        "soundEffect": "gentle_chime",
+        "animation": "gentle_sway"
+      },
+      {
+        "id": "uncommon_mushroom",
+        "name": "Spotted Mushroom",
+        "emoji": "🍄",
+        "description": "A cute fungus hiding under fallen leaves",
+        "rarity": "uncommon",
+        "points": 15,
+        "spawnRate": 0.2,
+        "soundEffect": "soft_pop",
+        "animation": "gentle_bounce"
+      },
+      {
+        "id": "rare_crystal",
+        "name": "Forest Crystal",
+        "emoji": "💎",
+        "description": "A sparkling gem that catches the morning light",
+        "rarity": "rare",
+        "points": 50,
+        "spawnRate": 0.05,
+        "soundEffect": "magical_chime",
+        "animation": "sparkle"
+      },
+      {
+        "id": "legendary_spirit",
+        "name": "Forest Spirit",
+        "emoji": "✨",
+        "description": "A mystical being that brings good fortune",
+        "rarity": "legendary",
+        "points": 200,
+        "spawnRate": 0.01,
+        "soundEffect": "ethereal_bell",
+        "animation": "magical_glow"
+      }
+    ],
+
+    "environments": [
+      {
+        "name": "Sunny Meadow",
+        "background": "meadow",
+        "music": "peaceful_acoustic",
+        "spawnBias": {
+          "common_flower": 1.5,
+          "uncommon_mushroom": 0.8
+        }
+      },
+      {
+        "name": "Shaded Grove",
+        "background": "forest",
+        "music": "mystical_ambient",
+        "spawnBias": {
+          "uncommon_mushroom": 1.8,
+          "rare_crystal": 1.2,
+          "legendary_spirit": 1.5
+        }
+      }
+    ]
+  },
+
+  "ui": {
+    "showScore": true,
+    "showItemCount": true,
+    "showProgress": true,
+    "collectionPanelStyle": "cozy",
+    "buttonStyle": "rounded",
+    "enableSounds": true,
+    "enableMusic": true
+  },
+
+  "accessibility": {
+    "highContrast": false,
+    "largeText": false,
+    "colorBlindFriendly": true,
+    "keyboardNavigation": true,
+    "screenReaderSupport": true
+  },
+
+  "customization": {
+    "allowPlayerName": true,
+    "customizableColors": true,
+    "customizableMusic": true,
+    "unlockableThemes": ["sunset", "ocean", "midnight"]
+  },
+
+  "badges": {
+    "enabled": true,
+    "apiEndpoint": "https://hub.wavelength.com/api/games",
+    "insigniaOfMerit": [
+      {
+        "id": "first_collection",
+        "name": "Garden Explorer",
+        "description": "Discovered your first treasure in the magical forest",
+        "image": "🌱",
+        "rarity": "common",
+        "trigger": {
+          "type": "items_collected",
+          "threshold": 1
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["t-shirt", "sticker", "mug"],
+          "placement_hints": "Works great on front chest, small corner designs"
+        }
+      },
+      {
+        "id": "dedicated_collector",
+        "name": "Nature's Friend",
+        "description": "Collected 10 items with patience and wonder",
+        "image": "🌿",
+        "rarity": "uncommon",
+        "trigger": {
+          "type": "items_collected",
+          "threshold": 10
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["t-shirt", "hoodie", "canvas_print"],
+          "placement_hints": "Beautiful as large back design or artistic front print"
+        }
+      },
+      {
+        "id": "treasure_hunter",
+        "name": "Crystal Seeker",
+        "description": "Found 3 rare crystals - a true treasure hunter",
+        "image": "💎",
+        "rarity": "rare",
+        "trigger": {
+          "type": "rare_items_collected",
+          "threshold": 3,
+          "rarities": ["rare", "legendary"]
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["t-shirt", "poster", "phone_case", "jewelry"],
+          "placement_hints": "Premium placement - center designs, elegant jewelry pieces"
+        }
+      },
+      {
+        "id": "spirit_whisperer",
+        "name": "Forest Guardian",
+        "description": "Encountered the mystical Forest Spirit - a blessed soul",
+        "image": "✨",
+        "rarity": "legendary",
+        "trigger": {
+          "type": "specific_item_collected",
+          "item_id": "legendary_spirit"
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["premium_t-shirt", "canvas_art", "limited_edition"],
+          "placement_hints": "Exclusive designs - large format art, premium materials only"
+        }
+      },
+      {
+        "id": "completionist",
+        "name": "Master Collector",
+        "description": "Reached the collection goal - dedication personified",
+        "image": "🏆",
+        "rarity": "epic",
+        "trigger": {
+          "type": "goal_completion",
+          "requirement": "collection_goal_met"
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["trophy_shirt", "certificate_print", "badge_collection"],
+          "placement_hints": "Achievement designs - bold statements, trophy themes"
+        }
+      }
+    ]
+  }
+}

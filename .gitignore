@@ -137,3 +137,50 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Wavelength Cozy Game SDK Specific
+
+# API Keys and Secrets
+*.key
+*api-key*
+*API_KEY*
+
+# AI Response Files (debug files, not needed in repo)
+api_response_*.json
+**/api_response_*.json
+
+# Generated Game Directories (user-created content)
+*-20[0-9][0-9][0-1][0-9][0-3][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9]/
+cozy-*-20*/
+*-game-20*/
+
+# Packaged Games
+packaged-games/
+*.zip
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Test games created during development
+test-*-game/
+example-*-game/
+demo-*-game/
+
+# Personal configurations
+my-*
+personal-*
+
+# HTTP server logs
+access.log
+error.log
