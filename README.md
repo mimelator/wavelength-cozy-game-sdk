@@ -29,18 +29,17 @@
 ## 🚀 **30-Second Quick Start**
 
 ```bash
-# 1. Get the SDK
+```bash
+# Quick Start (30 seconds)
 git clone https://github.com/mimelator/wavelength-cozy-game-sdk.git
 cd wavelength-cozy-game-sdk
 
-# 2. Get AI API key (Claude recommended for best results)
-export ANTHROPIC_API_KEY="your-claude-api-key"
+# Create your first game
+./wavelength-cli.sh new my-beach-game
 
-# 3. Create your cozy game
-./wavelength-cli.sh creative "cozy lighthouse where I guide ships safely home"
-
-# 4. Test and play
-./wavelength-cli.sh test [your-game-folder]
+# Test it locally
+cd my-beach-game
+../wavelength-cli.sh test
 ```
 
 **That's it!** You now have a unique, playable cozy game with built-in revenue generation.
@@ -101,15 +100,14 @@ export OPENAI_API_KEY="your-key"
 
 ---
 
-## 🛠️ **What You Get**
+## 🛠️ **Complete Toolkit**
 
-### **Complete Toolkit**
-- 🎨 **AI Creative Workflow** - Generate unique games from descriptions
-- 📱 **Mobile-Optimized Templates** - Responsive design built-in
-- 🏆 **Badge Revenue System** - Automatic merchandise generation
-- 🧪 **Local Testing Server** - Preview games instantly  
-- 🚀 **One-Click Deployment** - Deploy to WavelengthHub
-- 📊 **Revenue Analytics** - Track your earnings
+- **`wavelength-cli.sh`** - Professional command-line interface
+- **AI Creative Workflow** - Generate games from descriptions
+- **Professional Templates** - Collection game, adventure, puzzle
+- **Badge Revenue System** - Automatic merchandise integration
+- **Mobile-Responsive** - Perfect on all devices
+- **One-Click Deploy** - Instant publishing to WavelengthHub
 
 ### **Supported Game Types**
 - **Collection Games** - Beach treasures, forest mushrooms, space fragments
