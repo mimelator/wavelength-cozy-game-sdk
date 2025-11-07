@@ -105,20 +105,40 @@ This opens your game at http://localhost:3000
 - Visit the URL shown in terminal
 - Test touch controls!
 
-## Step 5: Deploy to Wavelength Hub (30 seconds)
+## Step 5: Add Badge System ⚠️ **REQUIRED** (1 minute)
+
+**ALL GAMES must include a compliant badge system for validation:**
 
 ```bash
-# One-click deployment
+# Copy badge system to your game
+cp ../dev-kit/badge-helper.js ./js/
+```
+
+Edit your `index.html` to include the badge system:
+
+```html
+<!-- Add this line before your closing </body> tag -->
+<script src="./js/badge-helper.js"></script>
+```
+
+**The CLI automatically adds badge integration - no additional code needed!**
+
+## Step 6: Deploy to Wavelength Hub (30 seconds)
+
+```bash
+# One-click deployment with badge validation
 ../vibe-cli.sh deploy
 ```
 
 This will:
-1. ✅ Validate your game meets Hub requirements
-2. 📦 Package your game automatically
+1. ✅ Validate your game meets Hub requirements (including badge system)
+2. 📦 Package your game automatically  
 3. 🌐 Open hub.wavelength.com/upload in your browser
 4. 🎮 Generate your deployment package
 
 **Just drag and drop the ZIP file to complete deployment!**
+
+> **💡 Badge System**: Your game automatically earns you 35% revenue when players buy merchandise featuring badges they earned in your game!
 
 ---
 

@@ -2,6 +2,19 @@
 
 Local testing environment for badge awarding - no sandbox required!
 
+## ⚠️ **CRITICAL: Validation Requirements**
+
+**ALL GAMES** must implement a compliant badge system to pass Wavelength Hub validation:
+
+### Required Elements:
+- ✅ **Badge Helper Class**: `WavelengthBadgeHelper` or `badgeHelper`
+- ✅ **Badge Helper Script**: File named `badge-helper.js` 
+- ✅ **API Endpoints**: Calls to `/api/games/{gameId}/badges/award` or `badges/award`
+- ✅ **Method Calls**: Use `awardBadge()` or `.awardBadge(` methods
+- ✅ **Helper Files**: Files containing both "badge" and "helper" in filename
+
+**See [Badge Integration Guide](../docs/guides/BADGE-INTEGRATION-GUIDE.md) for complete implementation details.**
+
 ## Quick Start
 
 1. **Copy the dev kit files** to your project:

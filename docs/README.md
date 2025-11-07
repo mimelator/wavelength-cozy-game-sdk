@@ -14,6 +14,8 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 - **[Universal Usage Guide](guides/UNIVERSAL-USAGE-GUIDE.md)** - Complete usage reference
 
 ### Development
+- **[Badge Integration Guide](guides/BADGE-INTEGRATION-GUIDE.md)** - ⚠️ **REQUIRED** Badge system compliance  
+- **[Badge Validation Checklist](BADGE-VALIDATION-CHECKLIST.md)** - 🔍 Pre-submission validation
 - **[Contributing Guide](guides/CONTRIBUTING.md)** - How to contribute to the project
 - **[Deployment Guide](guides/DEPLOYMENT-GUIDE.md)** - Deploy games to production
 
@@ -53,16 +55,31 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 
 ## 💰 Revenue Generation
 
-### Badge System
-The SDK includes a comprehensive badge system that automatically generates revenue through merchandise sales:
+### Badge System & Validation Requirements ⚠️ **CRITICAL**
 
+**ALL GAMES MUST IMPLEMENT COMPLIANT BADGE SYSTEMS** to pass Wavelength Hub validation.
+
+#### Required Implementation:
+- ✅ **Badge Helper Class**: `WavelengthBadgeHelper` or `badgeHelper` 
+- ✅ **Badge Helper Script**: File named `badge-helper.js` included in HTML
+- ✅ **API Endpoint Calls**: `/api/games/{gameId}/badges/award` or `badges/award`
+- ✅ **Method Calls**: Use `awardBadge()` or `.awardBadge(` methods
+- ✅ **Helper Files**: Files with "badge" and "helper" in filename
+
+#### Revenue Generation:
 - **35% Creator Revenue Share** - Automatic revenue from player badge merchandise
-- **Badge API Integration** - Seamless integration with Wavelength Hub
+- **Badge API Integration** - Seamless integration with Wavelength Hub  
 - **Merchandise Generation** - Automatic product creation from badge designs
 
-### How It Works
+#### Quick Implementation:
+1. Create `js/badge-helper.js` with `WavelengthBadgeHelper` class
+2. Include `<script src="./js/badge-helper.js"></script>` in your HTML
+3. Use `await badgeHelper.awardBadge(badgeId, null, metadata)` in your game
+4. **See [Badge Integration Guide](guides/BADGE-INTEGRATION-GUIDE.md) for complete instructions**
+
+### How Badge Revenue Works
 1. Players earn badges through gameplay achievements
-2. Badges appear in player's personal gallery
+2. Badges appear in player's personal gallery  
 3. Players can create merchandise featuring their earned badges
 4. Revenue is automatically shared with game creators (35%)
 
