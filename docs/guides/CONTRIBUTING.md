@@ -112,7 +112,6 @@ We especially welcome contributions in these areas:
 - 🤖 **AI Integration**: Support for new AI providers, improved prompts
 - 🎮 **Game Templates**: New cozy game types and mechanics
 - 📱 **Mobile Experience**: Better responsive design and touch interactions
-- 💰 **Revenue Features**: Enhanced badge systems and monetization tools
 
 ### **Medium Priority**  
 - 🎨 **Visual Polish**: CSS improvements, animations, accessibility
@@ -158,10 +157,8 @@ We especially welcome contributions in these areas:
 
 ### **Key Concepts**
 - **Cozy Games**: Peaceful, non-violent, relaxing experiences
-- **Badge System**: Achievement-based merchandise revenue model
 - **AI-First**: Creative workflow prioritizes AI assistance
 - **Mobile-First**: Games work great on phones and tablets
-- **Revenue-Focused**: Built to help creators earn money
 
 ### **External Resources**
 - [Claude API Documentation](https://docs.anthropic.com/)
@@ -179,7 +176,6 @@ Contributors will be recognized in:
 
 We also encourage contributors to:
 - Add your games to our showcase
-- Share your revenue success stories
 - Mentor new community members
 - Speak at events about cozy game development
 

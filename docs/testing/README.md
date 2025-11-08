@@ -40,7 +40,6 @@ Both guides help validate that **non-technical users can**:
 - ✅ Configure AI integration (OpenAI/Anthropic/Ollama)
 - ✅ Create their first cozy game using natural language
 - ✅ See their game running in a web browser
-- ✅ Understand the revenue potential of the badge system
 - ✅ Feel confident to create more games
 
 ## 📈 Success Metrics
@@ -49,7 +48,6 @@ Both guides help validate that **non-technical users can**:
 - Users complete game creation within 60 minutes
 - Users successfully configure AI without help
 - Users can see their game running in browser
-- Users understand the basic concept and revenue model
 
 ### Quality Indicators:
 - Satisfaction rating ≥ 7/10

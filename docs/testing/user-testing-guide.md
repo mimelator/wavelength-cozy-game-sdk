@@ -242,7 +242,6 @@ _________________________________
 ### Secondary Success Indicators
 - [ ] User enjoys the experience (satisfaction ≥7/10)
 - [ ] User would recommend to others
-- [ ] User understands revenue potential
 - [ ] User wants to create another game
 
 ### Red Flags (Indicates Need for Improvement)

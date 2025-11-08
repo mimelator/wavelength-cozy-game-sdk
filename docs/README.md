@@ -1,6 +1,5 @@
 # 📚 Wavelength Cozy Game SDK Documentation
 
-Welcome to the complete documentation for the Wavelength Cozy Game SDK - your professional toolkit for creating revenue-generating cozy games.
 
 ## 🚀 Quick Start
 
@@ -40,7 +39,6 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 ### Development Kit
 - **[Badge Development Kit](../dev-kit/README.md)** - Tools for testing badge systems
 
-## 💰 Revenue Generation
 
 ### Badge System & Validation Requirements ⚠️ **CRITICAL**
 
@@ -53,8 +51,6 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 - ✅ **Method Calls**: Use `awardBadge()` or `.awardBadge(` methods
 - ✅ **Helper Files**: Files with "badge" and "helper" in filename
 
-#### Revenue Generation:
-- **35% Creator Revenue Share** - Automatic revenue from player badge merchandise
 - **Badge API Integration** - Seamless integration with Wavelength Hub  
 - **Merchandise Generation** - Automatic product creation from badge designs
 
@@ -64,11 +60,9 @@ Welcome to the complete documentation for the Wavelength Cozy Game SDK - your pr
 3. Use `await badgeHelper.awardBadge(badgeId, null, metadata)` in your game
 4. **See [Badge Integration Guide](guides/BADGE-INTEGRATION-GUIDE.md) for complete instructions**
 
-### How Badge Revenue Works
 1. Players earn badges through gameplay achievements
 2. Badges appear in player's personal gallery  
 3. Players can create merchandise featuring their earned badges
-4. Revenue is automatically shared with game creators (35%)
 
 ## 🌐 Community & Support
 

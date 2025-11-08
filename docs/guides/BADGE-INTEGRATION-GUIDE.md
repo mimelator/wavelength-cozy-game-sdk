@@ -343,11 +343,9 @@ Before submitting your game, verify:
 - [ ] Error handling is implemented for badge operations
 - [ ] Game respects badge timing requirements (no spam awarding)
 
-## 💰 Revenue Integration
 
 When your badge system is compliant, you automatically get:
 
-- **35% Creator Revenue Share** from badge merchandise
 - **Automatic Badge Gallery** integration  
 - **Professional Badge Notifications** for players
 - **Cross-Game Badge Collections** for players
@@ -371,14 +369,12 @@ When your badge system is compliant, you automatically get:
 1. Deploy to production environment
 2. Test badge earning in live game
 3. Verify badges appear in player gallery
-4. Confirm revenue tracking is active
 
 ## 📚 Additional Resources
 
 - **[Badge Development Kit](../dev-kit/README.md)** - Local testing tools
 - **[Game Templates](../../templates/)** - Examples with compliant badge systems
 - **[API Documentation](../api/badges.md)** - Complete badge API reference
-- **[Revenue Guide](REVENUE-GUIDE.md)** - Maximizing badge-based revenue
 
 ---
 

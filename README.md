@@ -1,25 +1,20 @@
 # 🎮 Wavelength Cozy Game SDK
 
-**Create peaceful, revenue-generating cozy games with AI assistance**
 
 [![GitHub Stars](https://img.shields.io/github/stars/mimelator/wavelength-cozy-game-sdk?style=social)](https://github.com/mimelator/wavelength-cozy-game-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![AI Powered](https://img.shields.io/badge/AI-Powered-blue.svg)](https://github.com/mimelator/wavelength-cozy-game-sdk)
 
-> Transform your cozy game ideas into reality and earn 35% revenue from badge merchandise sales
 
 ---
 
 ## ✨ **What Makes This Special**
 
 🎨 **AI Creative Freedom** - Describe your cozy game idea, AI builds the complete experience  
-💰 **Built-in Revenue** - 35% creator share from automatic badge merchandise system  
 📱 **Mobile-First** - Games work perfectly on all devices out of the box  
-🚀 **Instant Deploy** - One command deploys to WavelengthHub with revenue tracking  
 
 ## 🎯 **Perfect For**
 
-- **Artists & Creators** seeking new revenue streams
 - **Entrepreneurs** building passive income  
 - **Game Enthusiasts** with cozy ideas but no coding skills
 - **Developers** wanting rapid AI-assisted prototyping
@@ -42,11 +37,9 @@ cd my-beach-game
 ../wavelength-cli.sh test
 ```
 
-**That's it!** You now have a unique, playable cozy game with built-in revenue generation.
 
 ---
 
-## 💰 **Revenue Model**
 
 ### **How You Earn Money**
 1. **Create cozy game** with built-in achievement badges
@@ -54,7 +47,6 @@ cd my-beach-game
 3. **Badges become merchandise** (t-shirts, mugs, stickers)
 4. **You earn 35%** of all merchandise sales automatically
 
-### **Example Revenue**
 - 1,000 players → ~100 badge earnings → ~20 merchandise purchases → **$60-200/month passive income**
 - Popular games can generate **$500-2000+ monthly** through organic badge merchandise sales
 
@@ -93,7 +85,6 @@ export OPENAI_API_KEY="your-key"
 - **`wavelength-cli.sh`** - Professional command-line interface
 - **AI Creative Workflow** - Generate games from descriptions
 - **Professional Templates** - Collection game, adventure, puzzle
-- **Badge Revenue System** - Automatic merchandise integration
 - **Mobile-Responsive** - Perfect on all devices
 - **One-Click Deploy** - Instant publishing to WavelengthHub
 
@@ -111,7 +102,6 @@ export OPENAI_API_KEY="your-key"
 |-------|---------|
 | [🚀 Quick Start](QUICK-START.md) | Get your first game running in 5 minutes |
 | [🎨 Creative Workflow](AI-CREATIVE-WORKFLOW.md) | Master AI-assisted game creation |
-| [💰 Revenue Guide](REVENUE-GUIDE.md) | Optimize games for maximum earnings |
 | [📱 Deployment](DEPLOYMENT-GUIDE.md) | Publish to WavelengthHub |
 | [🎯 Examples](docs/examples/) | Sample games and tutorials |
 
@@ -122,16 +112,13 @@ export OPENAI_API_KEY="your-key"
 ### **vs Traditional Game Development**
 ✅ **No Programming** - AI handles all technical implementation  
 ✅ **Instant Results** - Complete games in minutes, not months  
-✅ **Built-in Monetization** - Revenue system included from day one  
 
 ### **vs Other No-Code Platforms**
 ✅ **True AI Creativity** - Not limited to templates or drag-and-drop  
-✅ **Revenue-First Design** - Built around making money, not just games  
 ✅ **Quality Assurance** - Professional deployment and testing included  
 
 ### **vs DIY Approaches**
 ✅ **Professional Infrastructure** - Hosting, payments, analytics handled  
-✅ **Proven Revenue Model** - Badge system optimized for merchandise sales  
 ✅ **Community Platform** - Built-in discovery through WavelengthHub  
 
 ---
@@ -173,7 +160,6 @@ export OPENAI_API_KEY="your-key"
 
 ### **Connect with Creators**
 - 🎮 [WavelengthHub Community](https://hub.wavelength.com/community)
-- 💰 [Revenue Success Stories](https://hub.wavelength.com/success-stories)  
 - 🎨 [Creator Showcase](https://hub.wavelength.com/showcase)
 
 ---
@@ -185,7 +171,6 @@ export OPENAI_API_KEY="your-key"
 - 🤖 **More AI Providers** - Google Gemini, local models
 - 🎵 **Audio Integration** - AI-generated cozy soundtracks  
 - 🌍 **Multiplayer** - Shared cozy experiences
-- 📈 **Advanced Analytics** - Revenue optimization insights
 
 ### **Contributing**
 We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
@@ -198,7 +183,6 @@ We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
 
 ## 📄 **License**
 
-MIT License - Create freely, earn revenue, share knowledge.
 
 See [LICENSE](LICENSE) for full terms.
 
@@ -206,7 +190,6 @@ See [LICENSE](LICENSE) for full terms.
 
 ## 🌟 **Start Creating**
 
-Ready to turn your cozy game ideas into revenue-generating experiences?
 
 ```bash
 git clone https://github.com/mimelator/wavelength-cozy-game-sdk.git

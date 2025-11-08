@@ -2,7 +2,6 @@
 *Use VIBE Coding SDK with any text editor, AI assistant, or development environment*
 
 > **📖 For basic setup and quick start**, see [QUICK-START.md](QUICK-START.md)
-> **💰 For revenue and badge system details**, see [README.md](README.md)
 
 ## 🎯 **Focus: Non-VS Code Workflows**
 
@@ -316,7 +315,6 @@ When working outside VS Code/Claude, these files are crucial:
 - **`AI-CONTEXT.md`** - Upload to any AI assistant for instant expertise
 - **`templates/`** - Starting points for different game types
 - **`QUICK-START.md`** - Basic setup and first game creation
-- **`README.md`** - Complete SDK documentation and revenue details
 
 ---
 

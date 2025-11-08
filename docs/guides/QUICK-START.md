@@ -1,6 +1,5 @@
 # 🚀 Quick Start Guide - From Zero to Passive Income in 5 Minutes
 
-**Create your first revenue-generating cozy game without any programming!**
 
 Every game you create can earn you passive income through the badge merchandise system. Players earn badges, merchandise gets created, and you earn 35% forever.
 
@@ -19,7 +18,6 @@ Every game you create can earn you passive income through the badge merchandise 
 **The Badge Driven Model is powerful because:**
 - Players buy merch featuring badges THEY earned (personal connection)
 - Higher conversion rates than traditional merchandise
-- Each badge creates a potential revenue stream
 - Popular achievements continue selling as new players discover them
 
 ## Step 1: Download the SDK (30 seconds)
@@ -138,7 +136,6 @@ This will:
 
 **Just drag and drop the ZIP file to complete deployment!**
 
-> **💡 Badge System**: Your game automatically earns you 35% revenue when players buy merchandise featuring badges they earned in your game!
 
 ---
 

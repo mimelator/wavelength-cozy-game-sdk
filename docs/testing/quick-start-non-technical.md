@@ -185,7 +185,6 @@ chmod +x vibe-cli.sh
 
 ---
 
-## 💰 Step 9: Understand Your Revenue Potential (5 minutes)
 
 ### How the Badge System Makes You Money
 
@@ -198,10 +197,8 @@ chmod +x vibe-cli.sh
 **Why it works:**
 - Players buy merch featuring achievements THEY earned
 - Personal connection = higher sales
-- Each player can earn multiple badges = multiple revenue streams
 - Popular games continue generating income as new players discover them
 
-**Revenue potential**:
 - Casual game: $10-50/month per 1000 players
 - Popular game: $100-500/month per 1000 players
 - Viral game: $500+ per 1000 players
@@ -262,7 +259,6 @@ Check `ai-prompts/quick-start-chatgpt.md` for step-by-step instructions you can 
 - **Create meaningful achievement names** ("Ocean Guardian" not "Level 5")
 - **Think about what would look good on a t-shirt**
 
-### Maximizing Revenue:
 - **Design memorable badges** that tell personal stories
 - **Use emotional language** in achievement descriptions
 - **Create multiple difficulty levels** for different badge tiers
