@@ -1,7 +1,4 @@
-# 🚀 Quick Start Guide - From Zero to Passive Income in 5 Minutes
-
-
-Every game you create can earn you passive income through the badge merchandise system. Players earn badges, merchandise gets created, and you earn 35% forever.
+# 🚀 Quick Start Guide - Get Started in 5 Minutes
 
 ## Prerequisites
 - Any computer with a web browser
@@ -10,15 +7,10 @@ Every game you create can earn you passive income through the badge merchandise 
 - Creativity (most important!)
 
 ## Why Create VIBE Games?
-**💰 Badge Driven Merch Experience**: Players earn badges, create and buy merch featuring their achievements, you earn 35% forever
 **🎮 No Programming**: Just edit simple text files to create complete games
 **📱 Mobile Ready**: Automatically works on phones, tablets, and computers
 **🌍 Global Reach**: Deploy to hub.wavelength.com with one command
-
-**The Badge Driven Model is powerful because:**
-- Players buy merch featuring badges THEY earned (personal connection)
-- Higher conversion rates than traditional merchandise
-- Popular achievements continue selling as new players discover them
+**🏆 Achievement System**: Built-in badge system for player accomplishments
 
 ## Step 1: Download the SDK (30 seconds)
 
@@ -167,19 +159,12 @@ Your cozy game is now live on hub.wavelength.com and playable by people around t
 
 ## 🆘 Need Help?
 
-### AI Assistant (Fastest)
-```
-I'm using VIBE Coding SDK to create a cozy game. Help me [describe what you want to do].
-
-Here's my current game.json: [paste your configuration]
-```
-
-Upload the `AI-CONTEXT.md` file to ChatGPT, Claude, or any AI assistant for instant expert help!
-
 ### Community Support
 - **Discord**: https://discord.gg/vibe-coding
 - **Forum**: https://hub.wavelength.com/forum
 - **Email**: help@wavelength.com
+
+Ask questions in our community forums or Discord channels. Share your game.json configuration for help with specific issues.
 
 ### Common Issues
 - **Game won't load**: Check that all files are in the right place

@@ -1,11 +1,11 @@
 # 🎮 **VIBE SDK: Universal Tool Integration**
-*Use VIBE Coding SDK with any text editor, AI assistant, or development environment*
+*Use VIBE Coding SDK with any text editor or development environment*
 
 > **📖 For basic setup and quick start**, see [QUICK-START.md](QUICK-START.md)
 
 ## 🎯 **Focus: Non-VS Code Workflows**
 
-This guide is specifically for users who want to use VIBE SDK with tools other than VS Code and Claude. The SDK works with **any development environment** - here's how:
+This guide is specifically for users who want to use VIBE SDK with various development tools. The SDK works with **any development environment** - here's how:
 
 ### **1. 📝 Text Editor Integrations**
 
@@ -36,44 +36,6 @@ cd my-ocean-game
 ../vibe-cli.sh test
 ../vibe-cli.sh deploy
 ```
-
----
-
-### **2. 🤖 AI Assistant Integration (Any Platform)**
-
-**Quick Setup for Any AI:**
-```
-I'm using VIBE Coding SDK to create cozy games. Help me design a [describe your game concept].
-
-VIBE uses JSON configuration instead of code. Games have themes like 'ocean', 'forest', 'sunset' with emoji-based collectible items and peaceful gameplay.
-```
-
-**Platform-Specific Instructions:**
-
-#### **ChatGPT / GPT-4:**
-1. Upload `AI-CONTEXT.md` from the SDK
-2. Ask: *"Create a magical garden game using VIBE principles"*
-3. Copy the JSON configuration into your `game.json`
-
-#### **Google Bard / Gemini:**
-1. Copy-paste the AI-CONTEXT.md content
-2. Request: *"Generate VIBE SDK configuration for underwater treasure hunting"*
-3. Use the provided JSON in your game files
-
-#### **Claude (any interface):**
-- Works in web interface, API, or third-party clients
-- Upload AI-CONTEXT.md for full understanding
-- Natural conversation about game concepts
-
-#### **GitHub Copilot:**
-1. Open any `game.json` file in your editor
-2. Copilot automatically understands VIBE patterns
-3. Get intelligent autocompletion and suggestions
-
-#### **Local AI Models (Ollama, LM Studio, etc.):**
-1. Load the AI-CONTEXT.md into your model's context
-2. Works with Code Llama, Mistral, Llama 2, etc.
-3. Full offline game creation capability
 
 ---
 
@@ -251,11 +213,6 @@ create_vibe_game("Ocean Explorer", "ocean", [
 - No vendor lock-in to specific platforms
 - Choose tools that match your workflow
 
-### ✅ **AI Platform Agnostic**
-- Compatible with all major AI assistants
-- Works with local and cloud AI models
-- Standardized context for consistent results
-
 ### ✅ **Development Environment Flexible**
 - Command line, GUI, or web-based workflows
 - Mobile development capability
@@ -270,29 +227,26 @@ create_vibe_game("Ocean Explorer", "ocean", [
 
 ## 🎯 **Quick Integration Recipes**
 
-### **Recipe: ChatGPT + Sublime Text**
+### **Recipe: Sublime Text Workflow**
 ```bash
 # Setup
-git clone https://github.com/mimelator/wavelength-cozy-game-vibe-sdk.git
-cd wavelength-cozy-game-vibe-sdk
+git clone https://github.com/mimelator/wavelength-cozy-game-sdk.git
+cd wavelength-cozy-game-sdk
 
 # Workflow
-./vibe-cli.sh new forest-adventure
-# Ask ChatGPT: "Create mystical forest items for VIBE game"
-# Edit game.json in Sublime Text with AI suggestions
-subl forest-adventure/game.json
-cd forest-adventure && ../vibe-cli.sh test
+./wavelength-cli.sh new forest-adventure
+# Edit game.json in Sublime Text
+sublime forest-adventure/game.json
+cd forest-adventure && ../wavelength-cli.sh test
 ```
 
-### **Recipe: Local AI + vim**
+### **Recipe: vim Workflow**
 ```bash
-# Setup with local AI context
-cat AI-CONTEXT.md | your-local-ai-tool
 # Create game with vim
-./vibe-cli.sh new retro-arcade
+./wavelength-cli.sh new retro-arcade
 vim retro-arcade/game.json
 # Test and deploy
-cd retro-arcade && ../vibe-cli.sh deploy
+cd retro-arcade && ../wavelength-cli.sh deploy
 ```
 
 ### **Recipe: Visual Editor + Mobile**
@@ -309,10 +263,9 @@ cd retro-arcade && ../vibe-cli.sh deploy
 
 ## 📄 **Essential Files Reference**
 
-When working outside VS Code/Claude, these files are crucial:
+When working with various tools, these files are crucial:
 
-- **`vibe-cli.sh`** - Your main command interface
-- **`AI-CONTEXT.md`** - Upload to any AI assistant for instant expertise
+- **`wavelength-cli.sh`** - Your main command interface
 - **`templates/`** - Starting points for different game types
 - **`QUICK-START.md`** - Basic setup and first game creation
 
@@ -325,12 +278,6 @@ When working outside VS Code/Claude, these files are crucial:
 - **File validation** - Many editors can validate JSON automatically
 - **Auto-formatting** - Keep your game.json files clean
 - **Git integration** - Track changes to your game configurations
-
-### **AI Assistant Optimization**
-- **Upload AI-CONTEXT.md first** - Gives full VIBE understanding
-- **Be specific about game concepts** - Better AI suggestions
-- **Ask for complete JSON blocks** - Easier copy-paste workflow
-- **Request validation checks** - AI can spot JSON errors
 
 ### **Testing Strategy**
 - **Test early and often** - Use built-in test server frequently

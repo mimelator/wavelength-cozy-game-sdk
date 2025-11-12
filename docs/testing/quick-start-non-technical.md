@@ -1,6 +1,6 @@
-# 🌟 VIBE Coding: Your First AI-Created Game in 30 Minutes!
+# 🌟 VIBE Coding: Your First Game in 30 Minutes!
 
-**Welcome! You're about to create your very own video game using just natural language and AI. No programming experience needed!**
+**Welcome! You're about to create your very own video game. No programming experience needed!**
 
 ---
 
@@ -9,11 +9,10 @@
 By the end of this guide, you will have:
 - ✅ Created a personalized cozy game
 - ✅ Seen it running in your web browser
-- ✅ Learned how it can generate passive income
+- ✅ Learned how to customize and deploy games
 - ✅ Had fun doing it!
 
 **Estimated time**: 30-45 minutes  
-**Cost**: $1-3 for AI service  
 **Difficulty**: Beginner-friendly  
 
 ---
@@ -32,23 +31,20 @@ By the end of this guide, you will have:
 
 ---
 
-## 🤖 Step 2: Get Your AI Assistant (10 minutes)
+## 📝 Step 2: Prepare Your Game Idea (5 minutes)
 
-### Choose Your AI Helper
-**We recommend OpenAI (ChatGPT) for beginners:**
+### Think About Your Game
+**Come up with a simple, cozy game concept:**
 
-1. **Go to**: https://platform.openai.com/signup
-2. **Create an account** with your email address
-3. **Verify your email** when they send you a confirmation
-4. **Add a payment method** (don't worry, you'll only spend $1-3)
-5. **Go to**: https://platform.openai.com/api-keys
-6. **Click "Create new secret key"**
-7. **Copy the entire key** (it starts with "sk-")
-8. **Paste it into a safe note** on your computer (you'll need it in 2 minutes)
+Examples:
+- A peaceful beach where you collect colorful seashells
+- A cozy forest where you find magical mushrooms
+- A flower garden where you gather different blooms
+- A mountain lake where you collect pretty stones
 
-**💡 Tip**: Keep that key safe! It's like a password for your AI assistant.
+**💡 Tip**: Keep it simple and peaceful - focus on collection or exploration themes.
 
-**✅ Success check**: You have a long key that starts with "sk-"
+**✅ Success check**: You have a clear game idea in mind
 
 ---
 
@@ -102,69 +98,42 @@ chmod +x vibe-cli.sh
 
 ---
 
-## 🎨 Step 6: Connect Your AI Assistant (2 minutes)
+## 🎮 Step 6: Create Your Game! (5 minutes)
 
-**Replace YOUR_KEY_HERE with the key you copied earlier:**
-
-```
-./vibe-cli.sh ai-setup openai YOUR_KEY_HERE
-```
-
-**Example** (don't use this exact key):
-```
-./vibe-cli.sh ai-setup openai sk-1234567890abcdef
-```
-
-**You should see**: "✅ AI integration configured!"
-
-**✅ Success check**: You see the success message
-
----
-
-## 🎮 Step 7: Create Your Game with AI! (5 minutes)
-
-### Think of Your Game Idea
-**Examples of good ideas:**
-- "A peaceful beach where I collect colorful seashells"
-- "A cozy forest where I find magical mushrooms"
-- "A flower garden where I gather different blooms"
-- "A mountain lake where I collect pretty stones"
-
-### Tell the AI Your Idea
-**Type this command** (replace the quote with YOUR idea):
+### Create Your Game Project
+**Type this command** (replace "my-game-name" with your game idea):
 
 ```
-./vibe-cli.sh ai-create "your game idea here"
+./wavelength-cli.sh new my-game-name
 ```
 
 **Real example**:
 ```
-./vibe-cli.sh ai-create "peaceful snowy village where I collect winter ornaments"
+./wavelength-cli.sh new peaceful-beach-collector
 ```
 
-**Watch the magic happen!** The AI will:
+**This will:**
 - Create your game files
-- Design the visual theme
-- Set up collection mechanics
-- Create achievement badges
+- Set up the basic structure
+- Include achievement badges
 - Make it mobile-friendly
 
 **✅ Success check**: You see "Game created successfully!" and a new folder appears
 
 ---
 
-## 🌟 Step 8: See Your Game Come to Life! (5 minutes)
+## 🌟 Step 7: See Your Game Come to Life! (5 minutes)
 
 ### Start Your Game
-**The AI will tell you the game folder name. Use that name with the test command:**
+**Use the game folder name you created with the test command:**
 
 ```
-./vibe-cli.sh test your-game-folder-name
+./wavelength-cli.sh test your-game-folder-name
 ```
 
-**For example, if your game is called "Frozen Ice Palace Collection":**
+**For example, if your game is called "peaceful-beach-collector":**
 ```
-./vibe-cli.sh test frozen-ice-palace-collection
+./wavelength-cli.sh test peaceful-beach-collector
 ```
 
 **The terminal will show you which port to use, something like:**
@@ -185,27 +154,7 @@ chmod +x vibe-cli.sh
 
 ---
 
-
-### How the Badge System Makes You Money
-
-**What you just created:**
-- A cozy game with meaningful achievement badges
-- Each badge represents something players accomplished
-- Players can buy merchandise (t-shirts, stickers) featuring THEIR badges
-- **You earn 35% of every sale automatically**
-
-**Why it works:**
-- Players buy merch featuring achievements THEY earned
-- Personal connection = higher sales
-- Popular games continue generating income as new players discover them
-
-- Casual game: $10-50/month per 1000 players
-- Popular game: $100-500/month per 1000 players
-- Viral game: $500+ per 1000 players
-
----
-
-## 🎨 Step 10: Customize Your Game (Optional - 10 minutes)
+## 🎨 Step 8: Customize Your Game (Optional - 10 minutes)
 
 ### Make It Truly Yours
 1. **Open your game folder** in your file explorer
@@ -231,7 +180,6 @@ chmod +x vibe-cli.sh
 **You can now:**
 - **Create more games**: Try different themes and ideas
 - **Share your games**: Send the link to friends and family
-- **Earn passive income**: As people play and buy badge merchandise
 - **Join the community**: Connect with other VIBE creators
 
 ### Try These Ideas Next:
@@ -241,13 +189,9 @@ chmod +x vibe-cli.sh
 - "Japanese garden where I collect meditation stones"
 
 ### Create Another Game:
-**Option 1 - Command Line:**
 ```
-./vibe-cli.sh ai-create "your next amazing idea"
+./wavelength-cli.sh new your-next-game-name
 ```
-
-**Option 2 - ChatGPT Conversation (Recommended for Beginners):**
-Check `ai-prompts/quick-start-chatgpt.md` for step-by-step instructions you can copy to any ChatGPT conversation. This method is more beginner-friendly and guides you through each creative decision!
 
 ---
 
@@ -271,14 +215,11 @@ Check `ai-prompts/quick-start-chatgpt.md` for step-by-step instructions you can 
 ### If Something Goes Wrong:
 1. **Read any error messages carefully**
 2. **Make sure you're in the right folder**
-3. **Check that your AI key is correct**
-4. **Try closing and reopening the terminal**
+3. **Try closing and reopening the terminal**
 
 ### Common Issues:
 - **"Command not found"**: You're not in the right folder
-- **"Invalid API key"**: Double-check your key copy/paste
-- **"We could not parse the JSON"**: The AI service had a temporary issue, try again
-- **"Permission denied"**: Run `chmod +x vibe-cli.sh` first
+- **"Permission denied"**: Run `chmod +x wavelength-cli.sh` first
 - **Game won't load**: Wait 30 seconds, then refresh browser
 
 ### Get Community Help:
@@ -292,10 +233,9 @@ Check `ai-prompts/quick-start-chatgpt.md` for step-by-step instructions you can 
 
 **You did it!** You've successfully:
 - ✅ Downloaded and set up VIBE Coding
-- ✅ Connected AI assistance
 - ✅ Created your first game
 - ✅ Seen it running live
-- ✅ Learned how to earn passive income
+- ✅ Learned how to customize and deploy games
 
 **You're now officially a game creator!** 🎮✨
 

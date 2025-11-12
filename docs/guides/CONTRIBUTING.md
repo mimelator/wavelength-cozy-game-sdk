@@ -56,10 +56,6 @@ git remote add upstream https://github.com/mimelator/wavelength-cozy-game-sdk.gi
 # Test CLI functionality
 ./wavelength-cli.sh help
 
-# Test AI workflow (requires API key)
-export ANTHROPIC_API_KEY="your-test-key"
-./wavelength-cli.sh creative "test cozy game"
-
 # Test template system
 ./wavelength-cli.sh new test-game simple-collector
 ./wavelength-cli.sh test test-game
@@ -109,7 +105,6 @@ docs: update quick start guide with new CLI commands
 We especially welcome contributions in these areas:
 
 ### **High Priority**
-- 🤖 **AI Integration**: Support for new AI providers, improved prompts
 - 🎮 **Game Templates**: New cozy game types and mechanics
 - 📱 **Mobile Experience**: Better responsive design and touch interactions
 
@@ -150,19 +145,15 @@ We especially welcome contributions in these areas:
 
 ### **Understanding the Codebase**
 - `wavelength-cli.sh` - Main CLI interface
-- `ai-creative-workflow.sh` - Core AI integration
 - `templates/` - Game templates and scaffolding
 - `docs/` - Documentation and guides
 - `dev-kit/` - Development tools and helpers
 
 ### **Key Concepts**
 - **Cozy Games**: Peaceful, non-violent, relaxing experiences
-- **AI-First**: Creative workflow prioritizes AI assistance
 - **Mobile-First**: Games work great on phones and tablets
 
 ### **External Resources**
-- [Claude API Documentation](https://docs.anthropic.com/)
-- [OpenAI API Documentation](https://platform.openai.com/docs)
 - [HTML5 Game Development](https://developer.mozilla.org/en-US/docs/Games)
 - [Responsive Web Design](https://web.dev/responsive-web-design-basics/)
 

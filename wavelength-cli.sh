@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Wavelength Cozy Game SDK CLI - Professional Game Development Toolkit
-# Create revenue-generating cozy games with enterprise-grade tools
+# Create cozy games with enterprise-grade tools
 
 set -e
 
@@ -47,34 +47,11 @@ print_help() {
     echo -e "  ${GREEN}clean${NC}                    Clean build artifacts"
     echo -e "  ${GREEN}help${NC}                     Show this help message"
     echo ""
-    echo -e "${WHITE}AI COMMANDS:${NC}"
-    echo -e "  ${PURPLE}ai-setup${NC} <provider> <key> Configure AI integration"
-    echo -e "  ${PURPLE}ai-create${NC} <description>   Generate game from description"
-    echo -e "  ${PURPLE}creative${NC} <description>    AI creative workflow"
-    echo ""
     echo -e "${WHITE}EXAMPLES:${NC}"
     echo -e "  ./wavelength-cli.sh new beach-adventure simple-collector"
-    echo -e "  ./wavelength-cli.sh ai-setup openai sk-your-api-key-here"
-    echo -e "  ./wavelength-cli.sh creative \"cozy forest collection game\""
-    echo -e "  ./wavelength-cli.sh test frozen-ice-palace-collection"
+    echo -e "  ./wavelength-cli.sh test beach-adventure"
     echo -e "  ./wavelength-cli.sh deploy"
     echo ""
-}
-
-# Check if AI integration is available
-check_ai_available() {
-    if [[ -f "$SCRIPT_DIR/.ai_config" ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-# Load AI configuration
-load_ai_config() {
-    if [[ -f "$SCRIPT_DIR/.ai_config" ]]; then
-        source "$SCRIPT_DIR/.ai_config"
-    fi
 }
 
 # Create new game project
@@ -225,68 +202,6 @@ cmd_clean() {
     echo -e "${GREEN}${CHECKMARK} Cleanup complete!${NC}"
 }
 
-# AI Setup
-cmd_ai_setup() {
-    local provider="$1"
-    local api_key="$2"
-    
-    if [[ -z "$provider" ]] || [[ -z "$api_key" ]]; then
-        echo -e "${RED}${WARNING} Usage: ./wavelength-cli.sh ai-setup <provider> <api-key>${NC}"
-        echo ""
-        echo -e "${WHITE}Supported providers:${NC}"
-        echo -e "  ${GREEN}openai${NC}    - OpenAI GPT models"
-        echo -e "  ${GREEN}claude${NC}    - Anthropic Claude models"
-        echo -e "  ${GREEN}ollama${NC}    - Local Ollama models"
-        return 1
-    fi
-    
-    echo -e "${BLUE}🤖 Setting up AI integration...${NC}"
-    
-    # Create AI config file
-    cat > "$SCRIPT_DIR/.ai_config" << EOF
-AI_PROVIDER="$provider"
-API_KEY="$api_key"
-AI_ENABLED=true
-EOF
-    
-    echo -e "${GREEN}${CHECKMARK} AI integration configured for $provider${NC}"
-    echo -e "${BLUE}You can now use: ./wavelength-cli.sh ai-create \"your game idea\"${NC}"
-}
-
-# AI Create
-cmd_ai_create() {
-    local description="$1"
-    
-    if [[ -z "$description" ]]; then
-        echo -e "${RED}${WARNING} Usage: ./wavelength-cli.sh ai-create \"your game description\"${NC}"
-        return 1
-    fi
-    
-    if ! check_ai_available; then
-        echo -e "${RED}${WARNING} AI integration not available. Run: ./wavelength-cli.sh ai-setup${NC}"
-        return 1
-    fi
-    
-    echo -e "${BLUE}🤖 Creating game with AI: ${WHITE}$description${NC}"
-    
-    # Use AI creative workflow if available
-    if [[ -f "$SCRIPT_DIR/tools/ai-creative-workflow.sh" ]]; then
-        "$SCRIPT_DIR/tools/ai-creative-workflow.sh" "$description"
-    else
-        echo -e "${YELLOW}${INFO} AI creative workflow not available${NC}"
-        echo -e "${BLUE}Creating basic project instead...${NC}"
-        
-        # Create a basic project with AI-inspired name
-        local game_name=$(echo "$description" | tr ' ' '-' | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]//g')
-        cmd_new "$game_name" "simple-collector"
-    fi
-}
-
-# AI Creative workflow
-cmd_creative() {
-    cmd_ai_create "$@"
-}
-
 # Main command dispatcher
 main() {
     case "${1:-help}" in
@@ -306,18 +221,6 @@ main() {
             ;;
         "clean")
             cmd_clean
-            ;;
-        "ai-setup")
-            shift
-            cmd_ai_setup "$@"
-            ;;
-        "ai-create")
-            shift
-            cmd_ai_create "$@"
-            ;;
-        "creative")
-            shift
-            cmd_creative "$@"
             ;;
         "help"|"--help"|"-h")
             print_help

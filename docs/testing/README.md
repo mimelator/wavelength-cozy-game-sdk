@@ -5,7 +5,7 @@ This directory contains comprehensive user testing resources for the VIBE Coding
 ## 📁 Contents
 
 ### 🎯 [Quick Start for Non-Technical Users](quick-start-non-technical.md)
-**Perfect for actual users** - A friendly, step-by-step guide that walks complete beginners through creating their first AI-generated game in 30 minutes.
+**Perfect for actual users** - A friendly, step-by-step guide that walks complete beginners through creating their first game in 30 minutes.
 
 - **Use this for**: Real users, sharing with friends, marketing demos
 - **Audience**: Anyone who wants to try VIBE Coding
@@ -37,8 +37,7 @@ This directory contains comprehensive user testing resources for the VIBE Coding
 
 Both guides help validate that **non-technical users can**:
 - ✅ Download and set up the VIBE Coding SDK
-- ✅ Configure AI integration (OpenAI/Anthropic/Ollama)
-- ✅ Create their first cozy game using natural language
+- ✅ Create their first cozy game
 - ✅ See their game running in a web browser
 - ✅ Feel confident to create more games
 
@@ -46,14 +45,13 @@ Both guides help validate that **non-technical users can**:
 
 ### Primary Success Indicators:
 - Users complete game creation within 60 minutes
-- Users successfully configure AI without help
 - Users can see their game running in browser
 
 ### Quality Indicators:
 - Satisfaction rating ≥ 7/10
 - Would recommend to others
 - Wants to create another game
-- Understands badge-driven merchandising
+- Understands the badge system
 
 ## 🔄 Iteration Process
 
@@ -89,6 +87,6 @@ Both guides help validate that **non-technical users can**:
 
 ## 🌟 The Goal
 
-**Make game creation accessible to everyone!** These testing documents help ensure that anyone - regardless of technical background - can successfully create beautiful, cozy games and understand how to turn their creativity into passive income.
+**Make game creation accessible to everyone!** These testing documents help ensure that anyone - regardless of technical background - can successfully create beautiful, cozy games.
 
 **Happy Testing!** 🎮✨

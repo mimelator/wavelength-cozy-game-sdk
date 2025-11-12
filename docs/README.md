@@ -51,8 +51,7 @@
 - ✅ **Method Calls**: Use `awardBadge()` or `.awardBadge(` methods
 - ✅ **Helper Files**: Files with "badge" and "helper" in filename
 
-- **Badge API Integration** - Seamless integration with Wavelength Hub  
-- **Merchandise Generation** - Automatic product creation from badge designs
+- **Badge API Integration** - Seamless integration with Wavelength Hub
 
 #### Quick Implementation:
 1. Create `js/badge-helper.js` with `WavelengthBadgeHelper` class
@@ -61,8 +60,7 @@
 4. **See [Badge Integration Guide](guides/BADGE-INTEGRATION-GUIDE.md) for complete instructions**
 
 1. Players earn badges through gameplay achievements
-2. Badges appear in player's personal gallery  
-3. Players can create merchandise featuring their earned badges
+2. Badges appear in player's personal gallery
 
 ## 🌐 Community & Support
 

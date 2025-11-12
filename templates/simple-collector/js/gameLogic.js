@@ -140,7 +140,6 @@ class GameLogicExtensions {
                 <div style="font-weight: bold; color: #FFD700;">🎉 Badge Earned!</div>
                 <div style="font-weight: bold;">${badge.name}</div>
                 <div style="opacity: 0.9;">${badge.description}</div>
-                <div style="font-size: 0.8rem; opacity: 0.8;">Available for merch!</div>
             </div>
         `;
 
