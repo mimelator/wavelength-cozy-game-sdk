@@ -83,17 +83,32 @@ class GameLogicExtensions {
         this.achievements[badge.id] = true;
         this.showAchievement(badge.name, badge.description, badge.image);
         
-        if (this.badgeConfig.enabled && this.badgeAPI) {
+        if (this.badgeConfig.enabled) {
             try {
-                const result = await this.badgeAPI.awardBadge({
-                    badgeId: badge.id,
-                    metadata: {
-                        score: gameState.score || 0,
-                        itemsCollected: gameState.itemsCollected || 0
-                    }
-                });
+                let result;
                 
-                if (result.success) {
+                // Use SDK 2.0 API if available (preferred)
+                if (window.Wavelength && window.Wavelength.badges) {
+                    result = await window.Wavelength.badges.award({
+                        badgeId: badge.id,
+                        metadata: {
+                            score: gameState.score || 0,
+                            itemsCollected: gameState.itemsCollected || 0
+                        }
+                    });
+                } 
+                // Fallback to legacy BadgeAPI class
+                else if (this.badgeAPI) {
+                    result = await this.badgeAPI.awardBadge({
+                        badgeId: badge.id,
+                        metadata: {
+                            score: gameState.score || 0,
+                            itemsCollected: gameState.itemsCollected || 0
+                        }
+                    });
+                }
+                
+                if (result && result.success) {
                     this.showBadgeEarnedNotification(result.badge);
                 }
                 

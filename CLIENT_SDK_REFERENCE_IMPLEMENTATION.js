@@ -1,8 +1,13 @@
 /**
- * Wavelength SDK 2.0 - Cozy Game SDK
- * 
- * Provides game context, player context, and badge functionality for Wavelength Hub games.
- * This SDK provides window.Wavelength for games (separate from window.WavelengthHub for plugins).
+ * Wavelength SDK 2.0 - Reference Implementation
+ *
+ * This is a reference implementation for the Wavelength Cozy Game SDK update.
+ * Copy and adapt this code to the Wavelength Cozy Game SDK repository.
+ *
+ * ⚠️ Important: This is for the Wavelength Cozy Game SDK (for games),
+ * NOT the client SDK (@wavelength/client-sdk which is for tenant plugins).
+ *
+ * Repository: https://github.com/mimelator/wavelength-cozy-game-vibe-sdk
  */
 
 /**
@@ -172,7 +177,7 @@ class WavelengthSDK {
    * SDK version
    */
   get version() {
-    return '2.0.0';
+    return '1.0.0';
   }
 }
 
@@ -247,11 +252,6 @@ function initWavelengthSDK(context) {
     };
   }
 
-  // Also expose as window.WavelengthBadge for backward compatibility
-  if (typeof window.WavelengthBadge === 'undefined') {
-    window.WavelengthBadge = new window.WavelengthBadgeHelper(context);
-  }
-
   console.log('[Wavelength SDK] Initialized:', {
     gameId: context.gameId,
     tenantId: context.tenantId,
@@ -273,14 +273,10 @@ if (window.parent && window.parent !== window) {
       initWavelengthSDK(event.data.context);
     }
   });
-
-  // Also check if context was already set (for page reloads)
-  if (window.wavelengthGameContext) {
-    initWavelengthSDK(window.wavelengthGameContext);
-  }
 }
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { WavelengthSDK, initWavelengthSDK };
 }
+

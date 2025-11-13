@@ -212,38 +212,62 @@ if (window.WavelengthBadge) {
         apiBase: apiBase
       };
 
-      // Initialize badge helper
-      if (typeof WavelengthBadgeHelper !== 'undefined') {
-        badgeHelper = new WavelengthBadgeHelper(window.wavelengthGameContext);
-        log('Badge helper initialized successfully!', 'success');
-        log(`Game ID: ${gameId}`);
-        log(`Tenant ID: ${tenantId}`);
-        log(`Player ID: ${playerId || 'Anonymous (using session)'}`);
-        log(`API Base: ${apiBase}`);
-      } else {
-        log('Badge helper script not loaded. Make sure badge-helper.js is in the same directory.', 'error');
-      }
-
-      // Update integration code
-      updateIntegrationCode();
+      // SDK will auto-initialize from window.wavelengthGameContext
+      // Wait a moment for initialization
+      setTimeout(() => {
+        if (window.Wavelength) {
+          log('✅ SDK 2.0 initialized successfully!', 'success');
+          log(`Game ID: ${window.Wavelength.game.id}`);
+          log(`Tenant ID: ${window.Wavelength.game.tenantId}`);
+          log(`Player ID: ${window.Wavelength.player.id || 'Anonymous (using session)'}`);
+          log(`Session ID: ${window.Wavelength.player.sessionId}`);
+          log(`SDK Version: ${window.Wavelength.version}`);
+        } else {
+          log('⚠️ SDK 2.0 not initialized. Check console for errors.', 'error');
+        }
+        
+        // Also check legacy API
+        if (window.WavelengthBadge) {
+          log('✅ Legacy API (WavelengthBadge) also available', 'info');
+        }
+        
+        // Update integration code
+        updateIntegrationCode();
+      }, 100);
     }
 
     function updateIntegrationCode() {
       const gameId = document.getElementById('gameId').value;
-      const code = `// Check if badge helper is available
-if (window.WavelengthBadge) {
+      const code = `// SDK 2.0 API (Recommended)
+if (window.Wavelength && window.Wavelength.badges) {
   // Award a badge when player achieves something
+  try {
+    const result = await window.Wavelength.badges.award({
+      badgeId: 'my-achievement-badge',
+      metadata: {
+        score: 1250,
+        level: 5,
+        achievement: 'high-score'
+      }
+    });
+    console.log('Badge awarded!', result);
+    // Show badge notification to player
+    showBadgeNotification(result.badge);
+  } catch (error) {
+    console.error('Failed to award badge:', error);
+  }
+}
+
+// Legacy API (Still supported)
+if (window.WavelengthBadge) {
   window.WavelengthBadge.awardBadge({
     badgeId: 'my-achievement-badge',
     metadata: {
       score: 1250,
-      level: 5,
-      achievement: 'high-score'
+      level: 5
     }
   }).then(result => {
     console.log('Badge awarded!', result);
-    // Show badge notification to player
-    showBadgeNotification(result.badge);
   }).catch(error => {
     console.error('Failed to award badge:', error);
   });
@@ -252,17 +276,30 @@ if (window.WavelengthBadge) {
     }
 
     async function testAwardBadge() {
-      if (!badgeHelper) {
-        log('Please initialize badge helper first', 'error');
+      if (!window.Wavelength && !window.WavelengthBadge) {
+        log('Please initialize SDK first', 'error');
         return;
       }
 
       try {
         log('Attempting to award badge: test-badge-1...', 'info');
-        const result = await badgeHelper.awardBadge({
-          badgeId: 'test-badge-1',
-          metadata: {}
-        });
+        let result;
+        
+        // Use SDK 2.0 API if available
+        if (window.Wavelength && window.Wavelength.badges) {
+          result = await window.Wavelength.badges.award({
+            badgeId: 'test-badge-1',
+            metadata: {}
+          });
+        } 
+        // Fallback to legacy API
+        else if (window.WavelengthBadge) {
+          result = await window.WavelengthBadge.awardBadge({
+            badgeId: 'test-badge-1',
+            metadata: {}
+          });
+        }
+        
         log(`✅ Badge awarded successfully!`, 'success');
         log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
         log(`Status: ${result.badge.status}`);
@@ -276,22 +313,37 @@ if (window.WavelengthBadge) {
     }
 
     async function testAwardBadgeWithMetadata() {
-      if (!badgeHelper) {
-        log('Please initialize badge helper first', 'error');
+      if (!window.Wavelength && !window.WavelengthBadge) {
+        log('Please initialize SDK first', 'error');
         return;
       }
 
       try {
         log('Attempting to award badge with metadata...', 'info');
-        const result = await badgeHelper.awardBadge({
-          badgeId: 'test-badge-2',
-          metadata: {
-            score: 1250,
-            level: 5,
-            achievement: 'high-score',
-            timestamp: Date.now()
-          }
-        });
+        let result;
+        
+        if (window.Wavelength && window.Wavelength.badges) {
+          result = await window.Wavelength.badges.award({
+            badgeId: 'test-badge-2',
+            metadata: {
+              score: 1250,
+              level: 5,
+              achievement: 'high-score',
+              timestamp: Date.now()
+            }
+          });
+        } else if (window.WavelengthBadge) {
+          result = await window.WavelengthBadge.awardBadge({
+            badgeId: 'test-badge-2',
+            metadata: {
+              score: 1250,
+              level: 5,
+              achievement: 'high-score',
+              timestamp: Date.now()
+            }
+          });
+        }
+        
         log(`✅ Badge awarded with metadata!`, 'success');
         log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
         log(`Metadata: ${JSON.stringify({ score: 1250, level: 5 })}`);
@@ -302,8 +354,8 @@ if (window.WavelengthBadge) {
     }
 
     async function testAwardBadgeWithImage() {
-      if (!badgeHelper) {
-        log('Please initialize badge helper first', 'error');
+      if (!window.Wavelength && !window.WavelengthBadge) {
+        log('Please initialize SDK first', 'error');
         return;
       }
 
@@ -318,13 +370,26 @@ if (window.WavelengthBadge) {
         const base64Badge = 'data:image/svg+xml;base64,' + btoa(svgBadge);
 
         log('Attempting to award badge with custom image...', 'info');
-        const result = await badgeHelper.awardBadge({
-          badgeId: 'test-badge-3',
-          badgeImage: base64Badge,
-          metadata: {
-            customImage: true
-          }
-        });
+        let result;
+        
+        if (window.Wavelength && window.Wavelength.badges) {
+          result = await window.Wavelength.badges.award({
+            badgeId: 'test-badge-3',
+            badgeImage: base64Badge,
+            metadata: {
+              customImage: true
+            }
+          });
+        } else if (window.WavelengthBadge) {
+          result = await window.WavelengthBadge.awardBadge({
+            badgeId: 'test-badge-3',
+            badgeImage: base64Badge,
+            metadata: {
+              customImage: true
+            }
+          });
+        }
+        
         log(`✅ Badge with custom image awarded!`, 'success');
         log(`Badge Instance ID: ${result.badge.badgeInstanceId}`);
         if (result.badge.badgeImageUrl) {
@@ -337,14 +402,23 @@ if (window.WavelengthBadge) {
     }
 
     async function testGetBadges() {
-      if (!badgeHelper) {
-        log('Please initialize badge helper first', 'error');
+      if (!window.Wavelength && !window.WavelengthBadge) {
+        log('Please initialize SDK first', 'error');
         return;
       }
 
       try {
         log('Fetching available badges...', 'info');
-        const badges = await badgeHelper.getBadges();
+        let badges;
+        
+        if (window.Wavelength && window.Wavelength.badges) {
+          badges = await window.Wavelength.badges.list();
+        } else if (window.WavelengthBadge && typeof window.WavelengthBadge.getBadges === 'function') {
+          badges = await window.WavelengthBadge.getBadges();
+        } else {
+          throw new Error('Badge list API not available');
+        }
+        
         log(`✅ Retrieved ${badges.length} badge(s)`, 'success');
         badges.forEach((badge, i) => {
           log(`  ${i + 1}. ${badge.badgeId} - ${badge.name || 'No name'}`);

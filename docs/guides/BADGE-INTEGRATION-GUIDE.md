@@ -2,6 +2,78 @@
 
 Complete guide for implementing compliant badge systems in Wavelength Cozy Games.
 
+## 🆕 SDK 2.0 - New API (Recommended)
+
+The Wavelength SDK 2.0 provides a modern API structure. Games should use `window.Wavelength` for new implementations:
+
+### Using SDK 2.0 API
+
+```javascript
+// Game context
+const gameId = window.Wavelength.game.id;
+const tenantId = window.Wavelength.game.tenantId; // Always 'hub' for hub games
+const isHubGame = window.Wavelength.game.isHubGame; // Always true
+
+// Player context
+const playerId = window.Wavelength.player.id; // null for anonymous players
+const sessionId = window.Wavelength.player.sessionId; // Always available
+const isAnonymous = window.Wavelength.player.isAnonymous; // true if not logged in
+
+// Award a badge (new API)
+await window.Wavelength.badges.award({
+  badgeId: 'my-achievement-badge',
+  metadata: {
+    score: 1250,
+    level: 5
+  }
+});
+
+// List available badges
+const badges = await window.Wavelength.badges.list();
+
+// Get full context
+const context = window.Wavelength.getContext();
+```
+
+### SDK 2.0 Structure
+
+```javascript
+window.Wavelength = {
+  game: {
+    id: string,           // Game ID (e.g., 'autumn-grove-1-0-2')
+    tenantId: string,     // Always 'hub' for hub games
+    isHubGame: boolean    // Always true for hub games
+  },
+  player: {
+    id: string | null,    // Player ID (null for anonymous players)
+    sessionId: string,    // Session ID (always available)
+    isAnonymous: boolean  // true if player is not logged in
+  },
+  badges: {
+    award: (params) => Promise<Object>,  // Award a badge
+    list: () => Promise<Array>            // List available badges
+  },
+  getContext: () => Object,  // Get full context object
+  version: '2.0.0'
+}
+```
+
+### Backward Compatibility
+
+The SDK maintains backward compatibility with the old `WavelengthBadgeHelper` API. Both APIs work:
+
+```javascript
+// Old API (still works)
+if (window.WavelengthBadge) {
+  await window.WavelengthBadge.awardBadge({ badgeId: 'my-badge' });
+}
+
+// New API (recommended)
+if (window.Wavelength) {
+  await window.Wavelength.badges.award({ badgeId: 'my-badge' });
+}
+```
+
 ## 🎯 Badge Validation Requirements
 
 The Wavelength Hub validation system requires all games to implement a compliant badge system. Here are the **exact requirements** your game must meet:
@@ -12,19 +84,19 @@ Your game **MUST** include all of the following to pass validation:
 
 #### 1. **Badge API Endpoint Calls** ✅
 - **Required**: API calls to `/api/games/{gameId}/badges/award` or `badges/award`
-- **Implementation**: Use WavelengthBadgeHelper for automatic compliance
+- **Implementation**: Use `window.Wavelength.badges.award()` (SDK 2.0) or `WavelengthBadgeHelper.awardBadge()` (legacy)
 
-#### 2. **Badge Helper Class** ✅  
-- **Required**: `WavelengthBadgeHelper` or `badgeHelper` class in your code
-- **Implementation**: Include and initialize the badge helper class
+#### 2. **SDK or Badge Helper Class** ✅  
+- **Required**: `window.Wavelength` (SDK 2.0) or `WavelengthBadgeHelper` class in your code
+- **Implementation**: Include `badge-helper.js` which provides both APIs
 
 #### 3. **Badge Helper Script** ✅
 - **Required**: File named `badge-helper.js` included in your HTML
 - **Implementation**: Add `<script src="./js/badge-helper.js"></script>` to your index.html
 
 #### 4. **Method Calls** ✅
-- **Required**: Calls to `awardBadge()` or `.awardBadge(` methods
-- **Implementation**: Use the badge helper's `awardBadge()` method, not custom implementations
+- **Required**: Calls to `badges.award()` (SDK 2.0) or `awardBadge()` (legacy) methods
+- **Implementation**: Use `window.Wavelength.badges.award()` or `badgeHelper.awardBadge()`, not custom implementations
 
 #### 5. **Badge Helper Files** ✅
 - **Required**: Files with both "badge" and "helper" in the filename
@@ -32,9 +104,11 @@ Your game **MUST** include all of the following to pass validation:
 
 ## 🚀 Quick Implementation
 
-### Step 1: Create Badge Helper File
+### Step 1: Copy Badge Helper File
 
-Create `js/badge-helper.js` in your game directory:
+**Recommended**: Copy `badge-helper.js` from `dev-kit/` directory to your game's `js/` directory. This file includes both SDK 2.0 (`window.Wavelength`) and legacy API (`WavelengthBadgeHelper`) support.
+
+Alternatively, create `js/badge-helper.js` in your game directory:
 
 ```javascript
 /**
@@ -165,9 +239,9 @@ Add to your `index.html` **before** your game code:
 </html>
 ```
 
-### Step 3: Use Badge Helper in Game Code
+### Step 3: Use SDK in Game Code
 
-Replace any custom badge awarding with the helper:
+Replace any custom badge awarding with the SDK:
 
 ```javascript
 // ❌ INCORRECT - Will fail validation
@@ -175,8 +249,23 @@ function awardCustomBadge(badgeId) {
     fetch('/api/badges', { /* custom implementation */ });
 }
 
-// ✅ CORRECT - Will pass validation
+// ✅ CORRECT - SDK 2.0 API (Recommended)
 async function awardGameBadge(badgeId, metadata = {}) {
+    if (window.Wavelength && window.Wavelength.badges) {
+        try {
+            const result = await window.Wavelength.badges.award({
+                badgeId: badgeId,
+                metadata: metadata
+            });
+            console.log('Badge awarded successfully:', result);
+        } catch (error) {
+            console.error('Badge award failed:', error);
+        }
+    }
+}
+
+// ✅ ALSO CORRECT - Legacy API (Still supported)
+async function awardGameBadgeLegacy(badgeId, metadata = {}) {
     if (window.badgeHelper) {
         try {
             await window.badgeHelper.awardBadge(badgeId, null, metadata);
@@ -187,7 +276,7 @@ async function awardGameBadge(badgeId, metadata = {}) {
     }
 }
 
-// Usage examples
+// Usage examples (SDK 2.0)
 await awardGameBadge('first_level_complete', { level: 1, score: 100 });
 await awardGameBadge('high_score', { score: 5000, timestamp: Date.now() });
 ```
@@ -252,8 +341,19 @@ class BadgeManager {
         
         this.awardedBadges.add(badgeId);
         
-        // REQUIRED: Use WavelengthBadgeHelper.awardBadge() method
-        if (window.badgeHelper && typeof window.badgeHelper.awardBadge === 'function') {
+        // REQUIRED: Use SDK 2.0 API (preferred) or legacy API
+        if (window.Wavelength && window.Wavelength.badges) {
+            try {
+                const result = await window.Wavelength.badges.award({
+                    badgeId: badgeId,
+                    metadata: metadata
+                });
+                console.log(`🏆 Badge awarded: ${badgeId}`, result);
+            } catch (error) {
+                console.error('Badge award error:', error);
+            }
+        } else if (window.badgeHelper && typeof window.badgeHelper.awardBadge === 'function') {
+            // Fallback to legacy API
             try {
                 await window.badgeHelper.awardBadge(badgeId, null, metadata);
                 console.log(`🏆 Badge awarded: ${badgeId}`);
@@ -261,7 +361,7 @@ class BadgeManager {
                 console.error('Badge award error:', error);
             }
         } else {
-            console.warn('Badge helper not available for:', badgeId);
+            console.warn('SDK not available for:', badgeId);
         }
     }
 
