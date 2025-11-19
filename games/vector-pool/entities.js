@@ -253,6 +253,7 @@ export class Ship extends Entity {
         this.trail = []; // For motion trail
         // Increase mass significantly for impact
         this.mass = this.radius * this.radius * 5; 
+        this.lastTapTime = 0; // For detecting double tap/click
     }
 
     update(dt, input, addParticle) { // Accept addParticle callback
@@ -262,18 +263,43 @@ export class Ship extends Entity {
         this.trail.push({ pos: this.pos, angle: this.angle, alpha: 0.5 });
         if (this.trail.length > 10) this.trail.shift(); // Keep last 10 frames
 
-        // Handle Double Click Move
-        if (input.doubleClick.active) {
-            this.targetPos = new Vec2(input.doubleClick.x, input.doubleClick.y);
-            // Visual effect for target? (Could add a particle there)
-            if (addParticle) {
-                // Ping effect at target
-                for(let k=0; k<10; k++) {
-                     const a = Math.random() * Math.PI * 2;
-                     const v = new Vec2(Math.cos(a), Math.sin(a)).scale(100);
-                     addParticle(this.targetPos.x, this.targetPos.y, v, {r:0, g:1, b:0, a:1}, 0.5);
+        // Handle Single Tap/Click to Stop
+        // Logic: If user taps ship or taps empty space?
+        // User asked for "double click or single click to attract the ship doesn't work"
+        // Wait, user said "attract"? Or "attack"? Or "track"?
+        // "adttrack" -> "attract" maybe? Or "attack"? 
+        // Looking at previous code: "Handle Double Click Move" suggests move to point.
+        // User query: "double click or single click to adttrack the ship doen't work"
+        // Assuming they mean "attract" (move towards) or maybe just "track/move".
+        // Let's implement: Single Tap = Stop, Double Tap = Move to point (Attract)
+
+        if (input.pointer.justPressed) {
+            const now = Date.now();
+            if (now - this.lastTapTime < 300) {
+                // DOUBLE TAP DETECTED
+                // Move towards tap position
+                this.targetPos = mousePos;
+                
+                // Visual ping
+                if (addParticle) {
+                    for(let k=0; k<10; k++) {
+                         const a = Math.random() * Math.PI * 2;
+                         const v = new Vec2(Math.cos(a), Math.sin(a)).scale(100);
+                         addParticle(this.targetPos.x, this.targetPos.y, v, {r:0, g:1, b:0, a:1}, 0.5);
+                    }
+                }
+            } else {
+                // Single Tap Logic
+                // If tapping ON the ship -> Stop
+                // If tapping elsewhere -> Maybe nothing (since drag handles slingshot)
+                const dist = this.pos.sub(mousePos).length();
+                if (dist < this.radius * 2) {
+                    this.vel = new Vec2(0, 0); // Stop ship
+                    this.targetPos = null;
+                    this.isDragging = false; // Cancel drag if any
                 }
             }
+            this.lastTapTime = now;
         }
 
         // Apply force towards target

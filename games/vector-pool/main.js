@@ -131,6 +131,27 @@ function init() {
         }
     });
 
+    // Telemetry Minimize Handler
+    const telemetry = document.getElementById('telemetry');
+    const minimizeBtn = document.getElementById('minimize-btn');
+    const telemetryHeader = document.querySelector('.telemetry-header');
+    
+    // Toggle minimize function
+    const toggleTelemetry = (e) => {
+        e.stopPropagation(); // Prevent click through
+        telemetry.classList.toggle('minimized');
+        minimizeBtn.textContent = telemetry.classList.contains('minimized') ? '+' : '_';
+    };
+
+    minimizeBtn.addEventListener('click', toggleTelemetry);
+    telemetryHeader.addEventListener('click', toggleTelemetry);
+    
+    // Start minimized on mobile (small screens)
+    if (window.innerWidth < 600) {
+        telemetry.classList.add('minimized');
+        minimizeBtn.textContent = '+';
+    }
+
     // Audio Controls
     const muteBtn = document.getElementById('mute-btn');
     const volumeSlider = document.getElementById('volume-slider');
@@ -149,6 +170,11 @@ function init() {
     // Stop propagation on slider click to prevent ship movement
     volumeSlider.addEventListener('mousedown', e => e.stopPropagation());
     volumeSlider.addEventListener('touchstart', e => e.stopPropagation());
+
+    // Prevent telemetry interaction from moving ship
+    telemetry.addEventListener('mousedown', e => e.stopPropagation());
+    telemetry.addEventListener('touchstart', e => e.stopPropagation());
+    telemetry.addEventListener('pointerdown', e => e.stopPropagation());
 
     requestAnimationFrame(loop);
 }

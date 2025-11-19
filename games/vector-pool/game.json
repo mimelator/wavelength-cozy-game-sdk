@@ -2,7 +2,7 @@
   "name": "Vector Pool Asteroids",
   "title": "Vector Pool Asteroids",
   "description": "A vector graphics game combining Asteroids drift with billiards physics. Drag to aim and shoot, knock geometric shapes into corner pockets, and master the physics of space pool.",
-  "version": "1.0.1",
+  "version": "1.2.1",
   "author": "Wavelength Games",
   "category": "Physics",
   "tags": [

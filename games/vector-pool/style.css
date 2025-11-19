@@ -7,6 +7,7 @@ body, html {
     background-color: #050505;
     color: #fff;
     font-family: 'Courier New', Courier, monospace;
+    touch-action: none; /* Prevent default touch actions */
 }
 
 #gameCanvas {
@@ -43,6 +44,7 @@ h1 {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
     border-radius: 4px;
     max-width: 600px;
+    width: 90%; /* Responsive width */
     z-index: 100;
 }
 
@@ -119,13 +121,48 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background: rgba(0, 20, 40, 0.8);
+    background: rgba(0, 20, 40, 0.9);
     border: 1px solid #00ffff;
-    padding: 15px;
-    pointer-events: none;
+    padding: 0;
+    pointer-events: auto; /* Allow interaction */
     font-size: 14px;
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     min-width: 200px;
+    transition: height 0.3s ease;
+    overflow: hidden;
+}
+
+.telemetry-header {
+    background: rgba(0, 255, 255, 0.1);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    cursor: pointer;
+    color: #00ffff;
+    font-weight: bold;
+}
+
+#telemetry-content {
+    padding: 10px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+#telemetry.minimized #telemetry-content {
+    max-height: 0;
+    padding: 0 10px;
+    opacity: 0;
+}
+
+#minimize-btn {
+    background: none;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+    font-weight: bold;
 }
 
 .telemetry-row {
@@ -165,7 +202,7 @@ h2 {
 .audio-controls {
     display: flex;
     align-items: center;
-    pointer-events: auto !important; /* Allow clicks */
+    pointer-events: auto !important;
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid rgba(0, 255, 255, 0.3);

@@ -1,0 +1,33 @@
+<svg width="200" height="150" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(2deg); }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 2px #00ff00); }
+            50% { filter: drop-shadow(0 0 5px #00ff00); }
+        }
+        .ship {
+            animation: float 3s ease-in-out infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+        .asteroid {
+            animation: spin 8s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+        .text {
+            animation: glow 2s ease-in-out infinite;
+        }
+    </style>
+    <rect width="100%" height="100%" fill="#050505"/>
+    <path class="ship" d="M100 40 L85 90 L115 90 Z" fill="none" stroke="#00ffff" stroke-width="2"/>
+    <path class="asteroid" d="M40 100 L50 90 L60 105 L35 115 Z" fill="none" stroke="#ff00ff" stroke-width="2"/>
+    <text class="text" x="100" y="130" font-family="Courier New, monospace" font-size="14" fill="#00ff00" text-anchor="middle">VECTOR POOL</text>
+</svg>
