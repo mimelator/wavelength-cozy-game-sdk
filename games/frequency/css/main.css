@@ -1,0 +1,775 @@
+/**
+ * Frequency - Main Styles
+ * Cozy, ethereal design for sound-visual experience
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0f0;
+    overflow: hidden;
+    height: 100vh;
+    user-select: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Control Panel - Desktop Layout */
+#control-panel {
+    width: 320px;
+    height: 100vh;
+    background: rgba(20, 20, 40, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Main Game Area */
+#game-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0; /* Allows flex child to shrink */
+}
+
+#frequency-canvas {
+    background: transparent;
+    cursor: crosshair;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Title in Control Panel */
+#title {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+#title h1 {
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #4abdbc);
+    background-size: 300% 300%;
+    animation: gradientShift 4s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#title p {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin: 0;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Controls in Panel */
+#game-controls {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    min-width: 120px;
+}
+
+/* Enhanced button hover effects */
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 16px rgba(100, 200, 255, 0.4);
+    background: linear-gradient(135deg, rgba(100, 200, 255, 0.25), rgba(150, 100, 255, 0.25));
+}
+
+button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(100, 200, 255, 0.3);
+}
+
+/* Gentle button breathing animation */
+.main-button {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* UI element breathing */
+.control-group {
+    transition: all 0.3s ease;
+}
+
+.control-group:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 12px rgba(100, 200, 255, 0.2);
+}
+
+/* Slider enhancements */
+input[type="range"]:hover {
+    transform: scale(1.02);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    transition: all 0.2s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(100, 200, 255, 0.6);
+}
+
+/* Gentle pulse for active elements */
+.active, .playing {
+    animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(100, 200, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(100, 200, 255, 0.7);
+    }
+}
+
+/* Range Sliders */
+.audio-control, .frequency-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9em;
+}
+
+.audio-control span, .frequency-control span {
+    font-weight: bold;
+    color: #ff6b9d;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 107, 157, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 10px rgba(255, 107, 157, 0.4);
+}
+
+/* Instructions in Control Panel */
+#instructions {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#instructions p {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+#instructions p:last-child {
+    margin-bottom: 0;
+}
+
+/* Stats in Game Area */
+#stats {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 15px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#stats div {
+    font-size: 0.9em;
+}
+
+#stats span {
+    font-weight: bold;
+    color: #4abdbc;
+}
+
+/* Welcome Screen */
+#welcome-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 15, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: auto;
+}
+
+.welcome-content {
+    text-align: center;
+    background: rgba(20, 20, 40, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+}
+
+.welcome-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #4abdbc);
+    background-size: 300% 300%;
+    animation: gradientShift 4s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.welcome-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.main-button {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    min-width: 200px;
+    margin: 0;
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.3);
+}
+
+.main-button:hover {
+    box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+}
+
+.game-description {
+    font-size: 0.95em !important;
+    opacity: 0.7 !important;
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+/* 📱 Mobile-First Responsive Design */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: 100vh;
+    }
+
+    #game-container {
+        flex-direction: column;
+        height: 100vh;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    /* Mobile Control Panel - Collapsible at top */
+    #control-panel {
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+        overflow-y: auto;
+        padding: 15px;
+        background: rgba(20, 20, 40, 0.95);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 10px;
+        border-right: none;
+    }
+
+    /* Mobile Game Area - Takes remaining space */
+    #game-area {
+        flex: 1;
+        min-height: 300px;
+    }
+
+    /* Mobile Canvas - Priority Space */
+    #frequency-canvas {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: calc(60vh - 20px);
+        min-height: 300px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Mobile Title - Compact */
+    #title {
+        text-align: center;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    #title h1 {
+        font-size: 1.6em;
+        margin-bottom: 5px;
+    }
+
+    #title p {
+        font-size: 0.85em;
+        opacity: 0.8;
+    }
+
+    /* Mobile Controls - Compact Layout */
+    #game-controls {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .control-group h4 {
+        font-size: 1em;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Mobile Preset Buttons - Grid Layout */
+    .preset-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .preset-btn {
+        padding: 10px 12px;
+        font-size: 0.85em;
+        margin: 0;
+        min-width: auto;
+        flex: 1;
+    }
+
+    .control-group:first-child {
+        display: flex;
+        gap: 8px;
+    }
+
+    .control-group:first-child button {
+        flex: 1;
+    }
+
+    /* Mobile Sliders */
+    .audio-control, .frequency-control {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 10px 0;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mobile Control Buttons */
+    button {
+        padding: 10px 12px;
+        font-size: 0.85em;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        min-width: auto;
+        flex: 1;
+    }
+
+    .control-group:first-child {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* Mobile Sliders */
+    .audio-control, .frequency-control {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 10px 0;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mobile Instructions - In Control Panel */
+    #instructions {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #instructions p {
+        font-size: 0.85em;
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+
+    /* Mobile Stats - Stay in game area */
+    #stats {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(20, 20, 40, 0.8);
+        border-radius: 10px;
+        padding: 10px 12px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.8em;
+    }
+
+    #instructions p {
+        font-size: 0.85em;
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+
+    /* Mobile Stats - Horizontal Grid */
+    #stats {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        background: rgba(20, 20, 40, 0.8);
+        border-radius: 15px;
+        padding: 12px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        text-align: center;
+    }
+
+    #stats div {
+        font-size: 0.9em;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    }
+
+    #stats span {
+        color: #64b5f6;
+        font-weight: bold;
+    }
+
+    /* Hide welcome screen properly on mobile */
+    #welcome-screen {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .welcome-content h1 {
+        font-size: 1.8em;
+    }
+
+    .welcome-content p {
+        font-size: 0.9em;
+    }
+}
+
+/* 📱 Portrait Mobile Phones */
+@media (max-width: 480px) {
+    #frequency-canvas {
+        height: 55vh !important;
+        min-height: 300px;
+    }
+
+    #title h1 {
+        font-size: 1.5em;
+    }
+
+    .preset-buttons {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .preset-btn {
+        font-size: 0.75em;
+        padding: 8px 6px;
+    }
+
+    #stats {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    #stats div {
+        font-size: 0.8em;
+    }
+}
+
+/* 📱 Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    #frequency-canvas {
+        height: 70vh !important;
+        max-height: none;
+    }
+
+    .preset-buttons {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #stats {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.loading {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Badge Notifications */
+#badge-notifications {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.badge-notification {
+    background: linear-gradient(135deg, rgba(20, 20, 40, 0.95), rgba(40, 20, 60, 0.95));
+    border: 2px solid;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    animation: badgeAppear 3s ease-out forwards;
+    margin-bottom: 10px;
+    min-width: 180px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.badge-notification.common {
+    border-color: #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+.badge-notification.uncommon {
+    border-color: #2196F3;
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.4);
+}
+
+.badge-notification.rare {
+    border-color: #9C27B0;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.4);
+}
+
+.badge-notification.epic {
+    border-color: #FF9800;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+}
+
+.badge-notification.legendary {
+    border-color: #FFD700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    animation: badgeAppearLegendary 3s ease-out forwards;
+}
+
+@keyframes badgeAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotateY(90deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1) rotateY(0deg);
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1.0) rotateY(0deg);
+    }
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.0) rotateY(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8) rotateY(-90deg);
+    }
+}
+
+@keyframes badgeAppearLegendary {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotateY(180deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotateY(0deg);
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1.0) rotateY(0deg);
+    }
+    40%, 60% {
+        transform: translate(-50%, -50%) scale(1.05) rotateY(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.0) rotateY(0deg);
+    }
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.0) rotateY(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7) rotateY(-180deg);
+    }
+}
+
+/* 📱 Tablet Layout (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #control-panel {
+        width: 280px;
+    }
+
+    #game-controls {
+        padding: 12px;
+    }
+
+    .preset-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .preset-btn {
+        font-size: 0.8em;
+        padding: 8px 10px;
+    }
+}
+
+/* 🖥️ Large Desktop Layout (1200px+) */
+@media (min-width: 1200px) {
+    #control-panel {
+        width: 360px;
+    }
+
+    .preset-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+    }
+}

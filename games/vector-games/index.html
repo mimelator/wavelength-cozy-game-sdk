@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Pool Asteroids</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="ui">
+        <h1>Vector Pool</h1>
+        <p>Drag the ship to shoot!</p>
+        <p>Knock the shapes into the corners!</p>
+    </div>
+
+    <div id="welcome-panel">
+        <h2>COMMAND PROTOCOLS</h2>
+        <div class="control-list">
+            <div class="control-item"><span class="key">DRAG MOUSE</span> <span class="desc">Slingshot Ship</span></div>
+            <div class="control-item"><span class="key">B</span> <span class="desc">Spawn Black Hole</span></div>
+            <div class="control-item"><span class="key">W</span> <span class="desc">Spawn White Hole</span></div>
+            <div class="control-item"><span class="key">C</span> <span class="desc">Summon Comet Storm</span></div>
+            <div class="control-item"><span class="key">S</span> <span class="desc">Solar Flare</span></div>
+        </div>
+        <div class="objective">
+            MISSION: COLLIDE TO BREAK ASTEROIDS. SINK DEBRIS IN CORNER POCKETS.
+        </div>
+        <button id="start-btn">INITIALIZE SYSTEMS</button>
+    </div>
+
+    <div id="telemetry" style="display:none;">
+        <div class="telemetry-row"><span class="label">FPS:</span> <span id="t-fps">00</span></div>
+        <div class="telemetry-row"><span class="label">SCORE:</span> <span id="t-score">000000</span></div>
+        <div class="telemetry-row"><span class="label">SPEED:</span> <span id="t-speed">000</span></div>
+        <div class="telemetry-row"><span class="label">POS:</span> <span id="t-pos">0,0</span></div>
+        <div class="telemetry-row"><span class="label">ALERT:</span> <span id="t-alert" class="blink">--</span></div>
+        <div class="telemetry-row audio-controls">
+            <span class="label">AUDIO:</span>
+            <button id="mute-btn">🔊</button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

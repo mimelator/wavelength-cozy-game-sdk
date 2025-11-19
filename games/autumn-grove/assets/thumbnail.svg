@@ -1,0 +1,121 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Autumn forest background -->
+  <defs>
+    <radialGradient id="autumnSky" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" style="stop-color:#ffb347;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b4513;stop-opacity:1" />
+    </radialGradient>
+
+    <!-- Leaf glow filter -->
+    <filter id="leafGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#autumnSky)"/>
+
+  <!-- Forest trees -->
+  <g opacity="0.7">
+    <!-- Tree trunks -->
+    <rect x="80" y="180" width="15" height="80" fill="#654321"/>
+    <rect x="150" y="160" width="18" height="100" fill="#654321"/>
+    <rect x="250" y="170" width="12" height="90" fill="#654321"/>
+    <rect x="320" y="150" width="16" height="110" fill="#654321"/>
+
+    <!-- Tree canopies -->
+    <circle cx="87" cy="180" r="35" fill="#d2691e"/>
+    <circle cx="159" cy="160" r="45" fill="#ff6347"/>
+    <circle cx="256" cy="170" r="30" fill="#ff4500"/>
+    <circle cx="328" cy="150" r="40" fill="#dc143c"/>
+  </g>
+
+  <!-- Falling leaves with animation -->
+  <g>
+    <!-- Orange leaf -->
+    <g filter="url(#leafGlow)" transform="rotate(15)">
+      <path d="M120 60 Q130 70 125 80 Q115 85 110 75 Q115 65 120 60" fill="#ff8c00">
+        <animateTransform attributeName="transform" type="translate"
+                         values="0,-20; 0,280; 0,-20" dur="8s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" additive="sum"
+                         values="0; 360; 0" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="8s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Red leaf -->
+    <g filter="url(#leafGlow)" transform="rotate(-20)">
+      <path d="M200 40 Q210 50 205 60 Q195 65 190 55 Q195 45 200 40" fill="#dc143c">
+        <animateTransform attributeName="transform" type="translate"
+                         values="0,-30; 0,290; 0,-30" dur="10s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" additive="sum"
+                         values="0; -360; 0" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="10s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Yellow leaf -->
+    <g filter="url(#leafGlow)" transform="rotate(30)">
+      <path d="M300 50 Q310 60 305 70 Q295 75 290 65 Q295 55 300 50" fill="#ffd700">
+        <animateTransform attributeName="transform" type="translate"
+                         values="0,-25; 0,285; 0,-25" dur="9s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" additive="sum"
+                         values="0; 360; 0" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="9s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Brown leaf -->
+    <g filter="url(#leafGlow)" transform="rotate(-10)">
+      <path d="M180 80 Q190 90 185 100 Q175 105 170 95 Q175 85 180 80" fill="#8b4513">
+        <animateTransform attributeName="transform" type="translate"
+                         values="0,-40; 0,300; 0,-40" dur="7s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" type="rotate" additive="sum"
+                         values="0; 180; 0" dur="3.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="7s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  </g>
+
+  <!-- Ground with scattered leaves -->
+  <rect x="0" y="260" width="400" height="40" fill="#8b4513"/>
+
+  <!-- Ground leaves -->
+  <g opacity="0.8">
+    <circle cx="50" cy="275" r="3" fill="#ff6347"/>
+    <circle cx="120" cy="280" r="2.5" fill="#ffd700"/>
+    <circle cx="200" cy="275" r="3.5" fill="#ff8c00"/>
+    <circle cx="280" cy="285" r="2" fill="#dc143c"/>
+    <circle cx="350" cy="275" r="3" fill="#8b4513"/>
+  </g>
+
+  <!-- Magic sparkles -->
+  <g fill="rgba(255,255,255,0.8)">
+    <circle cx="60" cy="100" r="1">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="340" cy="120" r="1.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="80" r="1">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Title text -->
+  <text x="200" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold"
+        text-anchor="middle" fill="#654321" opacity="0.9">
+    🍂 Autumn Grove
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="200" y="285" font-family="Arial, sans-serif" font-size="12"
+        text-anchor="middle" fill="rgba(101,67,33,0.8)">
+    Gather nature's treasures • Seasonal magic
+  </text>
+</svg>

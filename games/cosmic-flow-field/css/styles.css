@@ -1,0 +1,208 @@
+/* Cosmic Flow Field - Advanced Performance CSS */
+
+/* GPU acceleration optimizations */
+.cosmic-cursor,
+.ui-overlay,
+.controls-hint,
+.performance-overlay,
+.loading-screen {
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force GPU layer */
+    backface-visibility: hidden;
+}
+
+/* Enhanced visual effects */
+.cosmic-cursor {
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, rgba(0, 255, 255, 0) 70%);
+    backdrop-filter: blur(1px);
+}
+
+.cosmic-cursor.active {
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.5) 0%, rgba(255, 0, 255, 0) 70%);
+    backdrop-filter: blur(2px);
+}
+
+/* Improved loading animations */
+.loading-progress {
+    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Performance mode styles */
+.low-performance * {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* High performance mode enhancements */
+.high-performance .cosmic-cursor {
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        inset 0 0 5px #00ffff;
+    filter: brightness(1.2);
+}
+
+.high-performance .ui-overlay {
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .cosmic-cursor {
+        width: 30px;
+        height: 30px;
+        border-width: 3px;
+    }
+
+    .ui-overlay {
+        font-size: 12px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .controls-hint {
+        font-size: 10px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .performance-overlay {
+        display: none; /* Hide on mobile for performance */
+    }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+    .cosmic-cursor {
+        display: none; /* Hide cursor on touch devices */
+    }
+
+    body {
+        cursor: auto;
+    }
+}
+
+/* High refresh rate display optimizations */
+@media (min-resolution: 120dpi) {
+    .cosmic-cursor,
+    .ui-overlay,
+    .controls-hint {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .loading-progress {
+        animation: none;
+        background: linear-gradient(90deg, #00ffff, #ff00ff);
+    }
+
+    .cosmic-cursor {
+        transition: none;
+    }
+
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print styles (for screenshots) */
+@media print {
+    .ui-overlay,
+    .controls-hint,
+    .performance-overlay,
+    .cosmic-cursor {
+        display: none;
+    }
+
+    body {
+        background: black;
+    }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus {
+    outline: 2px solid #00ffff;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .ui-overlay {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #00ffff;
+    }
+
+    .controls-hint {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #ff00ff;
+    }
+}
+
+/* Color scheme adaptations */
+@media (prefers-color-scheme: light) {
+    /* Maintain dark theme even in light mode for visual integrity */
+    body {
+        background: #0a0015 !important;
+    }
+}
+
+/* Hover states for interactive elements */
+.ui-overlay:hover,
+.controls-hint:hover {
+    opacity: 1 !important;
+}
+
+/* Animation performance classes */
+.animate-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.animate-cpu {
+    will-change: auto;
+}
+
+/* Fullscreen mode adjustments */
+.fullscreen-mode .ui-overlay,
+.fullscreen-mode .controls-hint {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.fullscreen-mode .ui-overlay:hover,
+.fullscreen-mode .controls-hint:hover {
+    opacity: 1;
+}
+
+/* Memory optimization classes */
+.memory-optimized {
+    contain: layout style paint;
+}
+
+.memory-optimized * {
+    contain: layout style;
+}

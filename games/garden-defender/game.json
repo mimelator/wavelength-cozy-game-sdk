@@ -1,0 +1,121 @@
+{
+  "name": "Garden Defender",
+  "description": "A unique tower defense game where you throw seeds to cultivate protective plants before bugs reach your precious tomatoes! Time your plantings like Missile Command - seeds need time to grow into effective defenders.",
+  "version": "1.0.1",
+  "author": "Wavelength Consulting",
+  "category": "Strategy",
+  "tags": ["tower defense", "gardening", "strategy", "timing", "nature", "protective", "cultivation", "retro"],
+  "thumbnail": "assets/thumbnail.svg",
+  "entry_point": "index.html",
+  "controls": {
+    "mouse": "Click bugs to destroy them instantly, or click empty space to throw seeds",
+    "keyboard": "1-5 keys to select different seed types, Space to pause",
+    "touch": "Tap bugs to destroy them, tap empty space to plant seeds"
+  },
+  "features": [
+    "Unique cultivation-based tower defense mechanics",
+    "Missile Command-style timing and trajectory system",
+    "Multiple seed types with different growth times and effects",
+    "Bug species with unique behaviors and vulnerabilities",
+    "Protective plant ecosystem with symbiotic relationships",
+    "Progressive waves with increasing complexity",
+    "Garden health system with tomato protection mechanics",
+    "Seed resource management and strategic planning",
+    "Achievement system for garden mastery"
+  ],
+  "technical": {
+    "canvas_based": true,
+    "physics_engine": "Custom trajectory and growth simulation",
+    "responsive": true,
+    "performance": "Optimized for smooth wave-based gameplay"
+  },
+  "badges": {
+    "enabled": true,
+    "rate_limit_ms": 30000,
+    "revenue_share": {
+      "developer": 35,
+      "lore_master": 40,
+      "platform": 25
+    },
+    "achievements": [
+      {
+        "id": "first_garden",
+        "name": "Seedling Gardener",
+        "description": "Successfully protected your first tomato plant",
+        "rarity": "common",
+        "condition": "Complete your first wave without losing a tomato",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌱",
+          "difficulty": "easy",
+          "category": "first_steps"
+        }
+      },
+      {
+        "id": "master_cultivator",
+        "name": "Master Cultivator",
+        "description": "Grew 50 protective plants successfully",
+        "rarity": "uncommon",
+        "condition": "Successfully grow 50 plants from seeds",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌿",
+          "difficulty": "medium",
+          "category": "mastery"
+        }
+      },
+      {
+        "id": "bug_whisperer",
+        "name": "Bug Whisperer",
+        "description": "Defeated 100 bugs with perfectly timed plantings",
+        "rarity": "rare",
+        "condition": "Stop 100 bugs with strategic plant placement",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🐛",
+          "difficulty": "hard",
+          "category": "strategic"
+        }
+      },
+      {
+        "id": "tomato_guardian",
+        "name": "Tomato Guardian",
+        "description": "Protected tomatoes through 10 consecutive waves",
+        "rarity": "epic",
+        "condition": "Survive 10 waves without losing any tomatoes",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🍅",
+          "difficulty": "hard",
+          "category": "endurance"
+        }
+      },
+      {
+        "id": "ecosystem_master",
+        "name": "Ecosystem Master",
+        "description": "Created a perfectly balanced garden ecosystem",
+        "rarity": "legendary",
+        "condition": "Achieve perfect symbiosis with all plant types in one wave",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌸",
+          "difficulty": "legendary",
+          "category": "transcendence"
+        }
+      },
+      {
+        "id": "click_master",
+        "name": "Click Master",
+        "description": "Destroyed 25 bugs with direct clicks",
+        "rarity": "uncommon",
+        "condition": "Click or tap directly on bugs to destroy them instantly",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "👆",
+          "difficulty": "medium",
+          "category": "precision"
+        }
+      }
+    ]
+  }
+}

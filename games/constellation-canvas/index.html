@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌 Constellation Canvas - Interactive Starfield</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">🌙 Constellation Canvas ✨</h1>
+            <p class="game-subtitle">Click to place stars • Drag to connect constellations • Create celestial music</p>
+        </header>
+
+        <div class="canvas-container">
+            <canvas id="starCanvas"></canvas>
+
+            <div class="star-palette">
+                <div class="palette-title">Star Colors</div>
+                <button class="star-color active" data-color="white" title="Pure White - High celestial tones">⭐</button>
+                <button class="star-color" data-color="blue" title="Cosmic Blue - Deep harmonies">🔵</button>
+                <button class="star-color" data-color="gold" title="Golden Star - Warm melodies">🟡</button>
+                <button class="star-color" data-color="red" title="Ruby Star - Rich bass tones">🔴</button>
+                <button class="star-color" data-color="purple" title="Mystic Purple - Ethereal sounds">🟣</button>
+                <button class="star-color" data-color="green" title="Jade Star - Nature harmonies">🟢</button>
+            </div>
+
+            <div class="constellation-controls">
+                <button id="clearSky" class="control-btn">🌌 Clear Sky</button>
+                <button id="meteorShower" class="control-btn">☄️ Meteor Shower</button>
+                <button id="toggleMusic" class="control-btn">🎵 Toggle Music</button>
+                <button id="fullscreenBtn" class="control-btn">🔲 Fullscreen</button>
+                <div id="badges-earned" class="badge-counter">Badges: 0</div>
+                <div id="rotation-stats" class="rotation-display">
+                    <div class="stat-item">🌪️ Fastest Rotation: <span id="fastest-rotation">0.000000</span></div>
+                    <div class="stat-item">🕳️ Black Holes: <span id="black-hole-count">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <div class="instruction-item">🌟 <strong>Click</strong> anywhere to place a star</div>
+            <div class="instruction-item">🔗 <strong>Drag</strong> from star to star to create constellations</div>
+            <div class="instruction-item">🎵 Each star plays celestial music based on its color and position</div>
+            <div class="instruction-item">✨ Connected stars create harmonious melodies together</div>
+            <div class="instruction-item">🔲 <strong>F key</strong> or button to toggle fullscreen</div>
+        </div>
+    </div>
+
+    <script src="js/audioEngine.js"></script>
+    <script src="js/starSystem.js"></script>
+    <script src="js/utils/badge-helper.js"></script>
+    <script src="js/utils/badge-tracker.js"></script>
+    <script src="js/constellationCanvas.js"></script>
+    <script src="js/meteorShower.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

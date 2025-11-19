@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Nature Sounds - Wavelength Cozy Game SDK</title>
+    <meta name="description" content="High-quality white noise generator with beautiful nature sounds. Ocean surf, rain, wind, rivers, and storms for relaxation and focus.">
+    <meta name="keywords" content="cozy game, white noise, nature sounds, relaxation, focus, ambient audio, p5.js">
+
+    <!-- p5.js Library -->
+    <script src="./lib/p5.min.js"></script>
+    <script src="./lib/p5.sound.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header -->
+        <header>
+            <h1>🌊 Nature Sounds 🌊</h1>
+            <p class="tagline">High-quality white noise for relaxation and focus</p>
+        </header>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <!-- Sound Selection Panel -->
+            <div id="sound-panel">
+                <h3>🎧 Choose Your Environment</h3>
+                <div id="sound-buttons">
+                    <button class="sound-btn active" data-sound="ocean" data-color="#4A90E2">🌊 Ocean Surf</button>
+                    <button class="sound-btn" data-sound="rain" data-color="#8E8E93">🌧️ Rain</button>
+                    <button class="sound-btn" data-sound="river" data-color="#5AC8FA">🏞️ River</button>
+                    <button class="sound-btn" data-sound="wind" data-color="#FFCC02">💨 Wind</button>
+                    <button class="sound-btn" data-sound="storm" data-color="#5856D6">⛈️ Storm</button>
+                </div>
+            </div>
+
+            <!-- Main Visualization Area -->
+            <div id="canvas-container">
+                <div id="p5-canvas-holder">
+                    <!-- p5.js canvas will be inserted here -->
+                </div>
+
+                <!-- Audio Controls Overlay -->
+                <div id="audio-controls">
+                    <div class="control-group">
+                        <label>🔊 Master Volume:</label>
+                        <input type="range" id="master-volume" min="0" max="100" value="70">
+                        <span id="volume-value">70%</span>
+                    </div>
+                    <div class="control-group">
+                        <label>🎚️ Quality:</label>
+                        <select id="quality-select">
+                            <option value="high">High Quality</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="low">Low Quality</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sound Mixing Panel -->
+            <div id="mixing-panel">
+                <h3>🎛️ Sound Layers & Mixing</h3>
+                <div id="layer-controls">
+                    <!-- Dynamic layer controls will be added here -->
+                </div>
+
+                <div class="mixing-controls">
+                    <div class="control-group">
+                        <label>⏰ Timer (minutes):</label>
+                        <input type="range" id="timer-slider" min="0" max="120" value="0">
+                        <span id="timer-value">Off</span>
+                    </div>
+                    <button id="timer-btn" class="control-btn">⏰ Set Timer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Preset Environments -->
+            <div id="presets-panel">
+                <h3>🏞️ Preset Environments</h3>
+                <div id="preset-buttons">
+                    <button class="preset-btn" data-preset="peaceful-beach">🏖️ Peaceful Beach</button>
+                    <button class="preset-btn" data-preset="forest-rain">🌲 Forest Rain</button>
+                    <button class="preset-btn" data-preset="mountain-wind">🏔️ Mountain Wind</button>
+                    <button class="preset-btn" data-preset="thunderstorm">⚡ Thunderstorm</button>
+                    <button class="preset-btn" data-preset="riverside">🌊 Riverside</button>
+                </div>
+            </div>
+
+            <!-- Session Info -->
+            <div id="session-panel">
+                <div class="session-item">
+                    <span class="session-label">🎵 Current Environment:</span>
+                    <span id="current-environment">Ocean Surf</span>
+                </div>
+                <div class="session-item">
+                    <span class="session-label">⏱️ Session Time:</span>
+                    <span id="session-time">00:00</span>
+                </div>
+                <div class="session-item">
+                    <span class="session-label">🔊 Audio Status:</span>
+                    <span id="audio-status">Ready</span>
+                </div>
+                <div class="session-item">
+                    <span class="session-label">🎛️ Active Layers:</span>
+                    <span id="active-layers">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>🎧 High-quality nature sounds for relaxation, sleep, and focus 🌙</p>
+        <p>💫 Layer multiple sounds • Set timers • Find your perfect ambient environment 🎶</p>
+        <p>Powered by Wavelength Cozy Game SDK - Premium White Noise Engine</p>
+    </footer>
+
+    <!-- Badge System Scripts -->
+    <script src="js/badge-helper.js"></script>
+    <script src="js/badge-tracker.js"></script>
+
+    <!-- Main Game Script -->
+    <script src="js/nature-sounds.js"></script>
+</body>
+</html>

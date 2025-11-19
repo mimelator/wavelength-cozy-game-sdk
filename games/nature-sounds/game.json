@@ -1,0 +1,308 @@
+{
+    "name": "Nature Sounds",
+    "id": "nature-sounds",
+    "version": "1.0.0",
+    "description": "High-quality white noise generator with beautiful nature sounds. Ocean surf, rain, wind, rivers, and storms for relaxation and focus.",
+    "longDescription": "Nature Sounds is a premium white noise generator featuring 5 realistic nature environments with advanced audio synthesis. Each environment combines multiple layered audio sources using pink, brown, and white noise types for authentic soundscapes. Features individual layer controls, preset environment blends, timer functionality, and audio-reactive visualizations. Perfect for relaxation, focus, meditation, or sleep aid.",
+    "category": "relaxation",
+    "tags": [
+        "white noise",
+        "nature sounds",
+        "relaxation",
+        "focus",
+        "ambient audio",
+        "sleep aid",
+        "meditation",
+        "cozy",
+        "audio reactive",
+        "p5js"
+    ],
+    "author": "Wavelength Consulting",
+    "game": {
+        "engine": "p5.js",
+        "type": "ambient-experience",
+        "inputMethods": ["mouse", "touch"],
+        "platforms": ["web", "mobile"],
+        "language": "en",
+        "ageRating": "all-ages",
+        "accessibility": {
+            "colorBlind": true,
+            "motorImpaired": true,
+            "reducedMotion": true,
+            "screenReader": false
+        }
+    },
+    "technical": {
+        "entryPoint": "index.html",
+        "minResolution": "320x480",
+        "recommendedResolution": "1200x800",
+        "requirements": {
+            "webAudio": true,
+            "canvas": true,
+            "localStorage": true,
+            "modernBrowser": true
+        },
+        "dependencies": [
+            {
+                "name": "p5.js",
+                "version": "1.7.0",
+                "url": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js",
+                "type": "external"
+            },
+            {
+                "name": "p5.sound",
+                "version": "1.7.0",
+                "url": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js",
+                "type": "external"
+            }
+        ]
+    },
+    "wavelength": {
+        "sdk_version": "2.0",
+        "badge_system": true,
+        "developer_share": 0.35,
+        "hub_integration": true,
+        "analytics": true,
+        "social_sharing": true
+    },
+    "badges": {
+        "total_count": 9,
+        "categories": {
+            "exploration": 3,
+            "dedication": 2,
+            "mastery": 2,
+            "usage": 2
+        },
+        "badges": [
+            {
+                "id": "first_session",
+                "name": "First Relaxation",
+                "description": "Started your first nature sounds session",
+                "icon": "🌱",
+                "category": "exploration",
+                "rarity": "common",
+                "trigger": "session_start"
+            },
+            {
+                "id": "zen_master",
+                "name": "Zen Master",
+                "description": "Enjoyed 30 minutes of continuous nature sounds",
+                "icon": "🧘",
+                "category": "dedication",
+                "rarity": "uncommon",
+                "trigger": "session_duration"
+            },
+            {
+                "id": "night_owl",
+                "name": "Night Owl",
+                "description": "Used nature sounds for sleep (after 10 PM)",
+                "icon": "🦉",
+                "category": "usage",
+                "rarity": "uncommon",
+                "trigger": "late_session"
+            },
+            {
+                "id": "explorer",
+                "name": "Sound Explorer",
+                "description": "Tried all 5 nature environments",
+                "icon": "🗺️",
+                "category": "exploration",
+                "rarity": "common",
+                "trigger": "environments_explored"
+            },
+            {
+                "id": "mixer",
+                "name": "Audio Mixer",
+                "description": "Created a custom sound blend",
+                "icon": "🎚️",
+                "category": "mastery",
+                "rarity": "uncommon",
+                "trigger": "custom_mix"
+            },
+            {
+                "id": "preset_master",
+                "name": "Preset Master",
+                "description": "Tried all preset environments",
+                "icon": "🏞️",
+                "category": "exploration",
+                "rarity": "common",
+                "trigger": "presets_tried"
+            },
+            {
+                "id": "daily_ritual",
+                "name": "Daily Ritual",
+                "description": "Used nature sounds for 7 consecutive days",
+                "icon": "📅",
+                "category": "dedication",
+                "rarity": "rare",
+                "trigger": "daily_streak"
+            },
+            {
+                "id": "focus_master",
+                "name": "Focus Master",
+                "description": "Used timer feature for focused sessions",
+                "icon": "⏰",
+                "category": "usage",
+                "rarity": "uncommon",
+                "trigger": "timer_used"
+            },
+            {
+                "id": "audiophile",
+                "name": "Audiophile",
+                "description": "Used high-quality audio for extended sessions",
+                "icon": "🎧",
+                "category": "mastery",
+                "rarity": "rare",
+                "trigger": "hq_session"
+            }
+        ]
+    },
+    "environments": {
+        "ocean": "Realistic ocean surf with waves, foam, and deep water ambience",
+        "rain": "Natural rainfall with droplets, splashes, and distant thunder",
+        "river": "Flowing river with bubbles, rocks, and occasional bird sounds",
+        "wind": "Mountain wind with gusts, rustling leaves, and distant howls",
+        "storm": "Dramatic thunderstorm with rain, wind, and lightning"
+    },
+    "presets": {
+        "peaceful_beach": "Ocean waves with gentle wind",
+        "forest_rain": "Rain in the forest with wind through trees",
+        "mountain_wind": "Mountain winds with distant river",
+        "thunderstorm": "Intense storm with rain and wind",
+        "riverside": "Peaceful river with light breeze"
+    },
+    "features": [
+        {
+            "name": "Layered Audio Synthesis",
+            "description": "Advanced noise generation with pink, brown, and white noise types for realistic nature sounds"
+        },
+        {
+            "name": "Audio-Reactive Visualizations",
+            "description": "Beautiful animated visuals that respond in real-time to audio intensity and frequency content"
+        },
+        {
+            "name": "Individual Layer Controls",
+            "description": "Fine-tune each audio layer independently for perfect sound customization"
+        },
+        {
+            "name": "Preset Environment Blends",
+            "description": "Carefully crafted sound combinations for specific moods and activities"
+        },
+        {
+            "name": "Timer Functionality",
+            "description": "Set focused session timers with automatic fade-out for productivity and meditation"
+        },
+        {
+            "name": "Multiple Quality Settings",
+            "description": "High, medium, and low quality modes to optimize for any device or bandwidth"
+        },
+        {
+            "name": "Achievement System",
+            "description": "9 unique badges rewarding exploration, dedication, and mindful usage patterns"
+        },
+        {
+            "name": "Mobile-Responsive Design",
+            "description": "Optimized interface and touch controls for seamless mobile and tablet experience"
+        }
+    ],
+    "instructions": {
+        "getting_started": [
+            "Choose from 5 nature environments: Ocean, Rain, River, Wind, or Storm",
+            "Adjust master volume and quality settings to your preference",
+            "Use individual layer controls to customize your perfect soundscape",
+            "Try preset environments for quick mood-based selections",
+            "Set a timer for focused work or meditation sessions",
+            "Watch the audio-reactive visualizations respond to the sound"
+        ],
+        "controls": {
+            "environment_buttons": "Select primary nature sound environment",
+            "preset_buttons": "Choose from curated sound combinations",
+            "volume_slider": "Adjust master audio volume level",
+            "layer_controls": "Individual volume controls for each audio layer",
+            "quality_selector": "Choose audio quality (high/medium/low)",
+            "timer_slider": "Set session timer duration",
+            "timer_button": "Start/stop timer functionality"
+        }
+    },
+    "monetization": {
+        "model": "badge-driven",
+        "features": [
+            "achievement_badges",
+            "session_tracking",
+            "usage_statistics",
+            "progression_rewards"
+        ],
+        "pricing": {
+            "free_tier": "Full access to all environments and features",
+            "premium_tier": "Enhanced analytics and sharing capabilities"
+        }
+    },
+    "social": {
+        "shareable": true,
+        "achievements_sharing": true,
+        "screenshot_capture": true,
+        "social_media_tags": [
+            "#NatureSounds",
+            "#CozyGames",
+            "#Relaxation",
+            "#Focus",
+            "#WhiteNoise",
+            "#WavelengthGames"
+        ]
+    },
+    "analytics": {
+        "track_events": [
+            "game_start",
+            "environment_selection",
+            "preset_selection",
+            "timer_usage",
+            "custom_mixing",
+            "badge_earned",
+            "session_duration",
+            "quality_changes"
+        ],
+        "privacy_compliant": true,
+        "gdpr_ready": true,
+        "data_retention": "12_months"
+    },
+    "localization": {
+        "supported_languages": ["en"],
+        "planned_languages": ["es", "fr", "de", "ja", "zh"],
+        "rtl_support": false
+    },
+    "testing": {
+        "unit_tests": false,
+        "integration_tests": true,
+        "performance_tests": true,
+        "accessibility_tests": true,
+        "cross_browser": ["chrome", "firefox", "safari", "edge"],
+        "mobile_tested": ["ios_safari", "android_chrome"]
+    },
+    "deployment": {
+        "build_required": false,
+        "static_hosting": true,
+        "cdn_ready": true,
+        "progressive_web_app": false,
+        "offline_mode": false
+    },
+    "license": "Wavelength Cozy Game SDK License",
+    "copyright": "© 2024 Wavelength Cozy Game SDK. All rights reserved.",
+    "created_date": "2024-11-08",
+    "last_updated": "2024-11-08",
+    "status": "beta",
+    "changelog": [
+        {
+            "version": "1.0.0",
+            "date": "2024-11-08",
+            "changes": [
+                "Initial release with 5 nature environments",
+                "Layered noise synthesis for realistic audio",
+                "Audio-reactive visualizations with auto-gain control",
+                "Individual layer volume controls and preset blends",
+                "Timer functionality for focused sessions",
+                "Achievement system with 9 unique badges",
+                "Mobile-responsive design with touch support"
+            ]
+        }
+    ]
+}

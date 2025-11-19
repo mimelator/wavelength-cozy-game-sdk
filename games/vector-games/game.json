@@ -1,0 +1,233 @@
+{
+  "name": "Vector Pool Asteroids",
+  "title": "Vector Pool Asteroids",
+  "description": "A vector graphics game combining Asteroids drift with billiards physics. Drag to aim and shoot, knock geometric shapes into corner pockets, and master the physics of space pool.",
+  "version": "1.0.1",
+  "author": "Wavelength Games",
+  "category": "Physics",
+  "tags": [
+    "physics",
+    "vector",
+    "space",
+    "billiards",
+    "asteroids",
+    "webgl",
+    "mobile-friendly",
+    "interactive"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "screenshot": "screenshot.svg",
+  "entry_point": "index.html",
+
+  "controls": {
+    "mouse": "Click and drag the ship to aim and shoot",
+    "touch": "Touch and drag the ship to aim and shoot",
+    "keyboard": "B key: Spawn black hole (debug), C key: Spawn comet storm (debug)"
+  },
+
+  "features": [
+    "Custom WebGL vector graphics rendering",
+    "Realistic physics simulation with elastic collisions",
+    "Dynamic special mechanics (black holes, comets)",
+    "Particle effects and visual feedback",
+    "Cross-platform input (mouse and touch)",
+    "Responsive fullscreen gameplay",
+    "Achievement system with badges"
+  ],
+
+  "technical": {
+    "canvas_based": true,
+    "dom_based": false,
+    "physics_engine": "Custom impulse-based 2D physics",
+    "rendering": "WebGL with custom shaders",
+    "responsive": true,
+    "performance": "Optimized particle system with lifecycle management",
+    "dependencies": [],
+    "es_modules": true,
+    "webgl_required": true
+  },
+
+  "theme": {
+    "name": "space",
+    "primaryColor": "#00ffff",
+    "secondaryColor": "#ff00ff",
+    "backgroundColor": "#050505",
+    "textColor": "#ffffff",
+    "accentColor": "#00ff00",
+    "font": "'Courier New', Courier, monospace"
+  },
+
+  "gameplay": {
+    "difficulty": "medium",
+    "movementSpeed": "normal",
+    "objective": "Clear the table by knocking geometric shapes into the four corner pockets",
+    "mechanics": [
+      "Drag-to-shoot ship control",
+      "Physics-based ball movement",
+      "Corner pocket targets",
+      "Ball splitting on high-speed collisions",
+      "Special events: black holes and comet storms"
+    ]
+  },
+
+  "badges": {
+    "enabled": true,
+    "apiEndpoint": "https://hub.wavelength.com/api/games",
+    "rate_limit_ms": 30000,
+    "achievements": [
+      {
+        "id": "first-pocket",
+        "name": "First Pocket",
+        "description": "Sunk your first ball into a corner pocket",
+        "rarity": "common",
+        "condition": "Sink first ball",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🎯",
+          "difficulty": "easy",
+          "category": "first_steps"
+        }
+      },
+      {
+        "id": "perfect-clear",
+        "name": "Perfect Clear",
+        "description": "Cleared all balls from the table - a perfect game!",
+        "rarity": "rare",
+        "condition": "Clear all balls from the table",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "✨",
+          "difficulty": "medium",
+          "category": "mastery"
+        }
+      },
+      {
+        "id": "high-score",
+        "name": "High Score Master",
+        "description": "Achieved a score of 10,000 or higher",
+        "rarity": "uncommon",
+        "condition": "Reach score ≥ 10,000",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🏆",
+          "difficulty": "medium",
+          "category": "achievement"
+        }
+      },
+      {
+        "id": "black-hole-master",
+        "name": "Black Hole Navigator",
+        "description": "Successfully navigated through a black hole event",
+        "rarity": "uncommon",
+        "condition": "Survive black hole event",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "⚫",
+          "difficulty": "medium",
+          "category": "survival"
+        }
+      },
+      {
+        "id": "comet-storm",
+        "name": "Comet Storm Survivor",
+        "description": "Survived a comet storm with 5 or more comets",
+        "rarity": "rare",
+        "condition": "Survive comet storm with 5+ comets",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "☄️",
+          "difficulty": "hard",
+          "category": "survival"
+        }
+      },
+      {
+        "id": "speed-demon",
+        "name": "Speed Demon",
+        "description": "Achieved a high-velocity collision that shattered a ball",
+        "rarity": "uncommon",
+        "condition": "High-speed collision causing ball split",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "💥",
+          "difficulty": "medium",
+          "category": "skill"
+        }
+      },
+      {
+        "id": "precision-shot",
+        "name": "Precision Shot",
+        "description": "Sunk a ball from a long distance",
+        "rarity": "uncommon",
+        "condition": "Sink ball from far distance",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🎯",
+          "difficulty": "medium",
+          "category": "skill"
+        }
+      },
+      {
+        "id": "chain-reaction",
+        "name": "Chain Reaction Master",
+        "description": "Created multiple ball splits in quick succession",
+        "rarity": "rare",
+        "condition": "Multiple splits in sequence",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🔗",
+          "difficulty": "hard",
+          "category": "skill"
+        }
+      }
+    ]
+  },
+
+  "deploy": {
+    "hubUrl": "hub.wavelength.com",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "vector",
+      "space",
+      "billiards",
+      "asteroids",
+      "webgl",
+      "mobile-friendly"
+    ],
+    "ageRating": "everyone",
+    "accessibility": true,
+    "mobileOptimized": true,
+    "analytics": {
+      "trackScore": true,
+      "trackTimeSpent": true,
+      "trackMobileUsage": true,
+      "trackBadgeEarnings": true
+    }
+  },
+
+  "ui": {
+    "showScore": true,
+    "showFPS": true,
+    "showTelemetry": true,
+    "enableSounds": false,
+    "enableMusic": false,
+    "buttonStyle": "minimal"
+  },
+
+  "accessibility": {
+    "highContrast": false,
+    "largeText": false,
+    "colorBlindFriendly": true,
+    "keyboardNavigation": false,
+    "screenReaderSupport": false,
+    "touchControls": true
+  },
+
+  "requirements": {
+    "webgl": true,
+    "es_modules": true,
+    "offline": true,
+    "file_size_limit_mb": 50,
+    "individual_file_limit_mb": 5
+  }
+}

@@ -1,0 +1,799 @@
+/* 🌱 GARDEN DEFENDER - Cultivation Defense Game */
+/* Inspired by Missile Command timing with nature-based tower defense */
+
+:root {
+    --garden-green: #4a7c59;
+    --soil-brown: #8b4513;
+    --tomato-red: #ff6347;
+    --seed-gold: #daa520;
+    --plant-emerald: #50c878;
+    --bug-purple: #8b008b;
+    --growth-lime: #32cd32;
+}
+
+body {
+    background: linear-gradient(45deg, var(--garden-green) 0%, #2d5016 50%, var(--garden-green) 100%);
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🎮 Game Container */
+#game-container {
+    max-width: 1000px;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(74, 124, 89, 0.9) 0%, rgba(45, 80, 22, 0.8) 100%);
+    border: 3px solid var(--plant-emerald);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow:
+        0 0 40px rgba(80, 200, 120, 0.4),
+        inset 0 0 30px rgba(80, 200, 120, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* 📝 Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#game-title {
+    color: var(--growth-lime);
+    font-size: 3.5em;    /* Increased from 2.5em */
+    margin: 0 0 15px 0;  /* More margin */
+    text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 30px rgba(50, 205, 50, 1), 0 0 40px rgba(255, 255, 255, 0.3);
+        transform: scale(1.02);
+    }
+}
+
+#game-description {
+    color: #e0e0e0;
+    font-size: 1.4em;    /* Increased from 1.1em */
+    margin: 0;
+}
+
+/* 🎛️ Game Interface */
+/* 🎮 Game Interface - Stats Only */
+#game-interface {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* 📱 Mobile Panel Toggle - Hidden on Desktop */
+#mobile-panel-toggle {
+    display: none; /* Hidden by default */
+}
+
+/* Legacy seed panel styles removed - now using overlay */
+
+/* 📊 Stats Panel */
+#stats-panel {
+    background: rgba(45, 80, 22, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px solid rgba(80, 200, 120, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 16px;   /* Increased from 8px 12px */
+    border-radius: 12px;  /* Larger border radius */
+    border-left: 6px solid var(--plant-emerald);  /* Thicker border */
+    font-size: 1.1em;    /* Larger text */
+}
+
+.stat-label {
+    font-weight: bold;
+}
+
+.stat-item span:last-child {
+    color: var(--growth-lime);
+    font-weight: bold;
+    font-size: 1.3em;    /* Increased from 1.1em */
+}
+
+/* � Game Area Container */
+#game-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+/* 🎨 Game Canvas */
+#game-canvas {
+    width: 100%;
+    max-width: 1200px;
+    height: 900px;
+    background: linear-gradient(180deg,
+        #87ceeb 0%,      /* Sky blue */
+        #98fb98 30%,     /* Pale green */
+        var(--soil-brown) 70%,  /* Soil */
+        #654321 100%     /* Deep soil */
+    );
+    border: 4px solid var(--plant-emerald);
+    border-radius: 20px;
+    cursor: crosshair;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+#game-canvas:hover {
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(80, 200, 120, 0.4);
+}
+
+/* 🌱 Seed Arsenal Overlay */
+#seed-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(45, 80, 22, 0.9);
+    border: 2px solid rgba(80, 200, 120, 0.5);
+    border-radius: 15px;
+    padding: 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    min-width: 200px;
+    max-width: 250px;
+}
+
+#seed-overlay h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: var(--growth-lime);
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(80, 200, 120, 0.3);
+}
+
+/* Updated seed inventory for overlay */
+#seed-overlay #seed-inventory {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#seed-overlay .seed-slot {
+    display: grid;
+    grid-template-columns: 35px 1fr 35px;
+    align-items: center;
+    background: rgba(139, 69, 19, 0.4);
+    border: 2px solid rgba(218, 165, 32, 0.3);
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+#seed-overlay .seed-slot:hover {
+    background: rgba(139, 69, 19, 0.6);
+    border-color: var(--seed-gold);
+    transform: scale(1.05);
+}
+
+#seed-overlay .seed-slot.active {
+    background: rgba(218, 165, 32, 0.5);
+    border-color: var(--seed-gold);
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+}
+
+#seed-overlay .seed-slot.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#seed-overlay .seed-icon {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+#seed-overlay .seed-name {
+    font-weight: bold;
+    color: var(--growth-lime);
+    font-size: 0.85em;
+    text-align: center;
+}
+
+#seed-overlay .seed-cost {
+    font-size: 0.8em;
+    color: var(--seed-gold);
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 🎛️ Controls Panel */
+#controls-panel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    background: linear-gradient(135deg, var(--plant-emerald), var(--garden-green));
+    color: white;
+    border: none;
+    padding: 16px 28px;  /* Increased from 12px 20px */
+    border-radius: 30px;  /* Larger border radius */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(80, 200, 120, 0.5);  /* Thicker border */
+    font-size: 1.3em;    /* Increased from 1em */
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, var(--growth-lime), var(--plant-emerald));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(80, 200, 120, 0.4);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 🏆 Game Status Messages */
+.status-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, var(--tomato-red), #ff4500);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-size: 1.3em;
+    font-weight: bold;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: statusPulse 0.5s ease-out;
+}
+
+@keyframes statusPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.status-message.victory {
+    background: linear-gradient(135deg, var(--growth-lime), var(--plant-emerald));
+}
+
+.status-message.wave-complete {
+    background: linear-gradient(135deg, var(--seed-gold), #ffa500);
+    color: #000;
+}
+
+/* 🌱 Seed Trajectory Preview */
+.seed-trajectory {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--seed-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--seed-gold);
+    pointer-events: none;
+    z-index: 10;
+    animation: trajectoryPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes trajectoryPulse {
+    from { opacity: 0.3; transform: scale(0.8); }
+    to { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* 🎯 Crosshair Cursor */
+.crosshair-cursor {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="none" stroke="%23daa520" stroke-width="2"/><line x1="12" y1="2" x2="12" y2="6" stroke="%23daa520" stroke-width="2"/><line x1="12" y1="18" x2="12" y2="22" stroke="%23daa520" stroke-width="2"/><line x1="2" y1="12" x2="6" y2="12" stroke="%23daa520" stroke-width="2"/><line x1="18" y1="12" x2="22" y2="12" stroke="%23daa520" stroke-width="2"/></svg>') 12 12, crosshair;
+}
+
+/* 📱 Mobile-First Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+        min-height: 100vh;
+    }
+
+    #game-container {
+        padding: 10px;
+        max-width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Compact Header */
+    header {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    #game-title {
+        font-size: 1.8em;
+        margin: 0 0 5px 0;
+    }
+
+    #game-description {
+        font-size: 0.9em;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    /* MOBILE: Maximize Canvas Space */
+    #game-canvas {
+        width: 100%;
+        height: 60vh;  /* 60% of viewport height */
+        min-height: 400px;
+        max-height: 500px;
+        border-radius: 15px;
+        margin: 10px 0;
+        order: 1;  /* Canvas comes first */
+    }
+
+    /* Mobile Panel Toggle Button */
+    #mobile-panel-toggle {
+        display: block; /* Show on mobile */
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--plant-emerald);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        cursor: pointer;
+        border: 3px solid rgba(80, 200, 120, 0.8);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        z-index: 200;
+        min-width: 120px;
+        transition: all 0.3s ease;
+    }
+
+    #mobile-panel-toggle:active {
+        background: var(--growth-lime);
+        transform: translateX(-50%) scale(0.95);
+    }
+
+    /* MOBILE: Collapsible Interface Panels */
+    #game-interface {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(45, 80, 22, 0.95);
+        backdrop-filter: blur(10px);
+        border-top: 3px solid var(--plant-emerald);
+        border-radius: 20px 20px 0 0;
+        padding: 15px;
+        transform: translateY(85%);  /* Hide most of panel */
+        transition: transform 0.3s ease;
+        z-index: 100;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+        max-height: 75vh;
+        overflow-y: auto;
+        display: block;
+        grid-template-columns: none;
+        gap: 15px;
+    }
+
+    #game-interface.expanded {
+        transform: translateY(0);  /* Show full panel */
+    }
+
+    /* Mobile Stats - Horizontal Layout */
+    #stats-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+
+    .stat-item {
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border-radius: 8px;
+    }
+
+    .stat-item span:last-child {
+        font-size: 1.1em;
+    }
+
+    /* Mobile Seed Panel - Horizontal Scroll */
+    #seed-panel {
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+
+    #seed-panel h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.1em;
+        text-align: left;
+    }
+
+    #seed-inventory {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .seed-slot {
+        flex: 0 0 120px;  /* Fixed width for horizontal scroll */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.8em;
+        border-radius: 10px;
+        min-height: 80px;
+        justify-content: space-between;
+    }
+
+    .seed-icon {
+        font-size: 1.8em;
+        margin-bottom: 2px;
+    }
+
+    .seed-name {
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .seed-cost, .seed-growth {
+        font-size: 0.7em;
+        line-height: 1.1;
+    }
+
+    /* Mobile Seed Overlay - Move to bottom right */
+    #seed-overlay {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
+        min-width: 160px;
+        max-width: 180px;
+        padding: 8px;
+        background: rgba(45, 80, 22, 0.95);
+    }
+
+    #seed-overlay h4 {
+        font-size: 1em;
+        margin: 0 0 8px 0;
+        padding-bottom: 4px;
+    }
+
+    #seed-overlay .seed-slot {
+        grid-template-columns: 25px 1fr 25px;
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    #seed-overlay .seed-icon {
+        font-size: 1.4em;
+    }
+
+    #seed-overlay .seed-name {
+        font-size: 0.75em;
+    }
+
+    #seed-overlay .seed-cost {
+        font-size: 0.7em;
+    }
+
+    /* Mobile Controls - Compact */
+    #controls-panel {
+        display: flex;
+        justify-content: space-around;
+        gap: 8px;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    .control-btn {
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 0.9em;
+        border-radius: 15px;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Hide footer on mobile */
+    footer {
+        display: none;
+    }
+
+    /* Mobile Touch Optimizations */
+    .seed-slot {
+        min-height: 44px;  /* iOS touch target minimum */
+    }
+
+    .control-btn {
+        min-height: 44px;  /* iOS touch target minimum */
+    }
+
+    /* Scroll indicators for seed inventory */
+    #seed-inventory::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    #seed-inventory::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+    }
+
+    #seed-inventory::-webkit-scrollbar-thumb {
+        background: var(--seed-gold);
+        border-radius: 2px;
+    }
+}
+
+/* 📱 Portrait Mobile Phones */
+@media (max-width: 480px) {
+    #game-canvas {
+        height: 55vh;  /* Even more space for gameplay */
+        min-height: 350px;
+    }
+
+    #game-interface {
+        transform: translateY(90%);  /* Hide even more */
+    }
+
+    #mobile-panel-toggle {
+        bottom: 15px;
+        padding: 10px 18px;
+        font-size: 1em;
+    }
+
+    .stat-item {
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .seed-slot {
+        flex: 0 0 100px;
+        min-height: 70px;
+        padding: 6px;
+    }
+
+    .seed-icon {
+        font-size: 1.5em;
+    }
+
+    .control-btn {
+        font-size: 0.8em;
+        padding: 8px 6px;
+    }
+}
+
+/* 📱 Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    #game-canvas {
+        height: 70vh;
+        max-height: none;
+    }
+
+    #game-interface {
+        transform: translateY(80%);
+        max-height: 60vh;
+    }
+
+    #mobile-panel-toggle {
+        bottom: 15px;
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+/* 🌿 Plant Growth Animations */
+@keyframes plantGrowth {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(0.7) rotate(5deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.growing-plant {
+    animation: plantGrowth 0.8s ease-out forwards;
+}
+
+/* 🐛 Bug Movement Effects */
+@keyframes bugWiggle {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-1px) rotate(-2deg); }
+    75% { transform: translateX(1px) rotate(2deg); }
+}
+
+.bug-moving {
+    animation: bugWiggle 0.3s ease-in-out infinite;
+}
+
+/* 💫 Special Effects */
+.seed-impact {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, var(--seed-gold) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: seedImpact 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes seedImpact {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* 🏆 Badge Notification Integration */
+.badge-notification.garden-theme {
+    background: linear-gradient(135deg, var(--plant-emerald), var(--growth-lime));
+    border: 2px solid var(--seed-gold);
+}
+
+.badge-notification.garden-theme .badge-icon {
+    filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.8));
+}
+
+/* 🏆 Badge Feedback Animations */
+.garden-badge-feedback {
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) translateY(-100px);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+.badge-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #4a7c59, #50c878);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 2px solid var(--seed-gold);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    z-index: 1001;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 300px;
+}
+
+.badge-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.badge-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.badge-icon {
+    font-size: 2em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.badge-text {
+    flex: 1;
+}
+
+.badge-title {
+    font-size: 0.9em;
+    color: var(--seed-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badge-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* 📖 Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+footer p {
+    margin: 5px 0;
+}

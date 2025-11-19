@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Frequency - Harmonic Sound Visualizer</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Left Panel for Controls -->
+        <div id="control-panel">
+            <div id="title">
+                <h1>🎵 Frequency</h1>
+                <p>Create harmonious sound waves</p>
+            </div>
+
+            <!-- Main Controls -->
+            <div id="game-controls">
+                <div class="control-group">
+                    <button id="clear-waves-btn">🌊 Clear Waves</button>
+                    <button id="random-harmony-btn">🎶 Random Harmony</button>
+                </div>
+
+                <div class="control-group">
+                    <label class="audio-control">
+                        🔊 Volume: <span id="volume-display">50%</span>
+                        <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label class="frequency-control">
+                        🎵 Base Frequency: <span id="frequency-display">220Hz</span>
+                        <input type="range" id="frequency-slider" min="80" max="800" value="220">
+                    </label>
+                </div>
+
+                <!-- Preset Compositions -->
+                <div class="control-group">
+                    <h4>✨ Cozy Compositions</h4>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="Rain Drops">🌧️ Rain Drops</button>
+                        <button class="preset-btn" data-preset="Ocean Waves">🌊 Ocean Waves</button>
+                        <button class="preset-btn" data-preset="Forest Whispers">🌲 Forest Whispers</button>
+                        <button class="preset-btn" data-preset="Crystal Chimes">💎 Crystal Chimes</button>
+                        <button class="preset-btn" data-preset="Celestial Harmony">⭐ Celestial Harmony</button>
+                        <button class="preset-btn" data-preset="Morning Dew">🌅 Morning Dew</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div id="instructions">
+                <p>🖱️ <strong>Click</strong> to create frequency waves</p>
+                <p>🎨 <strong>Watch</strong> harmonics blend and resonate</p>
+                <p>🎵 <strong>Listen</strong> to the gentle tones</p>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div id="game-area">
+            <canvas id="frequency-canvas"></canvas>
+
+            <!-- Stats in bottom right of game area -->
+            <div id="stats">
+                <div id="wave-count">Waves: <span>0</span></div>
+                <div id="frequency-count">Harmonics: <span>0</span></div>
+                <div id="meditation-time">Time: <span>0s</span></div>
+                <div id="badges-earned">Badges: <span>0</span></div>
+            </div>
+
+            <!-- Badge Notifications -->
+            <div id="badge-notifications"></div>
+        </div>
+
+        <!-- Welcome Screen -->
+        <div id="welcome-screen">
+            <div class="welcome-content">
+                <h1>🎵 Welcome to Frequency!</h1>
+                <p>Create beautiful sound waves and harmonic resonances</p>
+                <button id="start-game-btn" class="main-button">Start Creating</button>
+                <p class="game-description">
+                    A cozy, meditative experience with sound and color.<br>
+                    No goals, no pressure - just pure creative expression!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/badge-helper.js"></script>
+    <script src="js/game/audio.js"></script>
+    <script src="js/game/waves.js"></script>
+    <script src="js/game/harmonics.js"></script>
+    <script src="js/game/particles.js"></script>
+    <script src="js/game/visualizer.js"></script>
+    <script src="js/game/feedback.js"></script>
+    <script src="js/game/presets.js"></script>
+    <script src="js/game/engine.js"></script>
+</body>
+</html>

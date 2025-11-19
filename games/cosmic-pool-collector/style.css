@@ -1,0 +1,484 @@
+/* ✨ ENHANCED Wavelength Cozy Game SDK THEME: Mystical Cosmic Pool ✨ */
+body {
+    background: linear-gradient(45deg, #000011 0%, #001122 50%, #000011 100%);
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background 2s ease;
+    overflow: hidden;
+}
+
+/* 🌟 Cosmic Game Container */
+#game-container {
+    width: 90vw;
+    max-width: 900px;
+    background: linear-gradient(135deg, rgba(0, 0, 51, 0.9) 0%, rgba(25, 0, 51, 0.8) 100%);
+    border: 3px solid #6a5acd;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow:
+        0 0 50px rgba(106, 90, 205, 0.6),
+        inset 0 0 50px rgba(106, 90, 205, 0.1);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: visible;
+}
+
+/* 📊 Enhanced Score Panel */
+#score-panel {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+    border: 2px solid rgba(106, 90, 205, 0.3);
+}
+
+.score-item {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 🎮 Enhanced Header */
+header h1 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    font-size: 2.2em;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    to { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 255, 255, 0.5); }
+}
+
+/* 🌌 Mystical Cosmic Table */
+#cosmic-table {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: radial-gradient(circle at center, rgba(106, 90, 205, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 20px;
+    border: 2px solid rgba(106, 90, 205, 0.5);
+    box-shadow: inset 0 0 50px rgba(106, 90, 205, 0.2);
+}
+
+/* ✨ Enhanced Collectible Items with Rarity Effects */
+.collectible-item {
+    position: absolute;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    z-index: 5;
+}
+
+.collectible-item:hover {
+    transform: scale(1.3) rotate(5deg);
+    filter: brightness(1.5) drop-shadow(0 0 15px currentColor);
+    z-index: 10;
+}
+
+/* 🌟 Rarity-Based Styling */
+.rarity-common {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.rarity-uncommon {
+    color: #00ff88;
+    text-shadow: 0 0 12px rgba(0, 255, 136, 0.8);
+    animation: uncommonPulse 2s ease-in-out infinite;
+}
+
+.rarity-rare {
+    color: #0088ff;
+    text-shadow: 0 0 15px rgba(0, 136, 255, 1);
+    animation: rarePulse 1.5s ease-in-out infinite;
+}
+
+.rarity-ultrare {
+    color: #ff0088;
+    text-shadow: 0 0 20px rgba(255, 0, 136, 1);
+    animation: ultraRarePulse 1s ease-in-out infinite;
+}
+
+.rarity-legendary {
+    color: #ffaa00;
+    text-shadow: 0 0 25px rgba(255, 170, 0, 1), 0 0 35px rgba(255, 255, 255, 0.5);
+    animation: legendaryPulse 0.8s ease-in-out infinite;
+}
+
+/* 🌀 Rarity Animation Effects */
+@keyframes uncommonPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.05) rotate(2deg); }
+}
+
+@keyframes rarePulse {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    50% { transform: scale(1.1) rotate(-2deg); filter: brightness(1.3); }
+}
+
+@keyframes ultraRarePulse {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1) hue-rotate(0deg); }
+    33% { transform: scale(1.15) rotate(3deg); filter: brightness(1.4) hue-rotate(30deg); }
+    66% { transform: scale(1.15) rotate(-3deg); filter: brightness(1.4) hue-rotate(-30deg); }
+}
+
+@keyframes legendaryPulse {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1) hue-rotate(0deg) drop-shadow(0 0 20px currentColor);
+    }
+    25% {
+        transform: scale(1.2) rotate(5deg);
+        filter: brightness(1.6) hue-rotate(90deg) drop-shadow(0 0 30px currentColor);
+    }
+    50% {
+        transform: scale(1.25) rotate(0deg);
+        filter: brightness(1.8) hue-rotate(180deg) drop-shadow(0 0 35px currentColor);
+    }
+    75% {
+        transform: scale(1.2) rotate(-5deg);
+        filter: brightness(1.6) hue-rotate(270deg) drop-shadow(0 0 30px currentColor);
+    }
+}
+
+/* 🚀 Enhanced Movement Animations */
+@keyframes drift {
+    0% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(15px, 20px) rotate(90deg); }
+    50% { transform: translate(-10px, 30px) rotate(180deg); }
+    75% { transform: translate(8px, 15px) rotate(270deg); }
+    100% { transform: translate(0px, 0px) rotate(360deg); }
+}
+
+@keyframes cosmicDrift {
+    0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+    25% { transform: translate(20px, 25px) rotate(120deg) scale(1.1); }
+    50% { transform: translate(-15px, 35px) rotate(240deg) scale(0.9); }
+    75% { transform: translate(12px, 18px) rotate(300deg) scale(1.05); }
+    100% { transform: translate(0px, 0px) rotate(360deg) scale(1); }
+}
+
+@keyframes legendaryDrift {
+    0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+    16% { transform: translate(25px, 30px) rotate(60deg) scale(1.2); }
+    33% { transform: translate(-20px, 40px) rotate(120deg) scale(0.8); }
+    50% { transform: translate(30px, -15px) rotate(180deg) scale(1.3); }
+    66% { transform: translate(-25px, 20px) rotate(240deg) scale(0.9); }
+    83% { transform: translate(15px, 25px) rotate(300deg) scale(1.1); }
+    100% { transform: translate(0px, 0px) rotate(360deg) scale(1); }
+}
+
+/* 🌊 Movement Speed Classes */
+.drift-slow {
+    animation: drift 20s infinite linear;
+}
+
+.drift-medium {
+    animation: drift 15s infinite linear;
+}
+
+.drift-fast {
+    animation: drift 10s infinite linear;
+}
+
+.drift-cosmic {
+    animation: cosmicDrift 8s infinite ease-in-out;
+}
+
+.drift-legendary {
+    animation: legendaryDrift 6s infinite ease-in-out;
+}
+
+/* 🎆 Special Effect Animations */
+.points-popup {
+    position: absolute;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 1);
+    pointer-events: none;
+    z-index: 15;
+    animation: pointsRise 1s ease-out forwards;
+}
+
+@keyframes pointsRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* 🏆 Achievement Notifications */
+.achievement {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    color: #000;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-shadow: none;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+    animation: achievementSlide 3s ease-in-out;
+    z-index: 1000;
+}
+
+@keyframes achievementSlide {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    10%, 90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 🌟 Enhanced Badge Notification System */
+.badge-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #6f42c1, #fd7e14);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 400px;
+    text-align: center;
+}
+
+.badge-notification.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.cosmic-badge {
+    background: linear-gradient(135deg, #6f42c1, #fd7e14, #20c997);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(106, 90, 205, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.badge-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.badge-icon {
+    font-size: 2.5em;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    animation: badgeIconBounce 0.6s ease-out;
+}
+
+@keyframes badgeIconBounce {
+    0% { transform: scale(0) rotate(-180deg); }
+    50% { transform: scale(1.3) rotate(-90deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.badge-text {
+    text-align: left;
+}
+
+.badge-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.badge-name {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* 🌈 Badge Rarity Styling */
+.badge-notification.rarity-common {
+    background: linear-gradient(135deg, #6c757d, #495057);
+}
+
+.badge-notification.rarity-uncommon {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.badge-notification.rarity-rare {
+    background: linear-gradient(135deg, #007bff, #6610f2);
+}
+
+.badge-notification.rarity-epic {
+    background: linear-gradient(135deg, #6f42c1, #e83e8c);
+}
+
+.badge-notification.rarity-legendary {
+    background: linear-gradient(135deg, #fd7e14, #ffc107);
+    animation: legendaryBadgeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes legendaryBadgeGlow {
+    from {
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.4),
+            0 0 40px rgba(255, 193, 7, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    to {
+        box-shadow:
+            0 15px 40px rgba(0, 0, 0, 0.5),
+            0 0 60px rgba(255, 193, 7, 0.9),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* 🎆 Cosmic Badge Feedback */
+.cosmic-badge-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #6f42c1, #fd7e14);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.8;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* 📱 Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+    #game-container {
+        width: 95vw;
+        padding: 15px;
+    }
+
+    .collectible-item {
+        font-size: 40px; /* Larger for touch */
+    }
+
+    #cosmic-table {
+        height: 400px;
+    }
+
+    #score-panel {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .score-item {
+        font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* 🌟 Additional Visual Enhancements */
+footer {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+/* 🎨 Particle Canvas Styling */
+canvas {
+    border-radius: 15px;
+}
+
+/* ✨ Entrance Animation for New Items */
+.collectible-item {
+    animation-fill-mode: both;
+}
+
+.collectible-item:not(.spawned) {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+}
+
+/* 🌈 Dynamic Background Effects */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.1) 0%, transparent 50%);
+    animation: backgroundShift 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}

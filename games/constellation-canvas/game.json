@@ -1,0 +1,126 @@
+{
+  "name": "Constellation Canvas",
+  "description": "Paint the night sky with living stars and create celestial music through constellation patterns. Click to place twinkling stars, drag to connect them into constellations, and watch meteors streak across your cosmic canvas.",
+  "version": "1.0.2",
+  "author": "Wavelength Consulting",
+  "category": "Creative",
+  "tags": ["stars", "music", "creative", "relaxing", "celestial", "constellation", "audio", "interactive"],
+  "thumbnail": "assets/thumbnail.svg",
+  "entry_point": "index.html",
+  "controls": {
+    "mouse": "Click to place stars, drag to connect constellations",
+    "keyboard": {
+      "1-6": "Select star colors",
+      "C": "Clear sky",
+      "M": "Meteor shower",
+      "Space": "Meteor shower",
+      "S": "Toggle music"
+    }
+  },
+  "features": [
+    "Interactive star placement with 6 different colors",
+    "Drag-to-connect constellation creation",
+    "Procedural celestial music based on star position and color",
+    "Harmonic melodies when stars are connected",
+    "Magical meteor shower effects with sparkly trails",
+    "Twinkling star animations with ethereal glow",
+    "Stardust particle effects",
+    "Gentle floating motion and pulsing connections",
+    "Keyboard shortcuts and touch support"
+  ],
+  "technical": {
+    "canvas_based": true,
+    "audio": "Web Audio API for procedural celestial music",
+    "responsive": true,
+    "performance": "Optimized particle system with lifecycle management"
+  },
+  "badges": {
+    "enabled": true,
+    "rate_limit_ms": 30000,
+    "revenue_share": {
+      "developer": 35,
+      "lore_master": 40,
+      "platform": 25
+    },
+    "achievements": [
+      {
+        "id": "first_star",
+        "name": "Starlight Pioneer",
+        "description": "Create your first star in the cosmic canvas",
+        "rarity": "common",
+        "condition": "Create 1 star",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "⭐",
+          "difficulty": "easy",
+          "category": "creation"
+        }
+      },
+      {
+        "id": "rainbow_creator",
+        "name": "Rainbow Creator",
+        "description": "Use 3 different star colors to paint the cosmos",
+        "rarity": "uncommon",
+        "condition": "Use 3 different star colors",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌈",
+          "difficulty": "easy",
+          "category": "creativity"
+        }
+      },
+      {
+        "id": "constellation_artist",
+        "name": "Constellation Artist",
+        "description": "Connect 5 stars to form celestial patterns",
+        "rarity": "rare",
+        "condition": "Create 5 star connections",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "✨",
+          "difficulty": "medium",
+          "category": "artistic"
+        }
+      },
+      {
+        "id": "meteor_caller",
+        "name": "Meteor Caller",
+        "description": "Summon a meteor shower across your starscape",
+        "rarity": "rare",
+        "condition": "Trigger 1 meteor shower",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "☄️",
+          "difficulty": "medium",
+          "category": "celestial"
+        }
+      },
+      {
+        "id": "cosmic_architect",
+        "name": "Cosmic Architect",
+        "description": "Create an elaborate celestial masterpiece with 15 stars and 10 connections",
+        "rarity": "epic",
+        "condition": "Create 15 stars and 10 connections",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🏗️",
+          "difficulty": "hard",
+          "category": "mastery"
+        }
+      },
+      {
+        "id": "celestial_master",
+        "name": "Celestial Master",
+        "description": "Master all aspects of constellation creation: 25 stars, 20 connections, all colors, and multiple meteor showers",
+        "rarity": "legendary",
+        "condition": "Create 25 stars, 20 connections, use all 6 colors, trigger 3+ meteor showers",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "👑",
+          "difficulty": "expert",
+          "category": "legendary"
+        }
+      }
+    ]
+  }
+}

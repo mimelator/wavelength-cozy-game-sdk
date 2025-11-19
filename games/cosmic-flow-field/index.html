@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Flow Field - Interactive Energy Visualization</title>
+
+    <!-- Performance optimizations -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#1a0033">
+
+    <!-- Local resources - CDN-free for Wavelength Cozy SDK compliance -->
+    <link href="./fonts/orbitron-local.css" rel="stylesheet">
+
+    <!-- p5.js library - local version -->
+    <script src="./lib/p5.min.js"></script>
+
+    <!-- Badge Helper - Required for Wavelength Hub integration -->
+    <script src="./js/badge-helper.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0015;
+            font-family: 'Orbitron', monospace;
+            overflow: hidden;
+            cursor: none;
+            user-select: none;
+            touch-action: none;
+        }
+
+        #gameContainer {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, #1a0033 0%, #0a0015 70%);
+        }
+
+        .ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            color: #00ffff;
+            font-size: 14px;
+            text-shadow: 0 0 10px #00ffff;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .ui-overlay.hidden {
+            opacity: 0;
+        }
+
+        .controls-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            color: #ff00ff;
+            font-size: 12px;
+            text-shadow: 0 0 8px #ff00ff;
+            text-align: right;
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .controls-hint.hidden {
+            opacity: 0;
+        }
+
+        .performance-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            color: #ffffff;
+            font-size: 11px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .performance-overlay.visible {
+            opacity: 0.8;
+        }
+
+        /* Zoom indicator */
+        .zoom-indicator {
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            z-index: 100;
+            color: #ff00ff;
+            font-size: 16px;
+            font-weight: 700;
+            text-shadow: 0 0 10px #ff00ff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid #ff00ff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .zoom-indicator.visible {
+            opacity: 0.9;
+        }
+
+        /* Audio button */
+        .audio-button {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+            z-index: 100;
+            color: #00ffff;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+            border: 2px solid #00ffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio-button:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        .audio-button.muted {
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        .audio-button.muted:hover {
+            background: rgba(255, 68, 68, 0.1);
+            box-shadow: 0 0 15px #ff4444;
+        }
+
+        /* Custom cursor */
+        .cosmic-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 200;
+            box-shadow:
+                0 0 10px #00ffff,
+                inset 0 0 5px #00ffff;
+            transition: transform 0.1s ease;
+        }
+
+        .cosmic-cursor.active {
+            transform: scale(2);
+            border-color: #ff00ff;
+            box-shadow:
+                0 0 20px #ff00ff,
+                inset 0 0 10px #ff00ff;
+        }
+
+        /* Loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0a0015, #1a0033);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-text {
+            color: #00ffff;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #00ffff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ui-overlay, .controls-hint {
+                font-size: 12px;
+            }
+
+            .loading-text {
+                font-size: 20px;
+            }
+        }
+
+        /* Performance mode adjustments */
+        .low-performance .ui-overlay,
+        .low-performance .controls-hint {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Initializing Cosmic Flow</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="gameContainer">
+        <!-- Custom Cursor -->
+        <div class="cosmic-cursor" id="cosmicCursor"></div>
+
+        <!-- UI Overlay -->
+        <div class="ui-overlay" id="uiOverlay">
+            <div>Cosmic Flow Field</div>
+            <div id="particleCount">Particles: 0</div>
+            <div id="zoomLevel">Zoom: 1.0x</div>
+            <div id="timeElapsed">Time: 00:00</div>
+        </div>
+
+        <!-- Controls Hint -->
+        <div class="controls-hint" id="controlsHint">
+            Hold click to attract energy<br>
+            Click for pulse waves & sound<br>
+            Scroll: Zoom | Double-click: Smart zoom<br>
+            Space: Screenshot | Z: Random zoom<br>
+            +/-: Zoom in/out | 0: Reset zoom<br>
+            M: Toggle audio | R: Reset | F: Fullscreen
+        </div>
+
+        <!-- Performance Overlay -->
+        <div class="performance-overlay" id="performanceOverlay">
+            <div id="fpsCounter">FPS: --</div>
+            <div id="qualityLevel">Quality: High</div>
+        </div>
+
+        <!-- Zoom Indicator -->
+        <div class="zoom-indicator" id="zoomIndicator">
+            🔍 Zooming...
+        </div>
+
+        <!-- Audio Button -->
+        <div class="audio-button" id="audioButton" onclick="toggleAudio()">
+            🔊
+        </div>
+    </div>
+
+    <!-- Game Script -->
+    <script>
+        // Game Configuration
+        const CONFIG = {
+            particles: {
+                count: 2000,
+                maxSpeed: 2,
+                maxForce: 0.1,
+                lifespan: 180,
+                respawnRate: 10
+            },
+            flowField: {
+                resolution: 20,
+                strength: 0.01,
+                noiseScale: 0.005,
+                timeScale: 0.001
+            },
+            performance: {
+                targetFPS: 60,
+                adaptiveQuality: true,
+                fpsCheckInterval: 60
+            },
+            zoom: {
+                minZoom: 1.0, // Prevent seeing edges
+                maxZoom: 3.0,
+                autoZoomInterval: 8000, // ms between automatic zooms
+                transitionSpeed: 0.02,
+                gestureZoomSensitivity: 0.002,
+                autoZoomDuration: 4000 // how long auto zoom lasts
+            },
+            audio: {
+                masterVolume: 0.8,
+                ambientVolume: 0.6,
+                effectsVolume: 0.9,
+                spatialAudio: true,
+                reactiveAudio: true,
+                frequencyBands: 8,
+                reverbAmount: 0.4,
+                delayAmount: 0.3
+            }
+        };
+
+        // Global variables
+        let particles = [];
+        let flowField = [];
+        let flowFieldCols, flowFieldRows;
+        let mouseInfluence = { x: 0, y: 0, active: false };
+        let time = 0;
+        let startTime;
+        let screenshotCount = 0;
+        let badgeManager;
+        let performanceMonitor;
+        let qualityLevel = 1.0;
+        let frameCount = 0;
+        let lastFPSCheck = 0;
+        let fpsHistory = [];
+
+        // Zoom system variables
+        let zoomLevel = 1.0;
+        let targetZoom = 1.0;
+        let zoomCenter = { x: 0, y: 0 };
+        let targetZoomCenter = { x: 0, y: 0 };
+        let autoZoomTimer = 0;
+        let zoomTransitionSpeed = 0.02;
+        let isUserControlledZoom = false;
+        let lastGestureTime = 0;
+
+        // Audio system variables
+        let audioContext;
+        let audioManager;
+        let soundEnabled = true;
+        let masterVolume = 0.8;
+        let audioInitialized = false;
+
+        // Particle class with advanced behavior
+        class Particle {
+            constructor(x, y) {
+                this.position = createVector(x !== undefined ? x : random(width), y !== undefined ? y : random(height));
+                this.velocity = createVector(random(-1, 1), random(-1, 1));
+                this.acceleration = createVector(0, 0);
+                this.maxSpeed = CONFIG.particles.maxSpeed * qualityLevel;
+                this.maxForce = CONFIG.particles.maxForce;
+                this.lifespan = CONFIG.particles.lifespan;
+                this.age = 0;
+                this.size = random(1, 4) * max(0.5, qualityLevel);
+                this.hue = random(0, 360);
+                this.trail = [];
+                this.energy = random(0.5, 1.0);
+            }
+
+            update() {
+                // Apply flow field force
+                this.applyFlowField();
+
+                // Apply mouse influence
+                this.applyMouseInfluence();
+
+                // Update physics
+                this.velocity.add(this.acceleration);
+                this.velocity.limit(this.maxSpeed);
+                this.position.add(this.velocity);
+                this.acceleration.mult(0);
+
+                // Update trail
+                if (frameCount % 2 === 0) { // Optimize trail updates
+                    this.trail.push(this.position.copy());
+                    if (this.trail.length > 20 * qualityLevel) {
+                        this.trail.splice(0, 1);
+                    }
+                }
+
+                // Age the particle
+                this.age++;
+
+                // Wrap around screen
+                this.wrapAround();
+
+                // Update visual properties
+                this.hue += this.velocity.mag() * 0.5;
+                if (this.hue > 360) this.hue -= 360;
+            }
+
+            applyFlowField() {
+                let col = Math.floor(this.position.x / CONFIG.flowField.resolution);
+                let row = Math.floor(this.position.y / CONFIG.flowField.resolution);
+                let index = col + row * flowFieldCols;
+
+                if (index >= 0 && index < flowField.length) {
+                    let force = flowField[index].copy();
+                    force.mult(CONFIG.flowField.strength * this.energy);
+                    this.acceleration.add(force);
+                }
+            }
+
+            applyMouseInfluence() {
+                if (mouseInfluence.active) {
+                    let mousePos = createVector(mouseInfluence.x, mouseInfluence.y);
+                    let distance = p5.Vector.dist(this.position, mousePos);
+
+                    if (distance < 100) {
+                        let force = p5.Vector.sub(mousePos, this.position);
+                        force.normalize();
+                        force.mult(0.05 * (1 - distance / 100));
+                        this.acceleration.add(force);
+
+                        // Increase energy when near mouse
+                        this.energy = min(1.0, this.energy + 0.01);
+                    }
+                }
+            }
+
+            wrapAround() {
+                if (this.position.x < -10) this.position.x = width + 10;
+                if (this.position.x > width + 10) this.position.x = -10;
+                if (this.position.y < -10) this.position.y = height + 10;
+                if (this.position.y > height + 10) this.position.y = -10;
+            }
+
+            display() {
+                let alpha = this.getAlpha();
+                let size = this.size * (0.5 + this.energy * 0.5);
+
+                // Convert hue to RGB for better compatibility
+                let r = 128 + 127 * cos(radians(this.hue));
+                let g = 128 + 127 * cos(radians(this.hue + 120));
+                let b = 128 + 127 * cos(radians(this.hue + 240));
+
+                // Draw trail
+                if (this.trail.length > 1 && qualityLevel > 0.5) {
+                    stroke(r, g, b, alpha * 0.3);
+                    strokeWeight(size * 0.5);
+                    noFill();
+
+                    beginShape();
+                    for (let i = 0; i < this.trail.length; i++) {
+                        let trailAlpha = map(i, 0, this.trail.length - 1, 0, alpha * 0.5);
+                        stroke(r, g, b, trailAlpha);
+                        vertex(this.trail[i].x, this.trail[i].y);
+                    }
+                    endShape();
+                }
+
+                // Draw particle
+                push();
+                translate(this.position.x, this.position.y);
+
+                // Glow effect
+                if (qualityLevel > 0.7) {
+                    fill(r * 0.7, g * 0.7, b * 1.5, alpha * 0.2);
+                    noStroke();
+                    ellipse(0, 0, size * 4);
+                }
+
+                // Core particle
+                fill(r, g, b, alpha);
+                noStroke();
+                ellipse(0, 0, size);
+
+                // Bright center
+                fill(255, 255, 255, alpha * 0.8);
+                ellipse(0, 0, size * 0.3);
+
+                pop();
+            }
+
+            getAlpha() {
+                let fadeIn = min(1, this.age / 30);
+                let fadeOut = this.age < this.lifespan - 30 ? 1 :
+                             map(this.age, this.lifespan - 30, this.lifespan, 1, 0);
+                return 255 * fadeIn * fadeOut * this.energy;
+            }
+
+            isDead() {
+                return this.age >= this.lifespan;
+            }
+        }
+
+        // Performance Monitor
+        class PerformanceMonitor {
+            constructor() {
+                this.fps = 60;
+                this.frameHistory = [];
+                this.lastTime = millis();
+            }
+
+            update() {
+                let currentTime = millis();
+                let deltaTime = currentTime - this.lastTime;
+                this.lastTime = currentTime;
+
+                if (deltaTime > 0) {
+                    this.fps = 1000 / deltaTime;
+                    this.frameHistory.push(this.fps);
+
+                    if (this.frameHistory.length > 60) {
+                        this.frameHistory.shift();
+                    }
+                }
+            }
+
+            getAverageFPS() {
+                if (this.frameHistory.length === 0) return 60;
+                let sum = this.frameHistory.reduce((a, b) => a + b, 0);
+                return sum / this.frameHistory.length;
+            }
+
+            shouldReduceQuality() {
+                return this.getAverageFPS() < 45 && qualityLevel > 0.3;
+            }
+
+            shouldIncreaseQuality() {
+                return this.getAverageFPS() > 55 && qualityLevel < 1.0;
+            }
+        }
+
+        // Audio Management System
+        class AudioManager {
+            constructor() {
+                this.context = null;
+                this.masterGain = null;
+                this.ambientGain = null;
+                this.effectsGain = null;
+                this.reverb = null;
+                this.delay = null;
+                this.oscillators = [];
+                this.isInitialized = false;
+                this.ambientDrone = null;
+                this.particleOscillators = [];
+                this.zoomOscillator = null;
+                this.pulseOscillators = [];
+                this.lastParticleSound = 0;
+            }
+
+            async init() {
+                try {
+                    // Create audio context
+                    this.context = new (window.AudioContext || window.webkitAudioContext)();
+
+                    // Create master gain
+                    this.masterGain = this.context.createGain();
+                    this.masterGain.gain.value = CONFIG.audio.masterVolume;
+                    this.masterGain.connect(this.context.destination);
+
+                    // Create ambient gain
+                    this.ambientGain = this.context.createGain();
+                    this.ambientGain.gain.value = CONFIG.audio.ambientVolume;
+                    this.ambientGain.connect(this.masterGain);
+
+                    // Create effects gain
+                    this.effectsGain = this.context.createGain();
+                    this.effectsGain.gain.value = CONFIG.audio.effectsVolume;
+                    this.effectsGain.connect(this.masterGain);
+
+                    // Create reverb
+                    await this.createReverb();
+
+                    // Create delay
+                    this.createDelay();
+
+                    // Start ambient drone
+                    this.createAmbientDrone();
+
+                    this.isInitialized = true;
+                    console.log('🎵 Audio system initialized');
+
+                    return true;
+                } catch (error) {
+                    console.warn('Audio initialization failed:', error);
+                    return false;
+                }
+            }
+
+            async createReverb() {
+                // Create impulse response for reverb
+                const reverbTime = 3.0;
+                const sampleRate = this.context.sampleRate;
+                const length = sampleRate * reverbTime;
+                const impulse = this.context.createBuffer(2, length, sampleRate);
+
+                for (let channel = 0; channel < 2; channel++) {
+                    const channelData = impulse.getChannelData(channel);
+                    for (let i = 0; i < length; i++) {
+                        const decay = Math.pow(1 - i / length, 2);
+                        channelData[i] = (Math.random() * 2 - 1) * decay * 0.1;
+                    }
+                }
+
+                this.reverb = this.context.createConvolver();
+                this.reverb.buffer = impulse;
+
+                const reverbGain = this.context.createGain();
+                reverbGain.gain.value = CONFIG.audio.reverbAmount;
+                reverbGain.connect(this.reverb);
+                this.reverb.connect(this.masterGain);
+
+                return reverbGain;
+            }
+
+            createDelay() {
+                this.delay = this.context.createDelay(1.0);
+                this.delay.delayTime.value = 0.3;
+
+                const delayGain = this.context.createGain();
+                delayGain.gain.value = CONFIG.audio.delayAmount;
+
+                const feedback = this.context.createGain();
+                feedback.gain.value = 0.3;
+
+                this.delay.connect(delayGain);
+                delayGain.connect(this.delay);
+                delayGain.connect(feedback);
+                feedback.connect(this.delay);
+                delayGain.connect(this.masterGain);
+
+                return this.delay;
+            }
+
+            createAmbientDrone() {
+                // Create layered ambient drone
+                const frequencies = [55, 82.5, 110, 165]; // Deep cosmic frequencies
+
+                frequencies.forEach((freq, index) => {
+                    const oscillator = this.context.createOscillator();
+                    const gain = this.context.createGain();
+                    const filter = this.context.createBiquadFilter();
+
+                    oscillator.type = 'sine';
+                    oscillator.frequency.value = freq;
+
+                    filter.type = 'lowpass';
+                    filter.frequency.value = 200 + index * 100;
+                    filter.Q.value = 0.5;
+
+                    gain.gain.value = 0.15 / frequencies.length;
+
+                    oscillator.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(this.ambientGain);
+
+                    // Add slight frequency modulation
+                    const lfo = this.context.createOscillator();
+                    const lfoGain = this.context.createGain();
+                    lfo.frequency.value = 0.1 + index * 0.05;
+                    lfoGain.gain.value = 0.5;
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(oscillator.frequency);
+
+                    oscillator.start();
+                    lfo.start();
+
+                    this.oscillators.push({ oscillator, gain, filter, lfo });
+                });
+            }
+
+            playParticleSound(particle) {
+                if (!this.isInitialized || millis() - this.lastParticleSound < 50) return;
+
+                this.lastParticleSound = millis();
+
+                // Create short particle sound based on particle properties
+                const oscillator = this.context.createOscillator();
+                const gain = this.context.createGain();
+                const filter = this.context.createBiquadFilter();
+
+                // Map particle properties to sound
+                const frequency = map(particle.hue, 0, 360, 200, 800);
+                const velocity = particle.velocity.mag();
+                const volume = map(velocity, 0, 5, 0.1, 0.4) * particle.energy;
+
+                oscillator.type = 'sine';
+                oscillator.frequency.value = frequency;
+
+                filter.type = 'lowpass';
+                filter.frequency.value = frequency * 2;
+                filter.Q.value = 2;
+
+                gain.gain.value = 0;
+                gain.gain.setValueAtTime(0, this.context.currentTime);
+                gain.gain.linearRampToValueAtTime(volume, this.context.currentTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.context.currentTime + 0.1);
+
+                oscillator.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.effectsGain);
+
+                // Add to reverb for spatial effect
+                if (this.reverb) {
+                    const reverbSend = this.context.createGain();
+                    reverbSend.gain.value = 0.6;
+                    gain.connect(reverbSend);
+                    reverbSend.connect(this.reverb);
+                }
+
+                oscillator.start(this.context.currentTime);
+                oscillator.stop(this.context.currentTime + 0.15);
+
+                // Clean up
+                setTimeout(() => {
+                    try {
+                        oscillator.disconnect();
+                        gain.disconnect();
+                        filter.disconnect();
+                    } catch (e) {}
+                }, 200);
+            }
+
+            playPulseSound(x, y, intensity = 1.0) {
+                if (!this.isInitialized) return;
+
+                // Create pulse wave sound
+                const oscillator = this.context.createOscillator();
+                const gain = this.context.createGain();
+                const filter = this.context.createBiquadFilter();
+
+                // Spatial positioning based on coordinates
+                const pan = map(x, 0, width, -1, 1);
+                const pitch = map(y, 0, height, 100, 400);
+
+                oscillator.type = 'triangle';
+                oscillator.frequency.value = pitch;
+
+                filter.type = 'bandpass';
+                filter.frequency.value = pitch * 1.5;
+                filter.Q.value = 5;
+
+                // Create panning
+                const panner = this.context.createStereoPanner();
+                panner.pan.value = pan;
+
+                const volume = 0.7 * intensity;
+                gain.gain.value = 0;
+                gain.gain.setValueAtTime(0, this.context.currentTime);
+                gain.gain.linearRampToValueAtTime(volume, this.context.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.context.currentTime + 0.5);
+
+                oscillator.connect(filter);
+                filter.connect(gain);
+                gain.connect(panner);
+                panner.connect(this.effectsGain);
+
+                // Add to delay
+                if (this.delay) {
+                    const delaySend = this.context.createGain();
+                    delaySend.gain.value = 0.7;
+                    gain.connect(delaySend);
+                    delaySend.connect(this.delay);
+                }
+
+                oscillator.start(this.context.currentTime);
+                oscillator.stop(this.context.currentTime + 0.6);
+
+                console.log(`🎵 Pulse sound: ${pitch.toFixed(0)}Hz at pan ${pan.toFixed(2)}`);
+            }
+
+            playZoomSound(zoomLevel, direction) {
+                if (!this.isInitialized) return;
+
+                // Create zoom sound effect
+                const oscillator = this.context.createOscillator();
+                const gain = this.context.createGain();
+                const filter = this.context.createBiquadFilter();
+
+                oscillator.type = 'sawtooth';
+                const startFreq = direction > 0 ? 150 : 300;
+                const endFreq = direction > 0 ? 300 : 150;
+
+                oscillator.frequency.setValueAtTime(startFreq, this.context.currentTime);
+                oscillator.frequency.linearRampToValueAtTime(endFreq, this.context.currentTime + 0.8);
+
+                filter.type = 'lowpass';
+                filter.frequency.value = 400;
+                filter.Q.value = 1;
+
+                gain.gain.value = 0;
+                gain.gain.setValueAtTime(0, this.context.currentTime);
+                gain.gain.linearRampToValueAtTime(0.5, this.context.currentTime + 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.context.currentTime + 0.8);
+
+                oscillator.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.effectsGain);
+
+                oscillator.start(this.context.currentTime);
+                oscillator.stop(this.context.currentTime + 1.0);
+
+                console.log(`🔍 Zoom sound: ${direction > 0 ? 'in' : 'out'}`);
+            }
+
+            playAmbientReaction(particleCount, averageVelocity) {
+                if (!this.isInitialized) return;
+
+                // Modulate ambient drone based on particle activity
+                const activity = (particleCount / CONFIG.particles.count) * averageVelocity;
+                const targetVolume = CONFIG.audio.ambientVolume * (0.5 + activity * 0.5);
+
+                if (this.ambientGain) {
+                    this.ambientGain.gain.linearRampToValueAtTime(
+                        targetVolume,
+                        this.context.currentTime + 0.5
+                    );
+                }
+
+                // Modulate oscillator frequencies slightly
+                this.oscillators.forEach((osc, index) => {
+                    if (osc.oscillator) {
+                        const modulation = 1 + (activity * 0.1 * Math.sin(millis() * 0.001 + index));
+                        osc.oscillator.frequency.linearRampToValueAtTime(
+                            osc.oscillator.frequency.value * modulation,
+                            this.context.currentTime + 1.0
+                        );
+                    }
+                });
+            }
+
+            setMasterVolume(volume) {
+                if (this.masterGain) {
+                    this.masterGain.gain.linearRampToValueAtTime(
+                        volume,
+                        this.context.currentTime + 0.1
+                    );
+                }
+            }
+
+            toggleSound() {
+                soundEnabled = !soundEnabled;
+                this.setMasterVolume(soundEnabled ? CONFIG.audio.masterVolume : 0);
+                return soundEnabled;
+            }
+
+            resumeContext() {
+                if (this.context && this.context.state === 'suspended') {
+                    this.context.resume();
+                }
+            }
+        }
+
+        // Badge Management
+        class BadgeManager {
+            constructor() {
+                this.timeStarted = millis();
+                this.screenshots = 0;
+                this.patternsCreated = 0;
+                this.zoomInteractions = 0;
+                this.audioInteractions = 0;
+                this.earnedBadges = new Set();
+
+                // Wait for badge helper to be available
+                this.waitForBadgeHelper();
+            }
+
+            async waitForBadgeHelper() {
+                // Wait up to 3 seconds for badgeHelper to be available
+                let attempts = 0;
+                const maxAttempts = 30;
+
+                const checkHelper = () => {
+                    if (window.badgeHelper || window.CosmicFlowBadgeHelper) {
+                        this.badgeHelper = window.badgeHelper || new window.CosmicFlowBadgeHelper();
+                        console.log('✅ Badge helper ready for cosmic flow field');
+                        return true;
+                    }
+                    return false;
+                };
+
+                if (!checkHelper()) {
+                    const interval = setInterval(() => {
+                        attempts++;
+                        if (checkHelper() || attempts >= maxAttempts) {
+                            clearInterval(interval);
+                            if (!this.badgeHelper) {
+                                console.warn('⚠️ Badge helper not available, badges will work in fallback mode');
+                            }
+                        }
+                    }, 100);
+                }
+            }
+
+            update() {
+                // Run badge checks asynchronously (don't await to avoid blocking)
+                this.checkTimeBasedBadges().catch(err => console.warn('Badge check error:', err));
+                this.checkPatternBadges().catch(err => console.warn('Badge check error:', err));
+                this.updateUI();
+            }
+
+            async checkTimeBasedBadges() {
+                let timeElapsed = (millis() - this.timeStarted) / 1000;
+
+                // Cosmic Explorer badge after 5 minutes of exploration
+                if (timeElapsed > 300 && !this.earnedBadges.has('cosmic_explorer')) {
+                    await this.earnBadge('cosmic_explorer', 'Cosmic Explorer', '🚀');
+                }
+
+                // Flow Master badge after 10 minutes of continuous play
+                if (timeElapsed > 600 && !this.earnedBadges.has('flow_master')) {
+                    await this.earnBadge('flow_master', 'Flow Master', '🌌');
+                }
+            }
+
+            async checkPatternBadges() {
+                let timeElapsed = (millis() - this.timeStarted) / 1000;
+
+                // Only award interaction badges after 5 minutes minimum
+                if (timeElapsed < 300) return;
+
+                // Award badge for meaningful interaction patterns (50 interactions)
+                if (this.patternsCreated > 50 && !this.earnedBadges.has('energy_conductor')) {
+                    await this.earnBadge('energy_conductor', 'Energy Conductor', '⚡');
+                }
+
+                // Award badge for extensive zoom usage (20 zoom actions)
+                if (this.zoomInteractions > 20 && !this.earnedBadges.has('dimension_shifter')) {
+                    await this.earnBadge('dimension_shifter', 'Dimension Shifter', '🔍');
+                }
+
+                // Award badge for audio engagement (after enabling and using audio)
+                if (this.audioInteractions > 0 && timeElapsed > 600 && !this.earnedBadges.has('sound_weaver')) {
+                    await this.earnBadge('sound_weaver', 'Sound Weaver', '🎵');
+                }
+            }
+
+            async screenshotTaken() {
+                this.screenshots++;
+                let timeElapsed = (millis() - this.timeStarted) / 1000;
+
+                // Only award screenshot badges after meaningful playtime
+                if (timeElapsed < 300) return;
+
+                // First screenshot badge after 5 minutes + taking a screenshot
+                if (this.screenshots >= 1 && !this.earnedBadges.has('moment_keeper')) {
+                    await this.earnBadge('moment_keeper', 'Moment Keeper', '📸');
+                }
+
+                // Multiple screenshots badge - requires dedication
+                if (this.screenshots >= 5 && timeElapsed > 600 && !this.earnedBadges.has('cosmic_artist')) {
+                    await this.earnBadge('cosmic_artist', 'Cosmic Artist', '🎨');
+                }
+            }
+
+            async earnBadge(id, name, emoji) {
+                if (this.earnedBadges.has(id)) return;
+
+                this.earnedBadges.add(id);
+
+                // Use badge helper if available
+                if (this.badgeHelper && typeof this.badgeHelper.awardBadge === 'function') {
+                    try {
+                        const metadata = {
+                            timeElapsed: (millis() - this.timeStarted) / 1000,
+                            patternsCreated: this.patternsCreated,
+                            zoomInteractions: this.zoomInteractions,
+                            screenshots: this.screenshots
+                        };
+
+                        await this.badgeHelper.awardBadge(id, null, metadata);
+                        console.log(`🏆 Badge awarded via helper: ${name} (${id})`);
+                    } catch (error) {
+                        console.error('Error awarding badge via helper:', error);
+                        // Fallback to local notification
+                        this.showBadgeNotification(name, emoji);
+                    }
+                } else {
+                    // Fallback mode - show local notification and try API
+                    this.showBadgeNotification(name, emoji);
+                    this.sendBadgeToHub(id, name);
+                }
+
+                console.log(`🏆 Badge earned: ${name} (${id})`);
+            }
+
+            async sendBadgeToHub(badgeId, badgeName) {
+                try {
+                    const response = await fetch('https://hub.wavelength.com/api/games/badges', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            gameId: 'cosmic-flow-field',
+                            badgeId: badgeId,
+                            badgeName: badgeName,
+                            timestamp: Date.now(),
+                            gameVersion: '1.0.0'
+                        })
+                    });
+
+                    if (response.ok) {
+                        console.log(`✅ Badge ${badgeId} successfully registered with Wavelength Hub`);
+                    } else {
+                        console.warn(`⚠️ Failed to register badge ${badgeId}: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.warn(`⚠️ Error sending badge ${badgeId} to hub:`, error);
+                    // Fail silently - badge system should work offline too
+                }
+            }
+
+            showBadgeNotification(name, emoji) {
+                // Create notification element
+                let notification = document.createElement('div');
+                notification.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: rgba(0, 0, 0, 0.9);
+                        color: #00ffff;
+                        padding: 20px;
+                        border-radius: 10px;
+                        text-align: center;
+                        font-family: 'Orbitron', monospace;
+                        z-index: 1000;
+                        border: 2px solid #00ffff;
+                        box-shadow: 0 0 20px #00ffff;
+                        animation: badgeAppear 3s ease-out forwards;
+                    ">
+                        <div style="font-size: 48px; margin-bottom: 10px;">${emoji}</div>
+                        <div style="font-size: 18px; font-weight: bold;">Badge Earned!</div>
+                        <div style="font-size: 14px;">${name}</div>
+                    </div>
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 3000);
+            }
+
+            updateUI() {
+                let timeElapsed = (millis() - this.timeStarted) / 1000;
+                let minutes = Math.floor(timeElapsed / 60);
+                let seconds = Math.floor(timeElapsed % 60);
+                document.getElementById('timeElapsed').textContent =
+                    `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // p5.js setup
+        function setup() {
+            let canvas = createCanvas(windowWidth, windowHeight);
+            canvas.parent('gameContainer');
+
+            // Use RGB color mode for better compatibility
+            colorMode(RGB, 255);
+
+            // Set initial background to dark cosmic color
+            background(10, 0, 21);
+
+            // Initialize systems
+            initializeFlowField();
+            initializeParticles();
+
+            // Initialize zoom system
+            zoomCenter.x = width / 2;
+            zoomCenter.y = height / 2;
+            targetZoomCenter.x = width / 2;
+            targetZoomCenter.y = height / 2;
+            autoZoomTimer = millis();
+
+            badgeManager = new BadgeManager();
+            performanceMonitor = new PerformanceMonitor();
+
+            // Initialize audio system
+            audioManager = new AudioManager();
+
+            startTime = millis();
+
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+                document.getElementById('performanceOverlay').classList.add('visible');
+            }, 1500);
+
+            // Auto-hide UI after delay
+            setTimeout(() => {
+                document.getElementById('controlsHint').classList.add('hidden');
+            }, 10000);
+
+            console.log('Cosmic Flow Field initialized with', particles.length, 'particles');
+        }
+
+        // p5.js draw loop
+        function draw() {
+            // Background with trail effect (using RGB for reliability)
+            fill(10, 0, 21, 5); // Dark purple background with low alpha for trails
+            noStroke();
+            rect(0, 0, width, height);
+
+            // Update time
+            time += CONFIG.flowField.timeScale;
+
+            // Update zoom system
+            updateZoom();
+
+            // Apply zoom transformation
+            push();
+            translate(width/2, height/2);
+            scale(zoomLevel);
+            translate(-zoomCenter.x, -zoomCenter.y);
+
+            // Update flow field
+            updateFlowField();
+
+            // Update mouse influence (adjust for zoom)
+            let adjustedMouseX = (mouseX - width/2) / zoomLevel + zoomCenter.x;
+            let adjustedMouseY = (mouseY - height/2) / zoomLevel + zoomCenter.y;
+            mouseInfluence.x = adjustedMouseX;
+            mouseInfluence.y = adjustedMouseY;
+            
+            // Only active when mouse is pressed/held
+            mouseInfluence.active = mouseIsPressed;
+
+            // Update and display particles
+            updateParticles();
+            displayParticles();
+
+            // End zoom transformation
+            pop();
+
+            // Spawn new particles
+            if (frameCount % Math.ceil(CONFIG.particles.respawnRate / qualityLevel) === 0) {
+                spawnParticles();
+            }
+
+            // Update systems
+            performanceMonitor.update();
+            badgeManager.update();
+
+            // Update audio reactive features
+            if (audioManager && audioManager.isInitialized && frameCount % 30 === 0) {
+                updateAudioReactivity();
+            }
+
+            // Adaptive quality
+            if (CONFIG.performance.adaptiveQuality && frameCount % 60 === 0) {
+                adaptQuality();
+            }
+
+            // Update UI
+            updateUI();
+            updateCustomCursor();
+        }
+
+        // Initialize flow field
+        function initializeFlowField() {
+            flowFieldCols = Math.floor(width / CONFIG.flowField.resolution) + 1;
+            flowFieldRows = Math.floor(height / CONFIG.flowField.resolution) + 1;
+            flowField = new Array(flowFieldCols * flowFieldRows);
+        }
+
+        // Update flow field
+        function updateFlowField() {
+            let xoff = 0;
+            for (let x = 0; x < flowFieldCols; x++) {
+                let yoff = 0;
+                for (let y = 0; y < flowFieldRows; y++) {
+                    let index = x + y * flowFieldCols;
+                    let angle = noise(xoff, yoff, time) * TWO_PI * 2;
+                    let force = p5.Vector.fromAngle(angle);
+                    flowField[index] = force;
+                    yoff += CONFIG.flowField.noiseScale;
+                }
+                xoff += CONFIG.flowField.noiseScale;
+            }
+        }
+
+        // Initialize particles
+        function initializeParticles() {
+            particles = [];
+            let particleCount = Math.floor(CONFIG.particles.count * qualityLevel);
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            console.log(`Initialized ${particles.length} particles with quality level ${qualityLevel}`);
+        }
+
+        // Update particles
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+
+                if (particles[i].isDead()) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+
+        // Display particles
+        function displayParticles() {
+            // Debug: Draw some test particles if main particles aren't working
+            if (particles.length === 0) {
+                fill(255, 0, 255);
+                noStroke();
+                ellipse(width/2, height/2, 20);
+                fill(0, 255, 255);
+                ellipse(width/4, height/4, 15);
+                ellipse(3*width/4, 3*height/4, 15);
+            }
+
+            for (let particle of particles) {
+                particle.display();
+            }
+        }
+
+        // Spawn new particles
+        function spawnParticles() {
+            let targetCount = CONFIG.particles.count * qualityLevel;
+            while (particles.length < targetCount) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Adaptive quality control
+        function adaptQuality() {
+            if (performanceMonitor.shouldReduceQuality()) {
+                qualityLevel = max(0.3, qualityLevel - 0.1);
+                updateQualityLevel();
+            } else if (performanceMonitor.shouldIncreaseQuality()) {
+                qualityLevel = min(1.0, qualityLevel + 0.05);
+                updateQualityLevel();
+            }
+        }
+
+        // Update quality level
+        function updateQualityLevel() {
+            // Adjust particle count
+            let targetCount = CONFIG.particles.count * qualityLevel;
+            if (particles.length > targetCount) {
+                particles.splice(targetCount);
+            }
+
+            // Update quality display
+            let qualityText = qualityLevel > 0.8 ? "High" :
+                            qualityLevel > 0.5 ? "Medium" : "Low";
+            document.getElementById('qualityLevel').textContent = `Quality: ${qualityText}`;
+        }
+
+        // Update UI
+        function updateUI() {
+            document.getElementById('particleCount').textContent = `Particles: ${particles.length}`;
+            document.getElementById('zoomLevel').textContent = `Zoom: ${zoomLevel.toFixed(1)}x`;
+            document.getElementById('fpsCounter').textContent =
+                `FPS: ${Math.round(performanceMonitor.getAverageFPS())}`;
+        }
+
+        // Update zoom system
+        function updateZoom() {
+            // Automatic zoom at random intervals
+            if (!isUserControlledZoom && millis() - autoZoomTimer > CONFIG.zoom.autoZoomInterval) {
+                triggerAutoZoom();
+                autoZoomTimer = millis();
+            }
+
+            // Smooth zoom transition
+            zoomLevel = lerp(zoomLevel, targetZoom, CONFIG.zoom.transitionSpeed);
+            zoomCenter.x = lerp(zoomCenter.x, targetZoomCenter.x, CONFIG.zoom.transitionSpeed);
+            zoomCenter.y = lerp(zoomCenter.y, targetZoomCenter.y, CONFIG.zoom.transitionSpeed);
+
+            // Reset user control after some time
+            if (isUserControlledZoom && millis() - lastGestureTime > 5000) {
+                isUserControlledZoom = false;
+            }
+        }
+
+        // Trigger automatic zoom
+        function triggerAutoZoom() {
+            // Random zoom level between min and max
+            let newZoom = random(CONFIG.zoom.minZoom, CONFIG.zoom.maxZoom);
+
+            // Random center point in the flow field
+            let newCenterX = random(width * 0.2, width * 0.8);
+            let newCenterY = random(height * 0.2, height * 0.8);
+
+            setZoomTarget(newZoom, newCenterX, newCenterY);
+
+            // Play zoom sound
+            if (audioManager && audioManager.isInitialized) {
+                let direction = newZoom > zoomLevel ? 1 : -1;
+                audioManager.playZoomSound(newZoom, direction);
+            }
+
+            console.log(`Auto zoom: ${newZoom.toFixed(2)}x at (${newCenterX.toFixed(0)}, ${newCenterY.toFixed(0)})`);
+        }
+
+        // Set zoom target (can be called by user gestures or auto system)
+        function setZoomTarget(zoom, centerX, centerY) {
+            targetZoom = constrain(zoom, CONFIG.zoom.minZoom, CONFIG.zoom.maxZoom);
+            targetZoomCenter.x = centerX;
+            targetZoomCenter.y = centerY;
+
+            // Track zoom interactions for badges (only for user-initiated zooms)
+            if (isUserControlledZoom && badgeManager) {
+                badgeManager.zoomInteractions++;
+            }
+
+            // Show zoom indicator
+            showZoomIndicator();
+        }        // Show zoom indicator temporarily
+        function showZoomIndicator() {
+            let indicator = document.getElementById('zoomIndicator');
+            indicator.classList.add('visible');
+
+            // Hide after 2 seconds
+            setTimeout(() => {
+                indicator.classList.remove('visible');
+            }, 2000);
+        }
+
+        // Update audio reactivity
+        function updateAudioReactivity() {
+            if (!audioManager || !audioManager.isInitialized) return;
+
+            // Calculate average particle velocity for audio reaction
+            let totalVelocity = 0;
+            for (let particle of particles) {
+                totalVelocity += particle.velocity.mag();
+            }
+            let averageVelocity = particles.length > 0 ? totalVelocity / particles.length : 0;
+
+            // Update ambient audio based on particle activity
+            audioManager.playAmbientReaction(particles.length, averageVelocity);
+
+            // Occasionally play particle sounds for high-energy particles
+            if (random(1) < 0.1) { // 10% chance per update
+                let energeticParticles = particles.filter(p => p.velocity.mag() > 1.5 && p.energy > 0.8);
+                if (energeticParticles.length > 0) {
+                    let particle = random(energeticParticles);
+                    audioManager.playParticleSound(particle);
+                }
+            }
+        }
+
+        // Update custom cursor
+        function updateCustomCursor() {
+            let cursor = document.getElementById('cosmicCursor');
+            cursor.style.left = (mouseX - 10) + 'px';
+            cursor.style.top = (mouseY - 10) + 'px';
+
+            if (mouseIsPressed) {
+                cursor.classList.add('active');
+            } else {
+                cursor.classList.remove('active');
+            }
+        }
+
+        // Mouse interaction
+        function mousePressed() {
+            // Initialize audio on first user interaction
+            initAudioOnUserGesture();
+
+            // Create pulse wave (adjust position for zoom)
+            let adjustedMouseX = (mouseX - width/2) / zoomLevel + zoomCenter.x;
+            let adjustedMouseY = (mouseY - height/2) / zoomLevel + zoomCenter.y;
+
+            for (let i = 0; i < 20 * qualityLevel; i++) {
+                let angle = random(TWO_PI);
+                let distance = random(20, 60) / zoomLevel; // Adjust distance for zoom
+                let x = adjustedMouseX + cos(angle) * distance;
+                let y = adjustedMouseY + sin(angle) * distance;
+                particles.push(new Particle(x, y));
+            }
+
+            // Play pulse sound effect
+            if (audioManager && audioManager.isInitialized) {
+                audioManager.playPulseSound(mouseX, mouseY, 1.0);
+            }
+
+            // Track interaction patterns for badges
+            if (badgeManager) {
+                badgeManager.patternsCreated++;
+            }
+        }
+
+        // Initialize audio on user gesture (required by browsers)
+        async function initAudioOnUserGesture() {
+            if (!audioInitialized && audioManager) {
+                audioInitialized = await audioManager.init();
+                if (audioInitialized) {
+                    console.log('🎵 Audio initialized on user interaction');
+                    updateAudioButton();
+
+                    // Track audio interaction for badges
+                    if (badgeManager) {
+                        badgeManager.audioInteractions++;
+                    }
+                }
+            }
+
+            // Resume audio context if suspended
+            if (audioManager && audioManager.context) {
+                audioManager.resumeContext();
+            }
+        }
+
+        // Mouse wheel zoom
+        function mouseWheel(event) {
+            if (event.delta) {
+                // Initialize audio on interaction
+                initAudioOnUserGesture();
+
+                // User is controlling zoom
+                isUserControlledZoom = true;
+                lastGestureTime = millis();
+
+                // Calculate zoom change
+                let zoomChange = -event.delta * CONFIG.zoom.gestureZoomSensitivity;
+                let newZoom = targetZoom + zoomChange;
+                let direction = zoomChange > 0 ? 1 : -1;
+
+                // Set zoom target at mouse position
+                setZoomTarget(newZoom, mouseX, mouseY);
+
+                // Play zoom sound
+                if (audioManager && audioManager.isInitialized) {
+                    audioManager.playZoomSound(newZoom, direction);
+                }
+
+                // Prevent default scrolling
+                return false;
+            }
+        }
+
+        // Mouse double tap for zoom reset or smart zoom
+        function mouseTapped() {
+            isUserControlledZoom = true;
+            lastGestureTime = millis();
+
+            if (abs(targetZoom - 1.0) < 0.1) {
+                // If at normal zoom, zoom in to mouse position
+                setZoomTarget(2.5, mouseX, mouseY);
+            } else {
+                // Reset to normal zoom centered
+                setZoomTarget(1.0, width/2, height/2);
+            }
+        }        // Keyboard controls
+        function keyPressed() {
+            // Initialize audio on first keypress
+            initAudioOnUserGesture();
+
+            switch (key.toLowerCase()) {
+                case ' ':
+                    takeScreenshot();
+                    break;
+                case 'r':
+                    resetField();
+                    break;
+                case 'f':
+                    toggleFullscreen();
+                    break;
+                case 'm':
+                    // Toggle audio mute
+                    if (audioManager) {
+                        let enabled = audioManager.toggleSound();
+                        console.log(`🔊 Audio ${enabled ? 'enabled' : 'muted'}`);
+                        updateAudioButton();
+                    }
+                    break;
+                case 'z':
+                    // Manual zoom trigger
+                    isUserControlledZoom = true;
+                    lastGestureTime = millis();
+                    triggerAutoZoom();
+                    break;
+                case '0':
+                    // Reset zoom
+                    isUserControlledZoom = true;
+                    lastGestureTime = millis();
+                    setZoomTarget(1.0, width/2, height/2);
+                    break;
+                case '+':
+                case '=':
+                    // Zoom in
+                    isUserControlledZoom = true;
+                    lastGestureTime = millis();
+                    let zoomInTarget = targetZoom * 1.2;
+                    setZoomTarget(zoomInTarget, mouseX, mouseY);
+                    if (audioManager && audioManager.isInitialized) {
+                        audioManager.playZoomSound(zoomInTarget, 1);
+                    }
+                    break;
+                case '-':
+                    // Zoom out
+                    isUserControlledZoom = true;
+                    lastGestureTime = millis();
+                    let zoomOutTarget = targetZoom / 1.2;
+                    setZoomTarget(zoomOutTarget, mouseX, mouseY);
+                    if (audioManager && audioManager.isInitialized) {
+                        audioManager.playZoomSound(zoomOutTarget, -1);
+                    }
+                    break;
+            }
+        }
+
+        // Take screenshot
+        function takeScreenshot() {
+            save(`cosmic-flow-${Date.now()}.png`);
+            badgeManager.screenshotTaken().catch(err => console.warn('Screenshot badge error:', err));
+            screenshotCount++;
+        }
+
+        // Reset field
+        function resetField() {
+            particles = [];
+            initializeParticles();
+            time = 0;
+        }
+
+        // Toggle fullscreen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Audio control functions
+        function toggleAudio() {
+            if (audioManager) {
+                let enabled = audioManager.toggleSound();
+                updateAudioButton();
+                console.log(`🔊 Audio ${enabled ? 'enabled' : 'muted'}`);
+            }
+        }
+
+        function updateAudioButton() {
+            let button = document.getElementById('audioButton');
+            if (button) {
+                if (soundEnabled && audioInitialized) {
+                    button.textContent = '🔊';
+                    button.classList.remove('muted');
+                    button.title = 'Click to mute audio (M key)';
+                } else {
+                    button.textContent = '🔇';
+                    button.classList.add('muted');
+                    button.title = audioInitialized ? 'Click to enable audio (M key)' : 'Click to initialize audio';
+                }
+            }
+        }
+
+        // Window resize
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            initializeFlowField();
+
+            // Adjust zoom center for new dimensions
+            zoomCenter.x = width / 2;
+            zoomCenter.y = height / 2;
+            targetZoomCenter.x = width / 2;
+            targetZoomCenter.y = width / 2;
+        }        // Loading progress simulation
+        let loadingProgress = 0;
+        function updateLoadingProgress() {
+            loadingProgress += 2;
+            document.getElementById('loadingProgress').style.width = loadingProgress + '%';
+
+            if (loadingProgress < 100) {
+                setTimeout(updateLoadingProgress, 50);
+            }
+        }
+
+        // Touch gesture support
+        let touchStartDistance = 0;
+        let touchStartZoom = 1.0;
+        let touchStartCenter = { x: 0, y: 0 };
+
+        function touchStarted() {
+            // Initialize audio on touch
+            initAudioOnUserGesture();
+
+            if (touches.length === 2) {
+                // Pinch gesture setup
+                touchStartDistance = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y);
+                touchStartZoom = targetZoom;
+                touchStartCenter.x = (touches[0].x + touches[1].x) / 2;
+                touchStartCenter.y = (touches[0].y + touches[1].y) / 2;
+
+                isUserControlledZoom = true;
+                lastGestureTime = millis();
+            } else if (touches.length === 1) {
+                // Single touch - create pulse sound
+                if (audioManager && audioManager.isInitialized) {
+                    audioManager.playPulseSound(touches[0].x, touches[0].y, 1.2);
+                }
+            }
+
+            // Prevent default to avoid page scrolling
+            return false;
+        }
+
+        function touchMoved() {
+            if (touches.length === 2) {
+                // Pinch zoom
+                let currentDistance = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y);
+                let zoomScale = currentDistance / touchStartDistance;
+                let newZoom = touchStartZoom * zoomScale;
+
+                let currentCenter = {
+                    x: (touches[0].x + touches[1].x) / 2,
+                    y: (touches[0].y + touches[1].y) / 2
+                };
+
+                setZoomTarget(newZoom, currentCenter.x, currentCenter.y);
+
+                isUserControlledZoom = true;
+                lastGestureTime = millis();
+
+                // Prevent default scrolling
+                return false;
+            }
+        }
+
+        // Start loading animation
+        updateLoadingProgress();
+
+        // CSS animation for badge notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes badgeAppear {
+                0% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+                }
+                40% {
+                    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                }
+                80% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

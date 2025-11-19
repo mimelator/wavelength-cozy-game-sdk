@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavelength Cozy Game SDK: Garden Defender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1 id="game-title">🌱 Garden Defender 🌱</h1>
+            <p id="game-description">Throw seeds to cultivate protective plants before bugs reach your tomatoes!</p>
+        </header>
+
+        <!-- Game Controls -->
+        <div id="controls-panel">
+            <button id="start-wave-btn" class="control-btn">🌊 Start Wave</button>
+            <button id="pause-btn" class="control-btn">⏸️ Pause</button>
+            <button id="reset-btn" class="control-btn">🔄 Reset Garden</button>
+        </div>
+
+        <!-- Game Area with Canvas and Overlay -->
+        <div id="game-area">
+            <!-- Main Game Canvas -->
+            <canvas id="game-canvas" width="1200" height="900"></canvas>
+
+            <!-- Seed Arsenal Overlay -->
+            <div id="seed-overlay">
+                <h4>🌱 Seeds</h4>
+                <div id="seed-inventory">
+                    <div class="seed-slot active" data-seed="marigold">
+                        <div class="seed-icon">🌼</div>
+                        <div class="seed-name">Marigold</div>
+                        <div class="seed-cost">10</div>
+                    </div>
+                    <div class="seed-slot" data-seed="basil">
+                        <div class="seed-icon">🌿</div>
+                        <div class="seed-name">Basil</div>
+                        <div class="seed-cost">15</div>
+                    </div>
+                    <div class="seed-slot" data-seed="lavender">
+                        <div class="seed-icon">💜</div>
+                        <div class="seed-name">Lavender</div>
+                        <div class="seed-cost">20</div>
+                    </div>
+                    <div class="seed-slot" data-seed="rosemary">
+                        <div class="seed-icon">🌾</div>
+                        <div class="seed-name">Rosemary</div>
+                        <div class="seed-cost">25</div>
+                    </div>
+                    <div class="seed-slot" data-seed="mint">
+                        <div class="seed-icon">🍃</div>
+                        <div class="seed-name">Mint</div>
+                        <div class="seed-cost">30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Interface: Stats Panel -->
+        <div id="game-interface">
+
+            <!-- Game Stats -->
+            <div id="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">💰 Seeds:</span>
+                    <span id="seed-currency">100</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🍅 Tomatoes:</span>
+                    <span id="tomato-health">5</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🌊 Wave:</span>
+                    <span id="current-wave">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🐛 Bugs:</span>
+                    <span id="bugs-remaining">10</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Panel Toggle (only visible on mobile) -->
+        <button id="mobile-panel-toggle">🎮 Controls</button>
+
+        <footer>
+            <p>🎮 Click/Tap bugs to destroy them instantly • Click empty space to throw seeds • Number keys (1-5) to select seed type</p>
+            <p>💥 Direct destruction awards bonus currency • ⏰ Time your plantings perfectly for area effects!</p>
+            <p>Powered by Wavelength Cozy Game SDK - Cultivation Defense Engine</p>
+        </footer>
+    </div>
+
+    <!-- Badge System Scripts -->
+    <script src="js/utils/badge-helper.js"></script>
+    <script src="js/utils/badge-tracker.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

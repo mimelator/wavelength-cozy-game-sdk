@@ -1,0 +1,120 @@
+{
+  "name": "Frequency",
+  "version": "1.0.1",
+  "description": "A cozy, meditative sound-visual experience. Create beautiful frequency waves that interact harmonically, generating gentle tones and ethereal visuals. No goals, no pressure - just pure creative expression through sound and color.",
+  "author": "Wavelength Consulting",
+  "tags": ["audio", "cozy", "meditative", "creative", "sound", "waves", "harmony"],
+  "thumbnail": "images/thumbnail.svg",
+  "minWidth": 800,
+  "minHeight": 600,
+  "maxWidth": 1920,
+  "maxHeight": 1080,
+  "aspectRatio": "16:9",
+
+  "badges": {
+    "enabled": true,
+    "apiEndpoint": "https://hub.wavelength.com/api/games",
+    "insigniaOfMerit": [
+      {
+        "id": "first_wave",
+        "name": "Wave Maker",
+        "description": "Created your first beautiful frequency wave",
+        "image": "🌊",
+        "rarity": "common",
+        "trigger": {
+          "type": "waves_created",
+          "threshold": 1
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["t-shirt", "sticker", "mug"],
+          "placement_hints": "Perfect for center chest designs or small corner accents"
+        }
+      },
+      {
+        "id": "harmonic_explorer",
+        "name": "Harmonic Explorer",
+        "description": "Discovered the beauty of harmonic resonance",
+        "image": "🎵",
+        "rarity": "uncommon",
+        "trigger": {
+          "type": "harmonics_created",
+          "threshold": 5
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["t-shirt", "hoodie", "tote_bag"],
+          "placement_hints": "Musical symbol designs work great on apparel"
+        }
+      },
+      {
+        "id": "frequency_artist",
+        "name": "Frequency Artist",
+        "description": "Created 50 unique sound waves in your creative journey",
+        "image": "🎨",
+        "rarity": "rare",
+        "trigger": {
+          "type": "waves_created",
+          "threshold": 50
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["art_print", "canvas", "premium_shirt"],
+          "placement_hints": "Artistic designs perfect for wall art and premium apparel"
+        }
+      },
+      {
+        "id": "zen_composer",
+        "name": "Zen Composer",
+        "description": "Spent 10 minutes in peaceful sound meditation",
+        "image": "🧘",
+        "rarity": "rare",
+        "trigger": {
+          "type": "meditation_time",
+          "threshold": 600000
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["meditation_shirt", "zen_mug", "mindfulness_poster"],
+          "placement_hints": "Calming designs perfect for wellness and mindfulness products"
+        }
+      },
+      {
+        "id": "interference_master",
+        "name": "Interference Master",
+        "description": "Mastered wave interference patterns with multiple overlapping frequencies",
+        "image": "⚡",
+        "rarity": "epic",
+        "trigger": {
+          "type": "interference_patterns",
+          "threshold": 20
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["science_shirt", "physics_mug", "educational_poster"],
+          "placement_hints": "Scientific and educational designs for STEM enthusiasts"
+        }
+      },
+      {
+        "id": "sonic_architect",
+        "name": "Sonic Architect",
+        "description": "Achieved mastery in sound design: 100+ waves, 20+ harmonics, and 5+ minutes of zen",
+        "image": "🏗️",
+        "rarity": "legendary",
+        "trigger": {
+          "type": "combined_mastery",
+          "requirements": {
+            "waves_created": 100,
+            "harmonics_created": 20,
+            "meditation_time": 300000
+          }
+        },
+        "merch": {
+          "enabled": true,
+          "suggested_products": ["signature_collection", "architect_prints", "master_class_items"],
+          "placement_hints": "Premium designs worthy of master-level achievement and professional display"
+        }
+      }
+    ]
+  }
+}

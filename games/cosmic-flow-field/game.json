@@ -1,0 +1,192 @@
+{
+  "name": "cosmic-flow-field",
+  "title": "Cosmic Flow Field",
+  "description": "Guide flowing cosmic energy through space using advanced particle physics and flow field visualization",
+  "author": "Wavelength Consulting",
+  "version": "1.0.1",
+  "template": "advanced-p5js",
+
+  "theme": {
+    "name": "cosmic_flow",
+    "primaryColor": "#1a0033",
+    "secondaryColor": "#4a0080",
+    "backgroundColor": "#0a0015",
+    "accentColor": "#ff00ff",
+    "glowColor": "#00ffff",
+    "font": "'Orbitron', monospace"
+  },
+
+  "gameplay": {
+    "type": "ambient_interactive",
+    "difficulty": "minimal_controls",
+    "interaction": "mouse_influence",
+    "duration": "infinite",
+
+    "mechanics": {
+      "flowField": {
+        "resolution": 20,
+        "strength": 0.01,
+        "noiseScale": 0.005,
+        "timeScale": 0.001
+      },
+      "particles": {
+        "count": 2000,
+        "maxSpeed": 2,
+        "maxForce": 0.1,
+        "lifespan": 180,
+        "respawnRate": 10
+      },
+      "mouseInfluence": {
+        "radius": 100,
+        "strength": 0.05,
+        "attraction": true,
+        "repulsion": false
+      }
+    }
+  },
+
+  "visuals": {
+    "particles": {
+      "size": {
+        "min": 0.5,
+        "max": 3
+      },
+      "opacity": {
+        "birth": 0,
+        "peak": 255,
+        "death": 0
+      },
+      "trails": {
+        "enabled": true,
+        "length": 20,
+        "fadeRate": 0.95
+      }
+    },
+    "colors": {
+      "scheme": "hsl_flow",
+      "hueRange": [240, 320],
+      "saturationRange": [80, 100],
+      "lightnessRange": [50, 90],
+      "speedInfluence": true
+    },
+    "effects": {
+      "bloom": true,
+      "motionBlur": true,
+      "backgroundFade": 0.02
+    }
+  },
+
+  "performance": {
+    "targetFPS": 60,
+    "adaptiveQuality": true,
+    "culling": {
+      "enabled": true,
+      "margin": 50
+    },
+    "optimization": {
+      "objectPooling": true,
+      "spatialHashing": false,
+      "levelOfDetail": true
+    }
+  },
+
+  "audio": {
+    "enabled": true,
+    "ambientTrack": "cosmic_drone.mp3",
+    "reactiveAudio": {
+      "enabled": true,
+      "influenceParticles": true,
+      "influenceColors": true
+    }
+  },
+
+  "controls": {
+    "mouse": {
+      "influence": "attraction",
+      "clickAction": "pulse_wave",
+      "dragAction": "create_vortex"
+    },
+    "touch": {
+      "multitouch": true,
+      "gestures": ["pinch", "rotate"]
+    },
+    "keyboard": {
+      "space": "screenshot",
+      "r": "reset_field",
+      "f": "fullscreen"
+    }
+  },
+
+  "badges": {
+    "enabled": true,
+    "apiEndpoint": "https://hub.wavelength.com/api/games",
+    "insigniaOfMerit": [
+      {
+        "id": "cosmic_explorer",
+        "name": "Cosmic Explorer",
+        "description": "Explored the cosmic flow field for 5 continuous minutes",
+        "image": "🚀",
+        "rarity": "uncommon",
+        "trigger": {
+          "type": "time_spent",
+          "threshold": 300
+        }
+      },
+      {
+        "id": "flow_master",
+        "name": "Flow Master",
+        "description": "Mastered cosmic energy guidance for 10 continuous minutes",
+        "image": "🌌",
+        "rarity": "rare",
+        "trigger": {
+          "type": "time_spent",
+          "threshold": 600
+        }
+      },
+      {
+        "id": "energy_conductor",
+        "name": "Energy Conductor",
+        "description": "Created 50+ beautiful flow patterns through dedicated interaction",
+        "image": "⚡",
+        "rarity": "rare",
+        "trigger": {
+          "type": "pattern_created",
+          "threshold": 50
+        }
+      },
+      {
+        "id": "dimension_shifter",
+        "name": "Dimension Shifter",
+        "description": "Extensively explored dimensional zoom capabilities",
+        "image": "🔍",
+        "rarity": "rare",
+        "trigger": {
+          "type": "zoom_interactions",
+          "threshold": 20
+        }
+      },
+      {
+        "id": "moment_keeper",
+        "name": "Moment Keeper",
+        "description": "Captured a meaningful cosmic moment after dedicated exploration",
+        "image": "📸",
+        "rarity": "uncommon",
+        "trigger": {
+          "type": "screenshots_taken",
+          "threshold": 1
+        }
+      },
+      {
+        "id": "cosmic_artist",
+        "name": "Cosmic Artist",
+        "description": "Documented the cosmic journey with multiple captured moments",
+        "image": "🎨",
+        "rarity": "rare",
+        "trigger": {
+          "type": "screenshots_taken",
+          "threshold": 5
+        }
+      }
+    ]
+  }
+}

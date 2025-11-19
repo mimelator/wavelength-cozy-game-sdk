@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Mood Melodies - Wavelength Cozy Game SDK</title>
+    <meta name="description" content="Create beautiful music that reflects your emotions. A cozy interactive music maker powered by p5.js">
+    <meta name="keywords" content="cozy game, music maker, mood, emotions, interactive audio, p5.js">
+
+    <!-- p5.js Library - local version -->
+    <script src="./lib/p5.min.js"></script>
+    <script src="./lib/p5.sound.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header spans full width -->
+        <header style="grid-column: 1 / -1;">
+            <h1>🎵 Mood Melodies 🎵</h1>
+            <p class="tagline">Create music that matches your soul</p>
+        </header>
+
+        <!-- Main content area (left side) -->
+        <div class="main-content">
+            <!-- Mood Selector Panel -->
+            <div id="mood-panel">
+                <h3>🎭 How are you feeling?</h3>
+                <div id="mood-buttons">
+                    <button class="mood-btn" data-mood="happy" data-color="#FFD700">😊 Happy</button>
+                    <button class="mood-btn" data-mood="calm" data-color="#87CEEB">😌 Calm</button>
+                    <button class="mood-btn" data-mood="dreamy" data-color="#DDA0DD">😴 Dreamy</button>
+                    <button class="mood-btn" data-mood="energetic" data-color="#FF6B6B">⚡ Energetic</button>
+                    <button class="mood-btn" data-mood="melancholy" data-color="#4682B4">😔 Melancholy</button>
+                    <button class="mood-btn" data-mood="mysterious" data-color="#8B4B8B">🔮 Mysterious</button>
+                </div>
+            </div>
+
+            <!-- Main Music Canvas Area -->
+            <div id="canvas-container">
+                <div id="p5-canvas-holder">
+                    <!-- p5.js canvas will be inserted here -->
+                </div>
+
+                <!-- Overlay Controls -->
+                <div id="music-controls">
+                    <div id="volume-control">
+                        <label>🔊 Volume:</label>
+                        <input type="range" id="volume-slider" min="0" max="100" value="70">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div id="instructions">
+                <h4>🎮 How to Play:</h4>
+                <ul>
+                    <li>🎭 <strong>Choose your mood</strong> - Select how you're feeling</li>
+                    <li>🖱️ <strong>Click & drag</strong> on the canvas to create music instantly!</li>
+                    <li>🎼 <strong>Create melodies</strong> - Draw gestures with 3+ direction changes</li>
+                    <li>🎵 <strong>Express emotions</strong> - longer, more complex gestures count as melodies</li>
+                    <li>🏆 <strong>Earn badges</strong> - First badge after 5 minutes of play</li>
+                    <li>⏰ <strong>Best practices</strong> - New badges every 5 minutes maximum</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar (right side) -->
+        <div class="sidebar">
+            <!-- Instrument Panel -->
+            <div id="instrument-panel">
+                <h3>🎼 Choose Your Instruments</h3>
+                <div id="instrument-buttons">
+                    <button class="instrument-btn active" data-instrument="piano">🎹 Piano</button>
+                    <button class="instrument-btn" data-instrument="chimes">🎐 Chimes</button>
+                    <button class="instrument-btn" data-instrument="strings">🎻 Strings</button>
+                    <button class="instrument-btn" data-instrument="flute">🎵 Flute</button>
+                    <button class="instrument-btn" data-instrument="ambient">🌊 Ambient</button>
+                    <button class="instrument-btn" data-instrument="nature">🌿 Nature</button>
+                </div>
+            </div>
+
+            <!-- Game Stats -->
+            <div id="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">🎵 Melodies Created:</span>
+                    <span id="melodies-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🎭 Moods Explored:</span>
+                    <span id="moods-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🎼 Session Time:</span>
+                    <span id="session-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🏆 Badges Earned:</span>
+                    <span id="badges-count">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>🎵 Click and drag to paint with sound • Each mood creates unique musical colors 🌈</p>
+        <p>💫 Music starts instantly when you click • Express yourself through sound waves 🎶</p>
+        <p>Powered by Wavelength Cozy Game SDK - Emotion-Driven Music Engine</p>
+    </footer>
+
+    <!-- Badge System Scripts -->
+    <script src="js/badge-helper.js"></script>
+    <script src="js/badge-tracker.js"></script>
+
+    <!-- Main Game Script -->
+    <script src="js/game.js"></script>
+</body>
+</html>

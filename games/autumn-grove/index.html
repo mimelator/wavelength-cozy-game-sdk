@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍂 Autumn Grove - Cozy Leaf Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating leaves background animation -->
+    <div class="leaf-background">
+        <div class="leaf leaf-1">🍂</div>
+        <div class="leaf leaf-2">🍁</div>
+        <div class="leaf leaf-3">🍃</div>
+        <div class="leaf leaf-4">🍂</div>
+        <div class="leaf leaf-5">🍁</div>
+        <div class="leaf leaf-6">🍃</div>
+        <div class="leaf leaf-7">🍂</div>
+        <div class="leaf leaf-8">🍁</div>
+    </div>
+
+    <div id="game-container">
+        <header>
+            <h1 id="game-title">🍂 Autumn Grove 🍂</h1>
+            <p id="game-description">Wander through the enchanted autumn forest and gather nature's treasures</p>
+
+            <!-- Score Panel -->
+            <div id="score-panel">
+                <div class="score-item">
+                    <span class="score-label">Leaves Collected</span>
+                    <span id="leaves-count">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Season Score</span>
+                    <span id="total-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Autumn Spirit</span>
+                    <span id="spirit-level">1</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Cozy Streak</span>
+                    <span id="streak-count">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main game area - the autumn grove -->
+        <div id="autumn-grove">
+            <div id="tree-line">
+                <div class="tree">🌳</div>
+                <div class="tree">🌲</div>
+                <div class="tree">🌳</div>
+                <div class="tree">🍂</div>
+                <div class="tree">🌲</div>
+            </div>
+
+            <!-- Interactive collection area -->
+            <div id="collection-ground">
+                <!-- Items will be spawned here by JavaScript -->
+                <div id="combo-display"></div>
+            </div>
+
+            <!-- Weather overlay -->
+            <div id="weather-overlay"></div>
+            <div id="wind-overlay"></div>
+        </div>
+
+        <!-- Achievement notifications area -->
+        <div id="achievements-area"></div>
+
+        <footer>
+            <p>🍁 Powered by Wavelength Cozy Game SDK - Autumn Collection Engine 🍁</p>
+            <p class="season-mood">Feel the crisp air and gentle warmth of autumn magic</p>
+        </footer>
+    </div>
+
+    <!-- Particle canvas for magical effects -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Badge System Scripts (CRITICAL: Load in correct order) -->
+    <script src="js/utils/badge-helper.js"></script>
+    <script src="js/utils/badge-tracker.js"></script>
+
+    <!-- Main game script (MUST be last) -->
+    <script src="game.js"></script>
+</body>
+</html>

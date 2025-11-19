@@ -1,0 +1,538 @@
+/* 🍂 AUTUMN GROVE - Cozy Fall Themed Game Styles 🍂 */
+
+/* 🌾 Base Autumn Color Palette */
+:root {
+    --autumn-red: #d73027;
+    --autumn-orange: #fc8d59;
+    --autumn-yellow: #fee08b;
+    --autumn-brown: #8c510a;
+    --autumn-gold: #d4ac0d;
+    --forest-green: #2d5016;
+    --warm-cream: #fdf6e3;
+    --cozy-amber: #f39c12;
+    --deep-maroon: #a93226;
+    --soft-beige: #f8f3e8;
+}
+
+/* 🍃 Body and Background */
+body {
+    background: linear-gradient(135deg,
+        var(--forest-green) 0%,
+        var(--autumn-brown) 25%,
+        var(--autumn-orange) 50%,
+        var(--autumn-red) 75%,
+        var(--deep-maroon) 100%);
+    color: var(--warm-cream);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    animation: seasonShift 30s ease-in-out infinite;
+}
+
+@keyframes seasonShift {
+    0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+    25% { filter: hue-rotate(5deg) brightness(1.1); }
+    50% { filter: hue-rotate(-5deg) brightness(0.95); }
+    75% { filter: hue-rotate(3deg) brightness(1.05); }
+}
+
+/* 🍂 Floating Background Leaves */
+.leaf-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.leaf {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.6;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.leaf-1 { left: 10%; animation: fallAndDrift 15s infinite; animation-delay: 0s; }
+.leaf-2 { left: 20%; animation: fallAndDrift 18s infinite; animation-delay: 2s; }
+.leaf-3 { left: 40%; animation: fallAndDrift 20s infinite; animation-delay: 4s; }
+.leaf-4 { left: 60%; animation: fallAndDrift 16s infinite; animation-delay: 6s; }
+.leaf-5 { left: 75%; animation: fallAndDrift 22s infinite; animation-delay: 8s; }
+.leaf-6 { left: 85%; animation: fallAndDrift 14s infinite; animation-delay: 10s; }
+.leaf-7 { left: 30%; animation: fallAndDrift 19s infinite; animation-delay: 12s; }
+.leaf-8 { left: 65%; animation: fallAndDrift 17s infinite; animation-delay: 14s; }
+
+@keyframes fallAndDrift {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 🏠 Game Container */
+#game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(248, 243, 232, 0.9);
+    border-radius: 20px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(244, 164, 96, 0.2);
+    backdrop-filter: blur(10px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid var(--autumn-gold);
+}
+
+/* 🍁 Header Styling */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--autumn-brown);
+}
+
+#game-title {
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(212, 172, 13, 0.5);
+    animation: titleGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(212, 172, 13, 0.5);
+        color: var(--autumn-brown);
+    }
+    to {
+        text-shadow: 2px 2px 8px rgba(212, 172, 13, 0.8), 0 0 20px rgba(243, 156, 18, 0.3);
+        color: var(--deep-maroon);
+    }
+}
+
+#game-description {
+    font-size: 1.2em;
+    font-style: italic;
+    color: var(--forest-green);
+    margin: 0 0 20px 0;
+}
+
+/* 📊 Score Panel */
+#score-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    background: rgba(45, 80, 22, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid var(--autumn-gold);
+    margin: 20px 0;
+}
+
+.score-item {
+    text-align: center;
+    color: var(--warm-cream);
+}
+
+.score-label {
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.score-item span:last-child {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--autumn-gold);
+    text-shadow: 0 0 10px rgba(212, 172, 13, 0.5);
+}
+
+/* 🌳 Autumn Grove Game Area */
+#autumn-grove {
+    position: relative;
+    min-height: 500px;
+    background: linear-gradient(to bottom,
+        rgba(173, 216, 230, 0.3) 0%,
+        rgba(244, 164, 96, 0.2) 30%,
+        rgba(160, 82, 45, 0.4) 100%);
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid var(--autumn-brown);
+    overflow: hidden;
+}
+
+/* 🌲 Tree Line */
+#tree-line {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.tree {
+    font-size: 3em;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+    animation: gentleSway 6s ease-in-out infinite;
+}
+
+@keyframes gentleSway {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+/* 🍂 Collection Ground */
+#collection-ground {
+    position: relative;
+    min-height: 350px;
+    background: radial-gradient(circle at center,
+        rgba(244, 164, 96, 0.1) 0%,
+        rgba(160, 82, 45, 0.2) 100%);
+    border-radius: 15px;
+    border: 1px dashed var(--autumn-orange);
+    overflow: hidden;
+}
+
+/* 🍃 Collectible Items */
+.collectible-item {
+    position: absolute;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.4s ease;
+    transform: scale(0.9);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+    z-index: 10;
+    animation-fill-mode: both;
+}
+
+.collectible-item:hover {
+    transform: scale(1.3) rotate(10deg);
+    filter: brightness(1.3) drop-shadow(0 0 15px currentColor);
+    z-index: 20;
+}
+
+/* 🎨 Rarity-Based Styling for Autumn Items */
+.rarity-common {
+    color: var(--autumn-yellow);
+    text-shadow: 0 0 8px rgba(254, 224, 139, 0.6);
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.rarity-uncommon {
+    color: var(--autumn-orange);
+    text-shadow: 0 0 12px rgba(252, 141, 89, 0.8);
+    animation: warmGlow 3s ease-in-out infinite;
+}
+
+.rarity-rare {
+    color: var(--autumn-red);
+    text-shadow: 0 0 15px rgba(215, 48, 39, 1);
+    animation: crimsonPulse 2.5s ease-in-out infinite;
+}
+
+.rarity-epic {
+    color: var(--deep-maroon);
+    text-shadow: 0 0 20px rgba(169, 50, 38, 1);
+    animation: epicShimmer 2s ease-in-out infinite;
+}
+
+.rarity-legendary {
+    color: var(--autumn-gold);
+    text-shadow:
+        0 0 10px rgba(212, 172, 13, 1),
+        0 0 20px rgba(243, 156, 18, 0.8),
+        0 0 30px rgba(255, 193, 7, 0.5);
+    animation: legendaryAura 1.5s ease-in-out infinite;
+}
+
+/* 🌟 Item Animation Effects */
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes warmGlow {
+    0%, 100% { filter: brightness(1) hue-rotate(0deg); }
+    50% { filter: brightness(1.2) hue-rotate(10deg); }
+}
+
+@keyframes crimsonPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    50% { transform: scale(1.1) rotate(5deg); filter: brightness(1.3); }
+}
+
+@keyframes epicShimmer {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1) hue-rotate(0deg);
+    }
+    33% {
+        transform: scale(1.15) rotate(10deg);
+        filter: brightness(1.4) hue-rotate(15deg);
+    }
+    66% {
+        transform: scale(1.15) rotate(-10deg);
+        filter: brightness(1.4) hue-rotate(-15deg);
+    }
+}
+
+@keyframes legendaryAura {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1) hue-rotate(0deg) saturate(1);
+    }
+    20% {
+        transform: scale(1.2) rotate(12deg);
+        filter: brightness(1.6) hue-rotate(30deg) saturate(1.5);
+    }
+    40% {
+        transform: scale(1.25) rotate(0deg);
+        filter: brightness(1.8) hue-rotate(60deg) saturate(2);
+    }
+    60% {
+        transform: scale(1.2) rotate(-12deg);
+        filter: brightness(1.6) hue-rotate(90deg) saturate(1.5);
+    }
+    80% {
+        transform: scale(1.1) rotate(6deg);
+        filter: brightness(1.4) hue-rotate(120deg) saturate(1.2);
+    }
+}
+
+/* 🌬️ Movement Animations */
+.drift-gentle { animation: autumnDrift 25s linear infinite; }
+.drift-moderate { animation: autumnDrift 18s linear infinite; }
+.drift-fast { animation: autumnDrift 12s linear infinite; }
+.drift-magical { animation: magicalDrift 10s ease-in-out infinite; }
+
+/* Wind Gust Modifier */
+.wind-gust .drift-gentle,
+.wind-gust .drift-moderate,
+.wind-gust .drift-fast {
+    animation-duration: 4s !important;
+}
+
+@keyframes autumnDrift {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+    25% {
+        transform: translate(20px, 15px) rotate(90deg);
+    }
+    50% {
+        transform: translate(-15px, 25px) rotate(180deg);
+    }
+    75% {
+        transform: translate(10px, 10px) rotate(270deg);
+    }
+    100% {
+        transform: translate(0px, 0px) rotate(360deg);
+    }
+}
+
+@keyframes magicalDrift {
+    0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+    25% { transform: translate(30px, -10px) rotate(120deg) scale(1.1); }
+    50% { transform: translate(-20px, 20px) rotate(240deg) scale(0.9); }
+    75% { transform: translate(15px, -15px) rotate(300deg) scale(1.05); }
+    100% { transform: translate(0px, 0px) rotate(360deg) scale(1); }
+}
+
+/* 🎉 Points Popup Animation */
+.points-popup {
+    position: absolute;
+    color: var(--autumn-gold);
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 0 0 10px rgba(212, 172, 13, 1);
+    pointer-events: none;
+    z-index: 30;
+    animation: pointsRise 1.5s ease-out forwards;
+}
+
+@keyframes pointsRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-60px) scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* 🏆 Achievement Notifications */
+.achievement {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--autumn-gold) 0%, var(--cozy-amber) 100%);
+    color: var(--autumn-brown);
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(212, 172, 13, 0.4);
+    animation: achievementSlide 4s ease-in-out;
+    z-index: 1000;
+    border: 2px solid var(--deep-maroon);
+}
+
+@keyframes achievementSlide {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    15%, 85% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 🌟 Weather Effects */
+#weather-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%);
+    animation: sunlightFilter 15s ease-in-out infinite;
+}
+
+@keyframes sunlightFilter {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+/* 🌪️ Wind Gust Effect */
+#wind-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 5;
+}
+
+.wind-active {
+    opacity: 1 !important;
+    animation: windSweep 2s linear infinite;
+}
+
+@keyframes windSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* 🔥 Combo Meter */
+#combo-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 4em;
+    font-weight: bold;
+    color: var(--autumn-gold);
+    text-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+    pointer-events: none;
+    z-index: 100;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+}
+
+#combo-display.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 🎨 Particle Canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+    #game-container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    #game-title {
+        font-size: 2.2em;
+    }
+
+    #score-panel {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .collectible-item {
+        font-size: 45px; /* Larger for touch */
+    }
+
+    #autumn-grove {
+        min-height: 400px;
+        padding: 15px;
+    }
+
+    .tree {
+        font-size: 2.5em;
+    }
+
+    #collection-ground {
+        min-height: 280px;
+    }
+}
+
+/* 🍂 Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--forest-green);
+    font-style: italic;
+}
+
+.season-mood {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin: 5px 0 0 0;
+}

@@ -1,0 +1,367 @@
+{
+  "name": "Mood Melodies",
+  "id": "mood-melodies",
+  "version": "1.0.0",
+  "description": "Create beautiful music that reflects your emotions. An interactive music maker where every click paints sound across the canvas of your feelings.",
+  "longDescription": "Mood Melodies is a cozy, therapeutic music creation experience powered by p5.js. Express your emotions through six distinct moods - from joyful happiness to mysterious depths. Each mood transforms your touch into unique musical colors and sounds. With six different instruments and an intuitive canvas interface, there's no wrong way to create. Watch as your emotions become visual particles that dance to your musical creations. Perfect for relaxation, creative expression, or simply exploring the connection between feelings and sound.",
+  "category": "creative",
+  "tags": [
+    "music",
+    "creativity",
+    "emotions",
+    "relaxation",
+    "therapy",
+    "interactive",
+    "cozy",
+    "p5js",
+    "audio",
+    "mood"
+  ],
+  "author": "Wavelength Consulting",
+  "game": {
+    "engine": "p5.js",
+    "type": "interactive-music",
+    "inputMethods": ["mouse", "touch"],
+    "platforms": ["web", "mobile"],
+    "language": "en",
+    "ageRating": "all-ages",
+    "accessibility": {
+      "colorBlind": true,
+      "motorImpaired": true,
+      "reducedMotion": true,
+      "screenReader": false
+    }
+  },
+  "technical": {
+    "entryPoint": "index.html",
+    "minResolution": "800x600",
+    "recommendedResolution": "1200x800",
+    "requirements": {
+      "webAudio": true,
+      "canvas": true,
+      "localStorage": true,
+      "modernBrowser": true
+    },
+    "dependencies": [
+      {
+        "name": "p5.js",
+        "version": "1.7.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js",
+        "type": "external"
+      },
+      {
+        "name": "p5.sound",
+        "version": "1.7.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js",
+        "type": "external"
+      }
+    ]
+  },
+  "wavelength": {
+    "sdk_version": "2.0",
+    "badge_system": true,
+    "developer_share": 0.35,
+    "hub_integration": true,
+    "analytics": true,
+    "social_sharing": true
+  },
+  "badges": {
+    "total_count": 17,
+    "categories": {
+      "creativity": 6,
+      "exploration": 4,
+      "mastery": 3,
+      "dedication": 2,
+      "consistency": 2,
+      "specialization": 3,
+      "legendary": 2
+    },
+    "badges": [
+      {
+        "id": "first-note",
+        "name": "First Note",
+        "description": "Create your very first musical note",
+        "icon": "🎵",
+        "category": "creativity",
+        "rarity": "common",
+        "trigger": "create_first_note"
+      },
+      {
+        "id": "melody-maker",
+        "name": "Melody Maker",
+        "description": "Create 10 beautiful melodies",
+        "icon": "🎼",
+        "category": "creativity",
+        "rarity": "common",
+        "trigger": "melodies_created_10"
+      },
+      {
+        "id": "composer",
+        "name": "Composer",
+        "description": "Create 50 musical pieces",
+        "icon": "🎹",
+        "category": "creativity",
+        "rarity": "uncommon",
+        "trigger": "melodies_created_50"
+      },
+      {
+        "id": "virtuoso",
+        "name": "Virtuoso",
+        "description": "Master of 100+ musical creations",
+        "icon": "🏆",
+        "category": "mastery",
+        "rarity": "rare",
+        "trigger": "melodies_created_100"
+      },
+      {
+        "id": "emotional-explorer",
+        "name": "Emotional Explorer",
+        "description": "Experience 3 different moods",
+        "icon": "🎭",
+        "category": "exploration",
+        "rarity": "common",
+        "trigger": "moods_explored_3"
+      },
+      {
+        "id": "mood-master",
+        "name": "Mood Master",
+        "description": "Express through all 6 moods",
+        "icon": "🌈",
+        "category": "exploration",
+        "rarity": "uncommon",
+        "trigger": "moods_explored_6"
+      },
+      {
+        "id": "empathy-artist",
+        "name": "Empathy Artist",
+        "description": "Create 5+ melodies in each mood",
+        "icon": "💝",
+        "category": "mastery",
+        "rarity": "rare",
+        "trigger": "mood_mastery_complete"
+      },
+      {
+        "id": "instrument-dabbler",
+        "name": "Instrument Dabbler",
+        "description": "Try 3 different instruments",
+        "icon": "🎸",
+        "category": "exploration",
+        "rarity": "common",
+        "trigger": "instruments_tried_3"
+      },
+      {
+        "id": "multi-instrumentalist",
+        "name": "Multi-Instrumentalist",
+        "description": "Master all available instruments",
+        "icon": "🎺",
+        "category": "mastery",
+        "rarity": "rare",
+        "trigger": "all_instruments_used"
+      },
+      {
+        "id": "patient-creator",
+        "name": "Patient Creator",
+        "description": "Spend 10+ minutes in one session",
+        "icon": "⏰",
+        "category": "dedication",
+        "rarity": "common",
+        "trigger": "session_time_10min"
+      },
+      {
+        "id": "meditation-musician",
+        "name": "Meditation Musician",
+        "description": "Create for 30+ minutes straight",
+        "icon": "🧘",
+        "category": "dedication",
+        "rarity": "uncommon",
+        "trigger": "session_time_30min"
+      },
+      {
+        "id": "daily-harmony",
+        "name": "Daily Harmony",
+        "description": "Create music 3 days in a row",
+        "icon": "📅",
+        "category": "consistency",
+        "rarity": "uncommon",
+        "trigger": "consecutive_days_3"
+      },
+      {
+        "id": "weekly-warrior",
+        "name": "Weekly Warrior",
+        "description": "Create music 7 days straight",
+        "icon": "🗓️",
+        "category": "consistency",
+        "rarity": "rare",
+        "trigger": "consecutive_days_7"
+      },
+      {
+        "id": "zen-master",
+        "name": "Zen Master",
+        "description": "Create 20+ calm melodies",
+        "icon": "☯️",
+        "category": "specialization",
+        "rarity": "rare",
+        "trigger": "calm_mood_specialist"
+      },
+      {
+        "id": "joy-spreader",
+        "name": "Joy Spreader",
+        "description": "Create 20+ happy melodies",
+        "icon": "🌟",
+        "category": "specialization",
+        "rarity": "rare",
+        "trigger": "happy_mood_specialist"
+      },
+      {
+        "id": "dream-weaver",
+        "name": "Dream Weaver",
+        "description": "Master of dreamy atmospheres",
+        "icon": "🌙",
+        "category": "specialization",
+        "rarity": "rare",
+        "trigger": "dreamy_mood_specialist"
+      },
+      {
+        "id": "sonic-sage",
+        "name": "Sonic Sage",
+        "description": "Create 500+ total melodies",
+        "icon": "🎊",
+        "category": "legendary",
+        "rarity": "legendary",
+        "trigger": "melodies_created_500"
+      },
+      {
+        "id": "music-mystic",
+        "name": "Music Mystic",
+        "description": "Achieve perfect emotional balance",
+        "icon": "✨",
+        "category": "legendary",
+        "rarity": "legendary",
+        "trigger": "perfect_emotional_balance"
+      }
+    ]
+  },
+  "features": [
+    {
+      "name": "Mood-Based Music Generation",
+      "description": "Six distinct emotional moods that transform touch into unique musical experiences"
+    },
+    {
+      "name": "Interactive Audio Canvas",
+      "description": "Click and drag to paint music across a visual canvas with real-time audio feedback"
+    },
+    {
+      "name": "Multiple Instruments",
+      "description": "Piano, chimes, strings, flute, ambient, and nature sounds for diverse musical expression"
+    },
+    {
+      "name": "Visual Particle System",
+      "description": "Beautiful animated particles that respond to musical notes and mood colors"
+    },
+    {
+      "name": "Progressive Achievement System",
+      "description": "17 unique badges rewarding creativity, exploration, and musical mastery"
+    },
+    {
+      "name": "Therapeutic Experience",
+      "description": "Designed for relaxation, stress relief, and emotional expression through music"
+    }
+  ],
+  "instructions": {
+    "getting_started": [
+      "Choose a mood that matches how you're feeling",
+      "Select an instrument from the available options",
+      "Click and drag on the canvas to create musical notes",
+      "Watch as particles dance to your musical creation",
+      "Experiment with different moods and instruments",
+      "Earn badges for your musical creativity and exploration"
+    ],
+    "controls": {
+      "mouse": "Click and drag to create musical notes",
+      "touch": "Touch and drag for mobile music creation",
+      "mood_buttons": "Select emotional mood for music generation",
+      "instrument_buttons": "Choose different instruments and sounds",
+      "play_pause": "Start or stop music creation mode",
+      "volume": "Adjust audio output level",
+      "clear": "Clear canvas and reset current session",
+      "save": "Save current musical creation"
+    }
+  },
+  "monetization": {
+    "model": "badge-driven",
+    "features": [
+      "achievement_badges",
+      "milestone_rewards",
+      "consistency_bonuses",
+      "specialization_achievements"
+    ],
+    "pricing": {
+      "free_tier": "Full game access with all features",
+      "premium_tier": "Enhanced badge rewards and sharing features"
+    }
+  },
+  "social": {
+    "shareable": true,
+    "achievements_sharing": true,
+    "screenshot_capture": true,
+    "social_media_tags": [
+      "#MoodMelodies",
+      "#CozyGames",
+      "#MusicCreation",
+      "#EmotionalWellness",
+      "#InteractiveMusic",
+      "#WavelengthGames"
+    ]
+  },
+  "analytics": {
+    "track_events": [
+      "game_start",
+      "mood_selection",
+      "instrument_change",
+      "melody_creation",
+      "badge_earned",
+      "session_duration",
+      "feature_usage"
+    ],
+    "privacy_compliant": true,
+    "gdpr_ready": true,
+    "data_retention": "12_months"
+  },
+  "localization": {
+    "supported_languages": ["en"],
+    "planned_languages": ["es", "fr", "de", "ja", "zh"],
+    "rtl_support": false
+  },
+  "testing": {
+    "unit_tests": false,
+    "integration_tests": true,
+    "performance_tests": true,
+    "accessibility_tests": true,
+    "cross_browser": ["chrome", "firefox", "safari", "edge"],
+    "mobile_tested": ["ios_safari", "android_chrome"]
+  },
+  "deployment": {
+    "build_required": false,
+    "static_hosting": true,
+    "cdn_ready": true,
+    "progressive_web_app": false,
+    "offline_mode": false
+  },
+  "license": "Wavelength Cozy Game SDK License",
+  "copyright": "© 2024 Wavelength Cozy Game SDK. All rights reserved.",
+  "created_date": "2024-01-15",
+  "last_updated": "2024-01-15",
+  "status": "beta",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-15",
+      "changes": [
+        "Initial release with full music creation system",
+        "Six mood-based audio generation modes",
+        "Responsive design with mobile support",
+        "Visual particle effects and audio feedback"
+      ]
+    }
+  ]
+}

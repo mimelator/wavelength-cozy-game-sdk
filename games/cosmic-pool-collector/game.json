@@ -1,0 +1,107 @@
+{
+  "name": "Cosmic Pool Collector",
+  "description": "Collect cosmic treasures and unlock the mysteries of the universe! A magical space-themed collection game with particle effects, dynamic themes, and satisfying collection mechanics.",
+  "version": "1.0.1",
+  "author": "Wavelength Consulting",
+  "category": "Collection",
+  "tags": ["space", "cosmic", "collection", "particles", "magic", "treasures", "universe", "interactive"],
+  "thumbnail": "assets/thumbnail.svg",
+  "entry_point": "index.html",
+  "controls": {
+    "mouse": "Click to collect cosmic treasures",
+    "touch": "Tap to gather space items"
+  },
+  "features": [
+    "Cosmic-themed collection with space treasures",
+    "Advanced particle effects and visual magic",
+    "Dynamic background animations and cosmic shifts",
+    "Rarity-based collection system with weighted spawning",
+    "Combo system and streak mechanics",
+    "Special cosmic wormhole effects",
+    "Achievement system with space-themed badges",
+    "Responsive design optimized for all devices"
+  ],
+  "technical": {
+    "canvas_based": true,
+    "dom_based": true,
+    "physics_engine": "Custom particle physics with cosmic effects",
+    "responsive": true,
+    "performance": "Optimized particle system with lifecycle management"
+  },
+  "badges": {
+    "enabled": true,
+    "rate_limit_ms": 30000,
+    "revenue_share": {
+      "developer": 35,
+      "lore_master": 40,
+      "platform": 25
+    },
+    "achievements": [
+      {
+        "id": "stardust_collector",
+        "name": "Stardust Collector",
+        "description": "Collected your first cosmic treasure",
+        "rarity": "common",
+        "condition": "Collect 1 cosmic item",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "✨",
+          "difficulty": "easy",
+          "category": "first_steps"
+        }
+      },
+      {
+        "id": "nebula_explorer",
+        "name": "Nebula Explorer",
+        "description": "Gathered 25 cosmic crystals from the void",
+        "rarity": "uncommon",
+        "condition": "Collect 25 cosmic items",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "💎",
+          "difficulty": "easy",
+          "category": "exploration"
+        }
+      },
+      {
+        "id": "void_navigator",
+        "name": "Void Navigator",
+        "description": "Mastered the art of cosmic collection",
+        "rarity": "rare",
+        "condition": "Collect 100 cosmic treasures",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌌",
+          "difficulty": "medium",
+          "category": "mastery"
+        }
+      },
+      {
+        "id": "galaxy_guardian",
+        "name": "Galaxy Guardian",
+        "description": "Achieved cosmic harmony with high scores",
+        "rarity": "epic",
+        "condition": "Reach 5000 points with perfect collection",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌀",
+          "difficulty": "hard",
+          "category": "achievement"
+        }
+      },
+      {
+        "id": "universe_master",
+        "name": "Universe Master",
+        "description": "Unlocked the deepest mysteries of the cosmos",
+        "rarity": "legendary",
+        "condition": "Trigger cosmic shift and collect legendary items",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "⚫",
+          "difficulty": "legendary",
+          "category": "transcendence"
+        }
+      }
+    ]
+  }
+}

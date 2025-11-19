@@ -1,0 +1,107 @@
+{
+  "name": "Autumn Grove",
+  "description": "Wander through an enchanted autumn forest and gather nature's treasures as the seasons change. A peaceful collection experience with falling leaves, forest spirits, and magical autumn items.",
+  "version": "1.1.3",
+  "author": "Wavelength Consulting",
+  "category": "Collection",
+  "tags": ["autumn", "collection", "nature", "cozy", "seasonal", "forest", "leaves", "peaceful"],
+  "thumbnail": "assets/thumbnail.svg",
+  "entry_point": "index.html",
+  "controls": {
+    "mouse": "Click to collect autumn treasures",
+    "touch": "Tap to gather forest items"
+  },
+  "features": [
+    "Magical autumn forest with falling leaves and treasures",
+    "Collection system with rarity tiers (common to legendary)",
+    "Dynamic seasonal effects and visual magic",
+    "Particle system with autumn-themed sparkles",
+    "Contemplative 45-second badge timing for peaceful gameplay",
+    "Progressive achievement system encouraging exploration",
+    "Ambient forest atmosphere with gentle interactions",
+    "Responsive design for all devices"
+  ],
+  "technical": {
+    "canvas_based": false,
+    "dom_based": true,
+    "physics_engine": "Simple gravity and drift animations",
+    "responsive": true,
+    "performance": "Optimized for mobile with efficient particle cleanup"
+  },
+  "badges": {
+    "enabled": true,
+    "rate_limit_ms": 45000,
+    "revenue_share": {
+      "developer": 35,
+      "lore_master": 40,
+      "platform": 25
+    },
+    "achievements": [
+      {
+        "id": "autumn_walker",
+        "name": "Autumn Walker",
+        "description": "Collected your first autumn treasure in the enchanted grove",
+        "rarity": "common",
+        "condition": "Collect 1 autumn item",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🍂",
+          "difficulty": "easy",
+          "category": "first_steps"
+        }
+      },
+      {
+        "id": "leaf_whisperer",
+        "name": "Leaf Whisperer",
+        "description": "Gathered 25 autumn leaves with gentle care",
+        "rarity": "uncommon",
+        "condition": "Collect 25 autumn items",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🍁",
+          "difficulty": "easy",
+          "category": "collection"
+        }
+      },
+      {
+        "id": "forest_guardian",
+        "name": "Forest Guardian",
+        "description": "Collected 100 forest treasures with respect for nature",
+        "rarity": "rare",
+        "condition": "Collect 100 forest items",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🌳",
+          "difficulty": "medium",
+          "category": "mastery"
+        }
+      },
+      {
+        "id": "autumn_sage",
+        "name": "Autumn Sage",
+        "description": "Achieved perfect harmony with the autumn spirits",
+        "rarity": "epic",
+        "condition": "Reach 2000 points and collect rare items",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "🧚‍♀️",
+          "difficulty": "hard",
+          "category": "spiritual"
+        }
+      },
+      {
+        "id": "grove_keeper",
+        "name": "Grove Keeper",
+        "description": "Discovered the deepest secrets of the autumn grove",
+        "rarity": "legendary",
+        "condition": "Find a legendary forest spirit item",
+        "reward_type": "badge",
+        "metadata": {
+          "emoji": "💚",
+          "difficulty": "legendary",
+          "category": "discovery"
+        }
+      }
+    ]
+  }
+}
